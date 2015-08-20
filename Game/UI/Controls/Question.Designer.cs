@@ -28,6 +28,7 @@
       this.image = new System.Windows.Forms.PictureBox();
       this.text = new System.Windows.Forms.Label();
       this.answersTable = new System.Windows.Forms.TableLayoutPanel();
+      this.timerLabel = new System.Windows.Forms.Label();
       this.structTable.SuspendLayout();
       this.questionTable.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
@@ -36,15 +37,17 @@
       // structTable
       // 
       this.structTable.ColumnCount = 1;
-      this.structTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.structTable.Controls.Add(this.questionTable, 0, 0);
-      this.structTable.Controls.Add(this.answersTable, 0, 1);
+      this.structTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.structTable.Controls.Add(this.questionTable, 0, 1);
+      this.structTable.Controls.Add(this.answersTable, 0, 2);
+      this.structTable.Controls.Add(this.timerLabel, 0, 0);
       this.structTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.structTable.Location = new System.Drawing.Point(0, 0);
       this.structTable.Name = "structTable";
-      this.structTable.RowCount = 2;
-      this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38F));
-      this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62F));
+      this.structTable.RowCount = 3;
+      this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+      this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+      this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
       this.structTable.Size = new System.Drawing.Size(500, 500);
       this.structTable.TabIndex = 0;
       // 
@@ -56,11 +59,11 @@
       this.questionTable.Controls.Add(this.image, 0, 0);
       this.questionTable.Controls.Add(this.text, 1, 0);
       this.questionTable.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.questionTable.Location = new System.Drawing.Point(3, 3);
+      this.questionTable.Location = new System.Drawing.Point(3, 53);
       this.questionTable.Name = "questionTable";
       this.questionTable.RowCount = 1;
       this.questionTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.questionTable.Size = new System.Drawing.Size(494, 184);
+      this.questionTable.Size = new System.Drawing.Size(494, 144);
       this.questionTable.TabIndex = 0;
       // 
       // image
@@ -68,7 +71,7 @@
       this.image.Dock = System.Windows.Forms.DockStyle.Fill;
       this.image.Location = new System.Drawing.Point(3, 3);
       this.image.Name = "image";
-      this.image.Size = new System.Drawing.Size(186, 178);
+      this.image.Size = new System.Drawing.Size(186, 138);
       this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.image.TabIndex = 0;
       this.image.TabStop = false;
@@ -79,7 +82,7 @@
       this.text.Dock = System.Windows.Forms.DockStyle.Fill;
       this.text.Location = new System.Drawing.Point(195, 0);
       this.text.Name = "text";
-      this.text.Size = new System.Drawing.Size(296, 184);
+      this.text.Size = new System.Drawing.Size(296, 144);
       this.text.TabIndex = 1;
       // 
       // answersTable
@@ -88,12 +91,23 @@
       this.answersTable.ColumnCount = 1;
       this.answersTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.answersTable.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.answersTable.Location = new System.Drawing.Point(3, 193);
+      this.answersTable.Location = new System.Drawing.Point(3, 203);
       this.answersTable.Name = "answersTable";
       this.answersTable.RowCount = 1;
       this.answersTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.answersTable.Size = new System.Drawing.Size(494, 304);
+      this.answersTable.Size = new System.Drawing.Size(494, 294);
       this.answersTable.TabIndex = 1;
+      // 
+      // timerLabel
+      // 
+      this.timerLabel.AutoSize = true;
+      this.timerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.timerLabel.Location = new System.Drawing.Point(3, 0);
+      this.timerLabel.Name = "timerLabel";
+      this.timerLabel.Size = new System.Drawing.Size(494, 50);
+      this.timerLabel.TabIndex = 2;
+      this.timerLabel.Text = "Time Left:";
+      this.timerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
       // Question
       // 
@@ -103,6 +117,7 @@
       this.Name = "Question";
       this.Size = new System.Drawing.Size(500, 500);
       this.structTable.ResumeLayout(false);
+      this.structTable.PerformLayout();
       this.questionTable.ResumeLayout(false);
       this.questionTable.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
@@ -117,5 +132,6 @@
     private System.Windows.Forms.PictureBox image;
     private System.Windows.Forms.Label text;
     private System.Windows.Forms.TableLayoutPanel answersTable;
+    private System.Windows.Forms.Label timerLabel;
   }
 }

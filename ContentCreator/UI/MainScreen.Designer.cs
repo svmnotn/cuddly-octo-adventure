@@ -331,7 +331,7 @@
       // 
       // beforeAnswer
       // 
-      this.beforeAnswer.DecimalPlaces = 4;
+      this.beforeAnswer.DecimalPlaces = 3;
       this.beforeAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
       this.beforeAnswer.Location = new System.Drawing.Point(188, 55);
       this.beforeAnswer.Maximum = new decimal(new int[] {
@@ -346,7 +346,7 @@
       // 
       // afterAnswer
       // 
-      this.afterAnswer.DecimalPlaces = 4;
+      this.afterAnswer.DecimalPlaces = 3;
       this.afterAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
       this.afterAnswer.Location = new System.Drawing.Point(188, 81);
       this.afterAnswer.Maximum = new decimal(new int[] {
@@ -361,7 +361,7 @@
       // 
       // delayScore
       // 
-      this.delayScore.DecimalPlaces = 4;
+      this.delayScore.DecimalPlaces = 3;
       this.delayScore.Dock = System.Windows.Forms.DockStyle.Fill;
       this.delayScore.Location = new System.Drawing.Point(188, 107);
       this.delayScore.Maximum = new decimal(new int[] {
@@ -376,7 +376,7 @@
       // 
       // delayGO
       // 
-      this.delayGO.DecimalPlaces = 4;
+      this.delayGO.DecimalPlaces = 3;
       this.delayGO.Dock = System.Windows.Forms.DockStyle.Fill;
       this.delayGO.Location = new System.Drawing.Point(188, 133);
       this.delayGO.Maximum = new decimal(new int[] {

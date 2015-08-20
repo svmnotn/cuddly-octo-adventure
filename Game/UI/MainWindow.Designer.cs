@@ -49,8 +49,7 @@
     }
 
     #endregion
-
-    private System.Windows.Forms.Timer timer;
     internal System.Windows.Forms.ToolTip toolTip;
+    internal System.Windows.Forms.Timer timer;
   }
 }

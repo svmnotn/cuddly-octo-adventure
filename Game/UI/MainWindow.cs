@@ -24,9 +24,12 @@
       }
     }
     internal readonly Archive archive;
+    internal GameMode gm;
     internal readonly Team[] teams;
     internal int currTeam;
-    internal GameMode gm;
+    internal Action timerFire;
+    internal int timerCount;
+
 
     internal MainWindow() : this(Archive.Default) { }
 
@@ -41,7 +44,9 @@
     }
 
     private void OnTick(object sender, EventArgs e) {
-      ((Timer)sender).Enabled = false;
+      if(timerFire != null) {
+        timerFire();
+      }
     }
 
     private void OnClose(object sender, FormClosedEventArgs e) {
