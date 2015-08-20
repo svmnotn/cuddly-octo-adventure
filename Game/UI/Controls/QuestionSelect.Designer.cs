@@ -23,28 +23,28 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+      this.questionsTable = new System.Windows.Forms.TableLayoutPanel();
       this.SuspendLayout();
       // 
-      // tableLayoutPanel1
+      // questionsTable
       // 
-      this.tableLayoutPanel1.ColumnCount = 1;
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel1.Location = new System.Drawing.Point(100, 100);
-      this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-      this.tableLayoutPanel1.RowCount = 1;
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(300, 300);
-      this.tableLayoutPanel1.TabIndex = 0;
+      this.questionsTable.ColumnCount = 1;
+      this.questionsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.questionsTable.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.questionsTable.Location = new System.Drawing.Point(5, 5);
+      this.questionsTable.Name = "questionsTable";
+      this.questionsTable.RowCount = 1;
+      this.questionsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.questionsTable.Size = new System.Drawing.Size(490, 490);
+      this.questionsTable.TabIndex = 0;
       // 
       // QuestionSelect
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.tableLayoutPanel1);
+      this.Controls.Add(this.questionsTable);
       this.Name = "QuestionSelect";
-      this.Padding = new System.Windows.Forms.Padding(100);
+      this.Padding = new System.Windows.Forms.Padding(5);
       this.Size = new System.Drawing.Size(500, 500);
       this.ResumeLayout(false);
 
@@ -52,6 +52,6 @@
 
     #endregion
 
-    private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+    private System.Windows.Forms.TableLayoutPanel questionsTable;
   }
 }
