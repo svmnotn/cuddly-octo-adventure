@@ -2,9 +2,10 @@
   using System.Windows.Forms;
 
   internal partial class Question : UserControl {
-
-    internal Question() {
+    Data.Question question;
+    internal Question(Data.Question q) {
       InitializeComponent();
+      question = q;
     }
   }
 }
