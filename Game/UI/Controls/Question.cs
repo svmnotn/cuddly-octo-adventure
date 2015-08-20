@@ -61,6 +61,8 @@
       Program.main.timer.Stop();
       Program.main.timerFire -= GoResult;
       Program.main.timer.Enabled = false;
+      // Delete question from possible
+      Program.main.archive.RemoveQuestion(question);
       // Go to result
       var mode = new Result();
       mode.Dock = DockStyle.Fill;
