@@ -1,24 +1,34 @@
 ﻿namespace COA.Game {
   using System;
   using System.Collections.Generic;
+  using System.Windows.Forms;
+  using Data;
+  using UI.Controls;
 
   internal class GameMode {
-    internal static readonly GameMode Classical = new GameMode("Classical", "Lets you select a topic and question", delegate(object sender, EventArgs e) {
+    internal static readonly GameMode Classical = new GameMode("Classical", "Lets you select a topic and question", (object sender, EventArgs e) => {
       // Classical Start Logic
-
-
-
+      Program.main.gm = Classical;
+      Console.WriteLine("Classic");
+      var mode = new QuestionSelect(Program.main.archive.topics);
+      mode.Dock = DockStyle.Fill;
+      Program.main.Current = mode;
     });
-    internal static readonly GameMode RandomTopic = new GameMode("Random Topics", "Selects a randomized topic, and lets you select the question", delegate(object sender, EventArgs e) {
-      // RandomTopic Start Logic
-
-
-
+    internal static readonly GameMode RandomTopic = new GameMode("Random Topics", "Selects a randomized topic, and lets you select the question", (object sender, EventArgs e) => {
+      // Random Topic Start Logic
+      Program.main.gm = RandomTopic;
+      Console.WriteLine("RNG Topic");
+      Program.main.archive.topics.Shuffle();
+      var tmp = new List<Topic>();
+      tmp.Add(Program.main.archive.topics[0]);
+      var mode = new QuestionSelect(tmp);
+      mode.Dock = DockStyle.Fill;
+      Program.main.Current = mode;
     });
-    internal static readonly GameMode RandomQuestion = new GameMode("Random Questions", "Selects a randomized question from any topic", delegate(object sender, EventArgs e) {
-      // RandomQuestion Start Logic
-
-
+    internal static readonly GameMode RandomQuestion = new GameMode("Random Questions", "Selects a randomized question from any topic", (object sender, EventArgs e) => {
+      // Random Question Start Logic
+      Program.main.gm = RandomQuestion;
+      Console.WriteLine("RNG Question");
 
     });
 
