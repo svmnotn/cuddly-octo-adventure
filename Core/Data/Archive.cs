@@ -38,6 +38,24 @@
       return null;
     }
 
+    public void RemoveQuestion(Question q) {
+      foreach(var t in topics) {
+        if(t.RemoveQuestion(q)) {
+          return;
+        }
+      }
+    }
+
+    public bool HasQuestions() {
+      int count = 0;
+      foreach(var t in topics) {
+        if(t.HasQuestions()) {
+          count++;
+        }
+      }
+      return count > 0;
+    }
+
     public static Archive Default {
       get {
         var tmp = new Archive();

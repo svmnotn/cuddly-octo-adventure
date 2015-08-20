@@ -39,8 +39,8 @@
       GetQuestions(q.value).Add(q);
     }
 
-    public void RemoveQuestion(Question q) {
-      GetQuestions(q.value).Remove(q);
+    public bool RemoveQuestion(Question q) {
+      return GetQuestions(q.value).Remove(q);
     }
 
     public void ChangeValue(Question q, int newVal) {
@@ -60,11 +60,11 @@
       return null;
     }
 
-    public void RemoveQuestionByID(string id) {
+    public bool RemoveQuestionByID(string id) {
       List<Question> qList;
       var q = GetQuestionFromID(id);
       questions.TryGetValue(q.value, out qList);
-      qList.Remove(q);
+      return qList.Remove(q);
     }
 
     public bool HasQuestions() {
