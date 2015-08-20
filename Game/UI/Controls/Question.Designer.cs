@@ -81,10 +81,10 @@
       this.text.Name = "text";
       this.text.Size = new System.Drawing.Size(296, 184);
       this.text.TabIndex = 1;
-      this.text.Text = "label1";
       // 
       // answersTable
       // 
+      this.answersTable.AutoScroll = true;
       this.answersTable.ColumnCount = 1;
       this.answersTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.answersTable.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -2,7 +2,6 @@
   using System;
   using System.Collections.Generic;
   using System.Windows.Forms;
-  using Data;
   using UI.Controls;
 
   internal class GameMode {
@@ -19,7 +18,7 @@
       Program.main.gm = RandomTopic;
       Console.WriteLine("RNG Topic");
       Program.main.archive.topics.Shuffle();
-      var tmp = new List<Topic>();
+      var tmp = new List<Data.Topic>();
       tmp.Add(Program.main.archive.topics[0]);
       var mode = new QuestionSelect(tmp);
       mode.Dock = DockStyle.Fill;
@@ -29,7 +28,10 @@
       // Random Question Start Logic
       Program.main.gm = RandomQuestion;
       Console.WriteLine("RNG Question");
-
+      Program.main.archive.topics.Shuffle();
+      var mode = new Question(Program.main.archive.topics[0].GetQuestion());
+      mode.Dock = DockStyle.Fill;
+      Program.main.Current = mode;
     });
 
     internal readonly string Name;

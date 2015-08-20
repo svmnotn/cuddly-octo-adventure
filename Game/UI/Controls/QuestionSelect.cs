@@ -29,7 +29,9 @@
           bttn.Dock = DockStyle.Fill;
           bttn.Text = "" + q.value;
           bttn.Click += (object sender, EventArgs e) => {
-            // Go to question
+            var mode = new Question(q);
+            mode.Dock = DockStyle.Fill;
+            Program.main.Current = mode;
           };
           questionsTable.Controls.Add(bttn);
         }

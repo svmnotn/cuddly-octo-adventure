@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameMode.cs" />
+    <Compile Include="UI\Controls\AnswerButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\ArchiveControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

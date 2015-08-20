@@ -16,11 +16,19 @@
       return qs;
     }
 
+    public Question GetQuestion() {
+      int[] tmp = new int[questions.Keys.Count];
+      questions.Keys.CopyTo(tmp,0);
+      var keys = new List<int>(tmp);
+      keys.Shuffle();
+      return GetQuestion(keys[0]);
+    }
+
     public Question GetQuestion(int val) {
       var qs = GetQuestions(val);
       Question tmp = null;
       if(qs.Count > 0) {
-        tmp = qs.ToArray()[0];
+        tmp = qs[0];
         qs.Remove(tmp);
         qs.Shuffle();
       }
