@@ -17,6 +17,9 @@
     public static Settings Default {
       get {
         var tmp = new Settings();
+        tmp.timerFont = SystemFonts.DefaultFont;
+        tmp.timerColor = Color.Yellow;
+        tmp.backgroundColor = Color.Silver;
         tmp.teams = new List<Team>();
         var t = new Team();
         t.name = "Blue Team";

@@ -59,8 +59,9 @@
     public static Archive Default {
       get {
         var tmp = new Archive();
+        #region Archive Main Data
         tmp.name = "Default Archive";
-        tmp.description = "This is the Default that is automatically created when the SGCC is first run.";
+        tmp.description = "This is the Default that is automatically created when the Cuddly Octo Adventure Content Creator is first run.";
         tmp.version = "1.0.0";
         tmp.author = "someone";
         tmp.license = "Public Domain";
@@ -71,10 +72,13 @@
         tmp.teamLostMsg = "{team} Lost.";
         tmp.tiedMsg = "{teams} tied";
         tmp.topics = new List<Topic>();
+        #endregion
         var t = new Topic();
+        #region Topic 1
         t.name = "Test Topic";
         t.questions = new Dictionary<int, List<Question>>();
         var q = new Question();
+        #region question 1
         q.id = "test1";
         q.value = 100;
         q.question = "Is this a test?";
@@ -86,11 +90,28 @@
         a = new Answer();
         a.answer = "No!";
         q.answers.Add(a);
+        #endregion
         t.AddQuestion(q);
         q = new Question();
+        #region question 2
         q.id = "test2";
+        q.value = 100;
+        q.question = "Is this not a test?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "No!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "Yes!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 3
+        q.id = "test3";
         q.value = 1000;
-        q.question = "Is this really a test?";
+        q.question = "Is this not not a test?";
         q.answers = new List<Answer>();
         a = new Answer();
         a.answer = "Yes!";
@@ -99,7 +120,150 @@
         a = new Answer();
         a.answer = "No!";
         q.answers.Add(a);
+        #endregion
         t.AddQuestion(q);
+        q = new Question();
+        #region question 4
+        q.id = "test4";
+        q.value = 1000;
+        q.question = "Is a game?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 5
+        q.id = "test5";
+        q.value = 100;
+        q.question = "Am I awesome?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 6
+        q.id = "test6";
+        q.value = 1000;
+        q.question = "Am I da Bomb?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        #endregion
+        tmp.topics.Add(t);
+        t = new Topic();
+        #region Topic 2
+        t.name = "Trial Topic";
+        t.questions = new Dictionary<int, List<Question>>();
+        q = new Question();
+        #region question 1
+        q.id = "trial1";
+        q.value = 100;
+        q.question = "42?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 2
+        q.id = "trial2";
+        q.value = 100;
+        q.question = "life?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "yes";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 3
+        q.id = "trial3";
+        q.value = 1000;
+        q.question = "food?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 4
+        q.id = "trial4";
+        q.value = 1000;
+        q.question = "Grand Strategies?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 5
+        q.id = "trial5";
+        q.value = 100;
+        q.question = "Fun times?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        q = new Question();
+        #region question 6
+        q.id = "trial6";
+        q.value = 1000;
+        q.question = "Books?";
+        q.answers = new List<Answer>();
+        a = new Answer();
+        a.answer = "Yes!";
+        a.correct = true;
+        q.answers.Add(a);
+        a = new Answer();
+        a.answer = "No!";
+        q.answers.Add(a);
+        #endregion
+        t.AddQuestion(q);
+        #endregion
         tmp.topics.Add(t);
         tmp.settings = Settings.Default;
         return tmp;
