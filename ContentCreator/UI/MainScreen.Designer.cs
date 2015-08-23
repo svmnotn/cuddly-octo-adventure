@@ -1295,13 +1295,13 @@
       // 
       // openArchive
       // 
-      this.openArchive.Filter = "School Game Content Archive (*.sgca)|*.sgca";
+      this.openArchive.Filter = "Cuddly Octo Adventure Content Archive (*.coaca)|*.coaca";
       this.openArchive.Title = "Choose what Content Archive to edit";
       // 
       // saveArchiveDialog
       // 
       this.saveArchiveDialog.DefaultExt = "sgca";
-      this.saveArchiveDialog.Filter = "School Game Content Archive (*.sgca)|*.sgca";
+      this.saveArchiveDialog.Filter = "Cuddly Octo Adventure Content Archive (*.coaca)|*.coaca";
       this.saveArchiveDialog.Title = "Choose where to export your Content Archive";
       // 
       // MainScreen

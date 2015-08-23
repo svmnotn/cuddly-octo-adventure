@@ -113,6 +113,9 @@
     <EmbeddedResource Include="UI\Controls\Result.resx">
       <DependentUpon>Result.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Loader.resx">
+      <DependentUpon>Loader.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
