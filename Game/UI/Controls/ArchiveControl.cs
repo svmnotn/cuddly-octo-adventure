@@ -32,7 +32,8 @@
     }
 
     private void Delete(object sender, EventArgs e) {
-      Directory.Delete(Program.ArchivePath(archive));
+      Directory.Delete(Program.ArchivePath(archive), true);
+      Program.loader.LoadArchivesToTable();
     }
   }
 }
