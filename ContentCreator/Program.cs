@@ -8,7 +8,7 @@
   static class Program {
     internal static string AppDirectory {
       get {
-        return Extensions.CoreDirectory + @"\SGCC";
+        return Extensions.CoreDirectory + @"\Content Creator";
       }
     }
     internal static string WorkingDirectory {
