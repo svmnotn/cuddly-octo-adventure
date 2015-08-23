@@ -1,4 +1,5 @@
 ﻿namespace COA.Game.UI.Controls {
+  using System.Drawing;
   using System.Windows.Forms;
 
   internal partial class ModeSelect : UserControl {
@@ -13,6 +14,7 @@
         modeTable.RowStyles.Add(new RowStyle(SizeType.Percent, (100f/3f)));
         var bttn = new Button();
         bttn.Dock = DockStyle.Fill;
+        bttn.BackColor = Color.LightGray;
         bttn.Text = mode.Name;
         bttn.Click += mode.Start;
         modeTable.Controls.Add(bttn);
