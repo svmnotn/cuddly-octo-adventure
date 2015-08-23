@@ -29,13 +29,14 @@
       Program.main.gm = RandomQuestion;
       Console.WriteLine("RNG Question");
       Program.main.archive.topics.Shuffle();
-      var mode = new Question(Program.main.archive.topics[0].GetQuestion());
+      var mode = new QuestionPanel(Program.main.archive.topics[0].GetQuestion());
       mode.Dock = DockStyle.Fill;
       Program.main.Current = mode;
     });
 
     internal readonly string Name;
     internal readonly string Description;
+    /// Desinged as Button Event Handler, used as an Action
     internal readonly EventHandler Start;
 
     private GameMode(string name, string desc, EventHandler start) {

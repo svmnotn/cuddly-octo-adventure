@@ -60,11 +60,11 @@
     <Compile Include="UI\Controls\ModeSelect.Designer.cs">
       <DependentUpon>ModeSelect.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\Question.cs">
+    <Compile Include="UI\Controls\QuestionPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Question.Designer.cs">
-      <DependentUpon>Question.cs</DependentUpon>
+    <Compile Include="UI\Controls\QuestionPanel.Designer.cs">
+      <DependentUpon>QuestionPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Controls\QuestionSelect.cs">
       <SubType>UserControl</SubType>
@@ -104,8 +104,8 @@
     <EmbeddedResource Include="UI\Controls\ModeSelect.resx">
       <DependentUpon>ModeSelect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Question.resx">
-      <DependentUpon>Question.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\QuestionPanel.resx">
+      <DependentUpon>QuestionPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\QuestionSelect.resx">
       <DependentUpon>QuestionSelect.cs</DependentUpon>

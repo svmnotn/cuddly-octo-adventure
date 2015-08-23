@@ -1,5 +1,5 @@
 ﻿namespace COA.Game.UI.Controls {
-  partial class Question {
+  partial class QuestionPanel {
     /// <summary> 
     /// Required designer variable.
     /// </summary>
@@ -29,18 +29,21 @@
       this.text = new System.Windows.Forms.Label();
       this.answersTable = new System.Windows.Forms.TableLayoutPanel();
       this.timerLabel = new System.Windows.Forms.Label();
+      this.infoTable = new System.Windows.Forms.TableLayoutPanel();
+      this.teamLabel = new System.Windows.Forms.Label();
       this.structTable.SuspendLayout();
       this.questionTable.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
+      this.infoTable.SuspendLayout();
       this.SuspendLayout();
       // 
       // structTable
       // 
       this.structTable.ColumnCount = 1;
       this.structTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.structTable.Controls.Add(this.infoTable, 0, 0);
       this.structTable.Controls.Add(this.questionTable, 0, 1);
       this.structTable.Controls.Add(this.answersTable, 0, 2);
-      this.structTable.Controls.Add(this.timerLabel, 0, 0);
       this.structTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.structTable.Location = new System.Drawing.Point(0, 0);
       this.structTable.Name = "structTable";
@@ -48,6 +51,7 @@
       this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
       this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
       this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+      this.structTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
       this.structTable.Size = new System.Drawing.Size(500, 500);
       this.structTable.TabIndex = 0;
       // 
@@ -102,12 +106,37 @@
       // 
       this.timerLabel.AutoSize = true;
       this.timerLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.timerLabel.Location = new System.Drawing.Point(3, 0);
+      this.timerLabel.Location = new System.Drawing.Point(250, 0);
       this.timerLabel.Name = "timerLabel";
-      this.timerLabel.Size = new System.Drawing.Size(494, 50);
+      this.timerLabel.Size = new System.Drawing.Size(241, 44);
       this.timerLabel.TabIndex = 2;
       this.timerLabel.Text = "Time Left:";
       this.timerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      // 
+      // infoTable
+      // 
+      this.infoTable.ColumnCount = 2;
+      this.infoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.infoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.infoTable.Controls.Add(this.teamLabel, 0, 0);
+      this.infoTable.Controls.Add(this.timerLabel, 1, 0);
+      this.infoTable.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.infoTable.Location = new System.Drawing.Point(3, 3);
+      this.infoTable.Name = "infoTable";
+      this.infoTable.RowCount = 1;
+      this.infoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.infoTable.Size = new System.Drawing.Size(494, 44);
+      this.infoTable.TabIndex = 0;
+      // 
+      // teamLabel
+      // 
+      this.teamLabel.AutoSize = true;
+      this.teamLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.teamLabel.Location = new System.Drawing.Point(3, 0);
+      this.teamLabel.Name = "teamLabel";
+      this.teamLabel.Size = new System.Drawing.Size(241, 44);
+      this.teamLabel.TabIndex = 3;
+      this.teamLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
       // Question
       // 
@@ -117,10 +146,11 @@
       this.Name = "Question";
       this.Size = new System.Drawing.Size(500, 500);
       this.structTable.ResumeLayout(false);
-      this.structTable.PerformLayout();
       this.questionTable.ResumeLayout(false);
       this.questionTable.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
+      this.infoTable.ResumeLayout(false);
+      this.infoTable.PerformLayout();
       this.ResumeLayout(false);
 
     }
@@ -133,5 +163,7 @@
     private System.Windows.Forms.Label text;
     private System.Windows.Forms.TableLayoutPanel answersTable;
     private System.Windows.Forms.Label timerLabel;
+    private System.Windows.Forms.TableLayoutPanel infoTable;
+    private System.Windows.Forms.Label teamLabel;
   }
 }
