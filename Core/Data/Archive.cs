@@ -46,11 +46,17 @@
       }
     }
 
+    public void ShuffleTopics() {
+      foreach(var t in topics) {
+        t.ShuffleAll();
+      }
+    }
+
     public bool HasQuestions() {
       int count = 0;
       foreach(var t in topics) {
         if(t.HasQuestions()) {
-          count++;
+          count += 1;
         }
       }
       return count > 0;
