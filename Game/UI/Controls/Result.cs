@@ -1,5 +1,4 @@
 ﻿namespace COA.Game.UI.Controls {
-  using System;
   using System.Collections.Generic;
   using System.Drawing;
   using System.Windows.Forms;
@@ -11,7 +10,6 @@
       InitializeComponent();
       var info = "";
       // Check if game over
-      Console.WriteLine();
       if(Program.main.archive.HasQuestions()) {// Game not Over
         // Set the Text
         label.Text = "Current scores are:";
