@@ -20,8 +20,12 @@
       }
     }
 
+    public static string RelativeTo(this string rel, string relative) {
+      return relative + '\\' + rel;
+    }
+
     public static Image LoadImage(string dataPath, string relativeLoc) {
-      return Image.FromFile(dataPath + '\\' + relativeLoc);
+      return Image.FromFile(relativeLoc.RelativeTo(dataPath));
     }
 
     public static void ExtractToDirectory(this ZipArchive archive, string destinationDirectoryName, bool overwrite) {
