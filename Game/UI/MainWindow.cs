@@ -9,23 +9,19 @@
     internal UserControl Current {
       get { return current; }
       set {
-        if(!Controls.Contains(value)) {
-          Controls.Add(value);
-        }
         if(current != null) {
           current.Visible = false;
         }
-        current = value;
-        if(!string.IsNullOrWhiteSpace(archive.settings.backgroundLoc)) {
-          current.BackgroundImage = archive.settings.background ?? Extensions.LoadImage(Program.ArchivePath(archive), archive.settings.backgroundLoc);
+        if(!Controls.Contains(value)) {
+          Controls.Add(value);
         }
-        current.BackColor = archive.settings.backgroundColor;
+        current = value;
+        current.Dock = DockStyle.Fill;
         current.Visible = true;
       }
     }
     internal readonly Archive archive;
     internal GameMode gm;
-    internal readonly Team[] teams;
     internal int currTeam;
     internal Action timerFire;
     internal int timerCount;
@@ -36,11 +32,12 @@
     internal MainWindow(Archive a) {
       InitializeComponent();
       archive = a;
-      teams = archive.settings.teams.ToArray();
       Text = a.name;
-      var mode = new ModeSelect();
-      mode.Dock = DockStyle.Fill;
-      Current = mode;
+      BackColor = archive.settings.backgroundColor;
+      if(!string.IsNullOrWhiteSpace(archive.settings.backgroundLoc)) {
+        BackgroundImage = archive.settings.background ?? Extensions.LoadImage(Program.ArchivePath(archive), archive.settings.backgroundLoc);
+      }
+      Current = new ModeSelect();
     }
 
     private void OnTick(object sender, EventArgs e) {
