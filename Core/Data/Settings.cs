@@ -10,6 +10,7 @@
     [NonSerialized]
     public Image background;
     public string backgroundLoc;
+    public MessageSettings messages;
     public SoundSettings sound;
     public TimeSettings time;
     public List<Team> teams;
@@ -32,6 +33,12 @@
         t.font = SystemFonts.DefaultFont;
         tmp.teams.Add(t);
         tmp.sound = new SoundSettings();
+        tmp.messages = new MessageSettings();
+        tmp.messages.scorePresenter = "Current Scores";
+        tmp.messages.gameOver = "Tha tha tha tha That's All Folks!";
+        tmp.messages.teams = "Team";
+        tmp.messages.scores = "Score";
+        tmp.messages.fakePointsName = "FIPs";
         tmp.time = new TimeSettings();
         tmp.time.beforeAnswer = 60;
         tmp.time.afterAnswer = 5;
@@ -40,6 +47,14 @@
         return tmp;
       }
     }
+  }
+
+  public class MessageSettings {
+    public string scorePresenter;
+    public string gameOver;
+    public string teams;
+    public string scores;
+    public string fakePointsName;
   }
 
   public class SoundSettings {

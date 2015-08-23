@@ -26,46 +26,6 @@
       this.tabControl = new System.Windows.Forms.TabControl();
       this.generalTab = new System.Windows.Forms.TabPage();
       this.generalTable = new System.Windows.Forms.TableLayoutPanel();
-      this.timeInfoGroup = new System.Windows.Forms.GroupBox();
-      this.timeTable = new System.Windows.Forms.TableLayoutPanel();
-      this.timerFontLabel = new System.Windows.Forms.Label();
-      this.timerColorLabel = new System.Windows.Forms.Label();
-      this.beforeAnswerLabel = new System.Windows.Forms.Label();
-      this.afterAnswerLabel = new System.Windows.Forms.Label();
-      this.delayScoreLabel = new System.Windows.Forms.Label();
-      this.delayGOLabel = new System.Windows.Forms.Label();
-      this.timerFont = new System.Windows.Forms.TextBox();
-      this.timerColor = new System.Windows.Forms.TextBox();
-      this.beforeAnswer = new System.Windows.Forms.NumericUpDown();
-      this.afterAnswer = new System.Windows.Forms.NumericUpDown();
-      this.delayScore = new System.Windows.Forms.NumericUpDown();
-      this.delayGO = new System.Windows.Forms.NumericUpDown();
-      this.soundInfoGroup = new System.Windows.Forms.GroupBox();
-      this.soundTable = new System.Windows.Forms.TableLayoutPanel();
-      this.bkgSoundLabel = new System.Windows.Forms.Label();
-      this.correctSoundLabel = new System.Windows.Forms.Label();
-      this.wrongSoundLabel = new System.Windows.Forms.Label();
-      this.bkgSound = new System.Windows.Forms.TextBox();
-      this.correctSound = new System.Windows.Forms.TextBox();
-      this.wrongSound = new System.Windows.Forms.TextBox();
-      this.generalInfoGroup = new System.Windows.Forms.GroupBox();
-      this.generalSTable = new System.Windows.Forms.TableLayoutPanel();
-      this.bkgColorLabel = new System.Windows.Forms.Label();
-      this.bkgImageLabel = new System.Windows.Forms.Label();
-      this.bkgImage = new System.Windows.Forms.PictureBox();
-      this.bkgColor = new System.Windows.Forms.TextBox();
-      this.winning = new System.Windows.Forms.TextBox();
-      this.losing = new System.Windows.Forms.TextBox();
-      this.tying = new System.Windows.Forms.TextBox();
-      this.won = new System.Windows.Forms.TextBox();
-      this.lost = new System.Windows.Forms.TextBox();
-      this.tied = new System.Windows.Forms.TextBox();
-      this.winingLabel = new System.Windows.Forms.Label();
-      this.losingLabel = new System.Windows.Forms.Label();
-      this.tyingLabel = new System.Windows.Forms.Label();
-      this.wonLabel = new System.Windows.Forms.Label();
-      this.lostLabel = new System.Windows.Forms.Label();
-      this.tiedLabel = new System.Windows.Forms.Label();
       this.archiveInfoGroup = new System.Windows.Forms.GroupBox();
       this.archiveTable = new System.Windows.Forms.TableLayoutPanel();
       this.archiveName = new System.Windows.Forms.TextBox();
@@ -80,6 +40,46 @@
       this.license = new System.Windows.Forms.TextBox();
       this.authorLabel = new System.Windows.Forms.Label();
       this.licenseLabel = new System.Windows.Forms.Label();
+      this.messageInfoGroup = new System.Windows.Forms.GroupBox();
+      this.messageTable = new System.Windows.Forms.TableLayoutPanel();
+      this.curScoreLabel = new System.Windows.Forms.Label();
+      this.curScore = new System.Windows.Forms.TextBox();
+      this.goLabel = new System.Windows.Forms.Label();
+      this.gameOver = new System.Windows.Forms.TextBox();
+      this.teamsLabel = new System.Windows.Forms.Label();
+      this.teams = new System.Windows.Forms.TextBox();
+      this.scoresLabel = new System.Windows.Forms.Label();
+      this.scores = new System.Windows.Forms.TextBox();
+      this.pointsTextLabel = new System.Windows.Forms.Label();
+      this.pointsText = new System.Windows.Forms.TextBox();
+      this.soundInfoGroup = new System.Windows.Forms.GroupBox();
+      this.soundTable = new System.Windows.Forms.TableLayoutPanel();
+      this.bkgSoundLabel = new System.Windows.Forms.Label();
+      this.correctSoundLabel = new System.Windows.Forms.Label();
+      this.wrongSoundLabel = new System.Windows.Forms.Label();
+      this.bkgSound = new System.Windows.Forms.TextBox();
+      this.correctSound = new System.Windows.Forms.TextBox();
+      this.wrongSound = new System.Windows.Forms.TextBox();
+      this.timeInfoGroup = new System.Windows.Forms.GroupBox();
+      this.timeTable = new System.Windows.Forms.TableLayoutPanel();
+      this.timerFontLabel = new System.Windows.Forms.Label();
+      this.timerColorLabel = new System.Windows.Forms.Label();
+      this.beforeAnswerLabel = new System.Windows.Forms.Label();
+      this.afterAnswerLabel = new System.Windows.Forms.Label();
+      this.delayScoreLabel = new System.Windows.Forms.Label();
+      this.delayGOLabel = new System.Windows.Forms.Label();
+      this.timerFont = new System.Windows.Forms.TextBox();
+      this.timerColor = new System.Windows.Forms.TextBox();
+      this.beforeAnswer = new System.Windows.Forms.NumericUpDown();
+      this.afterAnswer = new System.Windows.Forms.NumericUpDown();
+      this.delayScore = new System.Windows.Forms.NumericUpDown();
+      this.delayGO = new System.Windows.Forms.NumericUpDown();
+      this.backgroundInfoGroup = new System.Windows.Forms.GroupBox();
+      this.generalSTable = new System.Windows.Forms.TableLayoutPanel();
+      this.bkgColorLabel = new System.Windows.Forms.Label();
+      this.bkgImageLabel = new System.Windows.Forms.Label();
+      this.bkgImage = new System.Windows.Forms.PictureBox();
+      this.bkgColor = new System.Windows.Forms.TextBox();
       this.questionsTab = new System.Windows.Forms.TabPage();
       this.splitContainer = new System.Windows.Forms.SplitContainer();
       this.nodeTable = new System.Windows.Forms.TableLayoutPanel();
@@ -120,19 +120,21 @@
       this.tabControl.SuspendLayout();
       this.generalTab.SuspendLayout();
       this.generalTable.SuspendLayout();
+      this.archiveInfoGroup.SuspendLayout();
+      this.archiveTable.SuspendLayout();
+      this.messageInfoGroup.SuspendLayout();
+      this.messageTable.SuspendLayout();
+      this.soundInfoGroup.SuspendLayout();
+      this.soundTable.SuspendLayout();
       this.timeInfoGroup.SuspendLayout();
       this.timeTable.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.beforeAnswer)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.afterAnswer)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.delayScore)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.delayGO)).BeginInit();
-      this.soundInfoGroup.SuspendLayout();
-      this.soundTable.SuspendLayout();
-      this.generalInfoGroup.SuspendLayout();
+      this.backgroundInfoGroup.SuspendLayout();
       this.generalSTable.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.bkgImage)).BeginInit();
-      this.archiveInfoGroup.SuspendLayout();
-      this.archiveTable.SuspendLayout();
       this.questionsTab.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
       this.splitContainer.Panel1.SuspendLayout();
@@ -182,21 +184,427 @@
       this.generalTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
       this.generalTable.ColumnCount = 1;
       this.generalTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.generalTable.Controls.Add(this.timeInfoGroup, 0, 3);
-      this.generalTable.Controls.Add(this.soundInfoGroup, 0, 2);
-      this.generalTable.Controls.Add(this.generalInfoGroup, 0, 1);
       this.generalTable.Controls.Add(this.archiveInfoGroup, 0, 0);
+      this.generalTable.Controls.Add(this.messageInfoGroup, 0, 1);
+      this.generalTable.Controls.Add(this.soundInfoGroup, 0, 2);
+      this.generalTable.Controls.Add(this.timeInfoGroup, 0, 3);
+      this.generalTable.Controls.Add(this.backgroundInfoGroup, 0, 4);
       this.generalTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.generalTable.Location = new System.Drawing.Point(3, 3);
       this.generalTable.Name = "generalTable";
       this.generalTable.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-      this.generalTable.RowCount = 4;
-      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.generalTable.RowCount = 5;
+      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 275F));
+      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 178F));
+      this.generalTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 400F));
       this.generalTable.Size = new System.Drawing.Size(770, 505);
       this.generalTable.TabIndex = 0;
+      // 
+      // archiveInfoGroup
+      // 
+      this.archiveInfoGroup.AutoSize = true;
+      this.archiveInfoGroup.Controls.Add(this.archiveTable);
+      this.archiveInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveInfoGroup.Location = new System.Drawing.Point(1, 1);
+      this.archiveInfoGroup.Margin = new System.Windows.Forms.Padding(1);
+      this.archiveInfoGroup.Name = "archiveInfoGroup";
+      this.archiveInfoGroup.Size = new System.Drawing.Size(750, 273);
+      this.archiveInfoGroup.TabIndex = 0;
+      this.archiveInfoGroup.TabStop = false;
+      this.archiveInfoGroup.Text = "Archive Information";
+      // 
+      // archiveTable
+      // 
+      this.archiveTable.AutoSize = true;
+      this.archiveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.archiveTable.ColumnCount = 2;
+      this.archiveTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+      this.archiveTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+      this.archiveTable.Controls.Add(this.archiveName, 1, 0);
+      this.archiveTable.Controls.Add(this.archiveNameLabel, 0, 0);
+      this.archiveTable.Controls.Add(this.archiveDescLabel, 0, 1);
+      this.archiveTable.Controls.Add(this.archiveDesc, 1, 1);
+      this.archiveTable.Controls.Add(this.archiveURLLabel, 0, 5);
+      this.archiveTable.Controls.Add(this.updateURL, 1, 5);
+      this.archiveTable.Controls.Add(this.versionLabel, 0, 2);
+      this.archiveTable.Controls.Add(this.version, 1, 2);
+      this.archiveTable.Controls.Add(this.author, 1, 3);
+      this.archiveTable.Controls.Add(this.license, 1, 4);
+      this.archiveTable.Controls.Add(this.authorLabel, 0, 3);
+      this.archiveTable.Controls.Add(this.licenseLabel, 0, 4);
+      this.archiveTable.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveTable.Location = new System.Drawing.Point(3, 16);
+      this.archiveTable.Margin = new System.Windows.Forms.Padding(0);
+      this.archiveTable.Name = "archiveTable";
+      this.archiveTable.RowCount = 6;
+      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+      this.archiveTable.Size = new System.Drawing.Size(744, 254);
+      this.archiveTable.TabIndex = 0;
+      // 
+      // archiveName
+      // 
+      this.archiveName.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveName.Location = new System.Drawing.Point(114, 3);
+      this.archiveName.Name = "archiveName";
+      this.archiveName.Size = new System.Drawing.Size(627, 20);
+      this.archiveName.TabIndex = 0;
+      this.archiveName.TextChanged += new System.EventHandler(this.SetArchiveName);
+      // 
+      // archiveNameLabel
+      // 
+      this.archiveNameLabel.AutoSize = true;
+      this.archiveNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveNameLabel.Location = new System.Drawing.Point(3, 0);
+      this.archiveNameLabel.Name = "archiveNameLabel";
+      this.archiveNameLabel.Size = new System.Drawing.Size(105, 25);
+      this.archiveNameLabel.TabIndex = 3;
+      this.archiveNameLabel.Text = "Archive Name:";
+      this.archiveNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // archiveDescLabel
+      // 
+      this.archiveDescLabel.AutoSize = true;
+      this.archiveDescLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveDescLabel.Location = new System.Drawing.Point(3, 25);
+      this.archiveDescLabel.Name = "archiveDescLabel";
+      this.archiveDescLabel.Size = new System.Drawing.Size(105, 127);
+      this.archiveDescLabel.TabIndex = 4;
+      this.archiveDescLabel.Text = "Archive Description:";
+      // 
+      // archiveDesc
+      // 
+      this.archiveDesc.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveDesc.Location = new System.Drawing.Point(114, 28);
+      this.archiveDesc.Multiline = true;
+      this.archiveDesc.Name = "archiveDesc";
+      this.archiveDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+      this.archiveDesc.Size = new System.Drawing.Size(627, 121);
+      this.archiveDesc.TabIndex = 1;
+      this.archiveDesc.TextChanged += new System.EventHandler(this.SetArchiveDesc);
+      // 
+      // archiveURLLabel
+      // 
+      this.archiveURLLabel.AutoSize = true;
+      this.archiveURLLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.archiveURLLabel.Location = new System.Drawing.Point(3, 227);
+      this.archiveURLLabel.Name = "archiveURLLabel";
+      this.archiveURLLabel.Size = new System.Drawing.Size(105, 27);
+      this.archiveURLLabel.TabIndex = 5;
+      this.archiveURLLabel.Text = "Update URL:";
+      this.archiveURLLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // updateURL
+      // 
+      this.updateURL.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.updateURL.Location = new System.Drawing.Point(114, 230);
+      this.updateURL.Name = "updateURL";
+      this.updateURL.Size = new System.Drawing.Size(627, 20);
+      this.updateURL.TabIndex = 2;
+      this.updateURL.TextChanged += new System.EventHandler(this.SetArchiveURL);
+      // 
+      // versionLabel
+      // 
+      this.versionLabel.AutoSize = true;
+      this.versionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.versionLabel.Location = new System.Drawing.Point(3, 152);
+      this.versionLabel.Name = "versionLabel";
+      this.versionLabel.Size = new System.Drawing.Size(105, 25);
+      this.versionLabel.TabIndex = 6;
+      this.versionLabel.Text = "Version:";
+      this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // version
+      // 
+      this.version.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.version.Location = new System.Drawing.Point(114, 155);
+      this.version.Name = "version";
+      this.version.Size = new System.Drawing.Size(627, 20);
+      this.version.TabIndex = 7;
+      this.version.TextChanged += new System.EventHandler(this.SetArchiveVersion);
+      // 
+      // author
+      // 
+      this.author.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.author.Location = new System.Drawing.Point(114, 180);
+      this.author.Name = "author";
+      this.author.Size = new System.Drawing.Size(627, 20);
+      this.author.TabIndex = 8;
+      this.author.TextChanged += new System.EventHandler(this.SetAuthor);
+      // 
+      // license
+      // 
+      this.license.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.license.Location = new System.Drawing.Point(114, 205);
+      this.license.Name = "license";
+      this.license.Size = new System.Drawing.Size(627, 20);
+      this.license.TabIndex = 9;
+      this.license.TextChanged += new System.EventHandler(this.SetLicense);
+      // 
+      // authorLabel
+      // 
+      this.authorLabel.AutoSize = true;
+      this.authorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.authorLabel.Location = new System.Drawing.Point(3, 177);
+      this.authorLabel.Name = "authorLabel";
+      this.authorLabel.Size = new System.Drawing.Size(105, 25);
+      this.authorLabel.TabIndex = 10;
+      this.authorLabel.Text = "Author:";
+      this.authorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // licenseLabel
+      // 
+      this.licenseLabel.AutoSize = true;
+      this.licenseLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.licenseLabel.Location = new System.Drawing.Point(3, 202);
+      this.licenseLabel.Name = "licenseLabel";
+      this.licenseLabel.Size = new System.Drawing.Size(105, 25);
+      this.licenseLabel.TabIndex = 11;
+      this.licenseLabel.Text = "License:";
+      this.licenseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // messageInfoGroup
+      // 
+      this.messageInfoGroup.AutoSize = true;
+      this.messageInfoGroup.Controls.Add(this.messageTable);
+      this.messageInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.messageInfoGroup.Location = new System.Drawing.Point(1, 276);
+      this.messageInfoGroup.Margin = new System.Windows.Forms.Padding(1);
+      this.messageInfoGroup.Name = "messageInfoGroup";
+      this.messageInfoGroup.Size = new System.Drawing.Size(750, 148);
+      this.messageInfoGroup.TabIndex = 4;
+      this.messageInfoGroup.TabStop = false;
+      this.messageInfoGroup.Text = "Messages";
+      // 
+      // messageTable
+      // 
+      this.messageTable.ColumnCount = 2;
+      this.messageTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+      this.messageTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+      this.messageTable.Controls.Add(this.curScoreLabel, 0, 0);
+      this.messageTable.Controls.Add(this.curScore, 1, 0);
+      this.messageTable.Controls.Add(this.goLabel, 0, 1);
+      this.messageTable.Controls.Add(this.gameOver, 1, 1);
+      this.messageTable.Controls.Add(this.teamsLabel, 0, 2);
+      this.messageTable.Controls.Add(this.teams, 1, 2);
+      this.messageTable.Controls.Add(this.scoresLabel, 0, 3);
+      this.messageTable.Controls.Add(this.scores, 1, 3);
+      this.messageTable.Controls.Add(this.pointsTextLabel, 0, 4);
+      this.messageTable.Controls.Add(this.pointsText, 1, 4);
+      this.messageTable.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.messageTable.Location = new System.Drawing.Point(3, 16);
+      this.messageTable.Name = "messageTable";
+      this.messageTable.RowCount = 5;
+      this.messageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.messageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.messageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.messageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.messageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.messageTable.Size = new System.Drawing.Size(744, 129);
+      this.messageTable.TabIndex = 0;
+      // 
+      // curScoreLabel
+      // 
+      this.curScoreLabel.AutoSize = true;
+      this.curScoreLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.curScoreLabel.Location = new System.Drawing.Point(3, 0);
+      this.curScoreLabel.Name = "curScoreLabel";
+      this.curScoreLabel.Size = new System.Drawing.Size(105, 26);
+      this.curScoreLabel.TabIndex = 0;
+      this.curScoreLabel.Text = "Curent Score Text:";
+      this.curScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // curScore
+      // 
+      this.curScore.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.curScore.Location = new System.Drawing.Point(114, 3);
+      this.curScore.Name = "curScore";
+      this.curScore.Size = new System.Drawing.Size(627, 20);
+      this.curScore.TabIndex = 1;
+      this.curScore.TextChanged += new System.EventHandler(this.SetCurrentScoreText);
+      // 
+      // goLabel
+      // 
+      this.goLabel.AutoSize = true;
+      this.goLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.goLabel.Location = new System.Drawing.Point(3, 26);
+      this.goLabel.Name = "goLabel";
+      this.goLabel.Size = new System.Drawing.Size(105, 26);
+      this.goLabel.TabIndex = 2;
+      this.goLabel.Text = "Game Over Text:";
+      this.goLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // gameOver
+      // 
+      this.gameOver.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.gameOver.Location = new System.Drawing.Point(114, 29);
+      this.gameOver.Name = "gameOver";
+      this.gameOver.Size = new System.Drawing.Size(627, 20);
+      this.gameOver.TabIndex = 6;
+      this.gameOver.TextChanged += new System.EventHandler(this.SetGameOverText);
+      // 
+      // teamsLabel
+      // 
+      this.teamsLabel.AutoSize = true;
+      this.teamsLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.teamsLabel.Location = new System.Drawing.Point(3, 52);
+      this.teamsLabel.Name = "teamsLabel";
+      this.teamsLabel.Size = new System.Drawing.Size(105, 26);
+      this.teamsLabel.TabIndex = 3;
+      this.teamsLabel.Text = "Teams Text:";
+      this.teamsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // teams
+      // 
+      this.teams.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.teams.Location = new System.Drawing.Point(114, 55);
+      this.teams.Name = "teams";
+      this.teams.Size = new System.Drawing.Size(627, 20);
+      this.teams.TabIndex = 7;
+      this.teams.TextChanged += new System.EventHandler(this.SetTeamsText);
+      // 
+      // scoresLabel
+      // 
+      this.scoresLabel.AutoSize = true;
+      this.scoresLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.scoresLabel.Location = new System.Drawing.Point(3, 78);
+      this.scoresLabel.Name = "scoresLabel";
+      this.scoresLabel.Size = new System.Drawing.Size(105, 26);
+      this.scoresLabel.TabIndex = 4;
+      this.scoresLabel.Text = "Scores Text:";
+      this.scoresLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // scores
+      // 
+      this.scores.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.scores.Location = new System.Drawing.Point(114, 81);
+      this.scores.Name = "scores";
+      this.scores.Size = new System.Drawing.Size(627, 20);
+      this.scores.TabIndex = 8;
+      this.scores.TextChanged += new System.EventHandler(this.SetScoresText);
+      // 
+      // pointsTextLabel
+      // 
+      this.pointsTextLabel.AutoSize = true;
+      this.pointsTextLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pointsTextLabel.Location = new System.Drawing.Point(3, 104);
+      this.pointsTextLabel.Name = "pointsTextLabel";
+      this.pointsTextLabel.Size = new System.Drawing.Size(105, 26);
+      this.pointsTextLabel.TabIndex = 5;
+      this.pointsTextLabel.Text = "Points Text:";
+      this.pointsTextLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // pointsText
+      // 
+      this.pointsText.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.pointsText.Location = new System.Drawing.Point(114, 107);
+      this.pointsText.Name = "pointsText";
+      this.pointsText.Size = new System.Drawing.Size(627, 20);
+      this.pointsText.TabIndex = 9;
+      this.pointsText.TextChanged += new System.EventHandler(this.SetPointsText);
+      // 
+      // soundInfoGroup
+      // 
+      this.soundInfoGroup.AutoSize = true;
+      this.soundInfoGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.soundInfoGroup.Controls.Add(this.soundTable);
+      this.soundInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.soundInfoGroup.Location = new System.Drawing.Point(3, 428);
+      this.soundInfoGroup.Name = "soundInfoGroup";
+      this.soundInfoGroup.Size = new System.Drawing.Size(746, 96);
+      this.soundInfoGroup.TabIndex = 2;
+      this.soundInfoGroup.TabStop = false;
+      this.soundInfoGroup.Text = "Sound Settings";
+      // 
+      // soundTable
+      // 
+      this.soundTable.AutoSize = true;
+      this.soundTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.soundTable.ColumnCount = 2;
+      this.soundTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+      this.soundTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+      this.soundTable.Controls.Add(this.bkgSoundLabel, 0, 0);
+      this.soundTable.Controls.Add(this.correctSoundLabel, 0, 1);
+      this.soundTable.Controls.Add(this.wrongSoundLabel, 0, 2);
+      this.soundTable.Controls.Add(this.bkgSound, 1, 0);
+      this.soundTable.Controls.Add(this.correctSound, 1, 1);
+      this.soundTable.Controls.Add(this.wrongSound, 1, 2);
+      this.soundTable.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.soundTable.Location = new System.Drawing.Point(3, 16);
+      this.soundTable.Margin = new System.Windows.Forms.Padding(0);
+      this.soundTable.Name = "soundTable";
+      this.soundTable.RowCount = 3;
+      this.soundTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.soundTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.soundTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.soundTable.Size = new System.Drawing.Size(740, 77);
+      this.soundTable.TabIndex = 0;
+      // 
+      // bkgSoundLabel
+      // 
+      this.bkgSoundLabel.AutoSize = true;
+      this.bkgSoundLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.bkgSoundLabel.Location = new System.Drawing.Point(3, 0);
+      this.bkgSoundLabel.Name = "bkgSoundLabel";
+      this.bkgSoundLabel.Size = new System.Drawing.Size(179, 26);
+      this.bkgSoundLabel.TabIndex = 0;
+      this.bkgSoundLabel.Text = "Background Music:";
+      this.bkgSoundLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // correctSoundLabel
+      // 
+      this.correctSoundLabel.AutoSize = true;
+      this.correctSoundLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.correctSoundLabel.Location = new System.Drawing.Point(3, 26);
+      this.correctSoundLabel.Name = "correctSoundLabel";
+      this.correctSoundLabel.Size = new System.Drawing.Size(179, 26);
+      this.correctSoundLabel.TabIndex = 1;
+      this.correctSoundLabel.Text = "Correct Sound:";
+      this.correctSoundLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // wrongSoundLabel
+      // 
+      this.wrongSoundLabel.AutoSize = true;
+      this.wrongSoundLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.wrongSoundLabel.Location = new System.Drawing.Point(3, 52);
+      this.wrongSoundLabel.Name = "wrongSoundLabel";
+      this.wrongSoundLabel.Size = new System.Drawing.Size(179, 26);
+      this.wrongSoundLabel.TabIndex = 2;
+      this.wrongSoundLabel.Text = "Wrong Sound:";
+      this.wrongSoundLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      // 
+      // bkgSound
+      // 
+      this.bkgSound.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.bkgSound.Location = new System.Drawing.Point(188, 3);
+      this.bkgSound.Name = "bkgSound";
+      this.bkgSound.Size = new System.Drawing.Size(549, 20);
+      this.bkgSound.TabIndex = 3;
+      this.bkgSound.Click += new System.EventHandler(this.SelectBkgSound);
+      // 
+      // correctSound
+      // 
+      this.correctSound.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.correctSound.Location = new System.Drawing.Point(188, 29);
+      this.correctSound.Name = "correctSound";
+      this.correctSound.Size = new System.Drawing.Size(549, 20);
+      this.correctSound.TabIndex = 4;
+      this.correctSound.Click += new System.EventHandler(this.SelectCorrectSound);
+      // 
+      // wrongSound
+      // 
+      this.wrongSound.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.wrongSound.Location = new System.Drawing.Point(188, 55);
+      this.wrongSound.Name = "wrongSound";
+      this.wrongSound.Size = new System.Drawing.Size(549, 20);
+      this.wrongSound.TabIndex = 5;
+      this.wrongSound.Click += new System.EventHandler(this.SelectWrongSound);
       // 
       // timeInfoGroup
       // 
@@ -205,9 +613,9 @@
       this.timeInfoGroup.BackColor = System.Drawing.Color.Transparent;
       this.timeInfoGroup.Controls.Add(this.timeTable);
       this.timeInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.timeInfoGroup.Location = new System.Drawing.Point(3, 892);
+      this.timeInfoGroup.Location = new System.Drawing.Point(3, 530);
       this.timeInfoGroup.Name = "timeInfoGroup";
-      this.timeInfoGroup.Size = new System.Drawing.Size(746, 175);
+      this.timeInfoGroup.Size = new System.Drawing.Size(746, 172);
       this.timeInfoGroup.TabIndex = 3;
       this.timeInfoGroup.TabStop = false;
       this.timeInfoGroup.Text = "Time Settings";
@@ -242,7 +650,7 @@
       this.timeTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.timeTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.timeTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.timeTable.Size = new System.Drawing.Size(740, 156);
+      this.timeTable.Size = new System.Drawing.Size(740, 153);
       this.timeTable.TabIndex = 0;
       // 
       // timerFontLabel
@@ -389,115 +797,18 @@
       this.delayGO.TabIndex = 11;
       this.delayGO.ValueChanged += new System.EventHandler(this.SetGODelay);
       // 
-      // soundInfoGroup
+      // backgroundInfoGroup
       // 
-      this.soundInfoGroup.AutoSize = true;
-      this.soundInfoGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.soundInfoGroup.Controls.Add(this.soundTable);
-      this.soundInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.soundInfoGroup.Location = new System.Drawing.Point(3, 789);
-      this.soundInfoGroup.Name = "soundInfoGroup";
-      this.soundInfoGroup.Size = new System.Drawing.Size(746, 97);
-      this.soundInfoGroup.TabIndex = 2;
-      this.soundInfoGroup.TabStop = false;
-      this.soundInfoGroup.Text = "Sound Settings";
-      // 
-      // soundTable
-      // 
-      this.soundTable.AutoSize = true;
-      this.soundTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.soundTable.ColumnCount = 2;
-      this.soundTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-      this.soundTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-      this.soundTable.Controls.Add(this.bkgSoundLabel, 0, 0);
-      this.soundTable.Controls.Add(this.correctSoundLabel, 0, 1);
-      this.soundTable.Controls.Add(this.wrongSoundLabel, 0, 2);
-      this.soundTable.Controls.Add(this.bkgSound, 1, 0);
-      this.soundTable.Controls.Add(this.correctSound, 1, 1);
-      this.soundTable.Controls.Add(this.wrongSound, 1, 2);
-      this.soundTable.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.soundTable.Location = new System.Drawing.Point(3, 16);
-      this.soundTable.Margin = new System.Windows.Forms.Padding(0);
-      this.soundTable.Name = "soundTable";
-      this.soundTable.RowCount = 3;
-      this.soundTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.soundTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.soundTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.soundTable.Size = new System.Drawing.Size(740, 78);
-      this.soundTable.TabIndex = 0;
-      // 
-      // bkgSoundLabel
-      // 
-      this.bkgSoundLabel.AutoSize = true;
-      this.bkgSoundLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.bkgSoundLabel.Location = new System.Drawing.Point(3, 0);
-      this.bkgSoundLabel.Name = "bkgSoundLabel";
-      this.bkgSoundLabel.Size = new System.Drawing.Size(179, 26);
-      this.bkgSoundLabel.TabIndex = 0;
-      this.bkgSoundLabel.Text = "Background Music:";
-      this.bkgSoundLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // correctSoundLabel
-      // 
-      this.correctSoundLabel.AutoSize = true;
-      this.correctSoundLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.correctSoundLabel.Location = new System.Drawing.Point(3, 26);
-      this.correctSoundLabel.Name = "correctSoundLabel";
-      this.correctSoundLabel.Size = new System.Drawing.Size(179, 26);
-      this.correctSoundLabel.TabIndex = 1;
-      this.correctSoundLabel.Text = "Correct Sound:";
-      this.correctSoundLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // wrongSoundLabel
-      // 
-      this.wrongSoundLabel.AutoSize = true;
-      this.wrongSoundLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.wrongSoundLabel.Location = new System.Drawing.Point(3, 52);
-      this.wrongSoundLabel.Name = "wrongSoundLabel";
-      this.wrongSoundLabel.Size = new System.Drawing.Size(179, 26);
-      this.wrongSoundLabel.TabIndex = 2;
-      this.wrongSoundLabel.Text = "Wrong Sound:";
-      this.wrongSoundLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // bkgSound
-      // 
-      this.bkgSound.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.bkgSound.Location = new System.Drawing.Point(188, 3);
-      this.bkgSound.Name = "bkgSound";
-      this.bkgSound.Size = new System.Drawing.Size(549, 20);
-      this.bkgSound.TabIndex = 3;
-      this.bkgSound.Click += new System.EventHandler(this.SelectBkgSound);
-      // 
-      // correctSound
-      // 
-      this.correctSound.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.correctSound.Location = new System.Drawing.Point(188, 29);
-      this.correctSound.Name = "correctSound";
-      this.correctSound.Size = new System.Drawing.Size(549, 20);
-      this.correctSound.TabIndex = 4;
-      this.correctSound.Click += new System.EventHandler(this.SelectCorrectSound);
-      // 
-      // wrongSound
-      // 
-      this.wrongSound.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.wrongSound.Location = new System.Drawing.Point(188, 55);
-      this.wrongSound.Name = "wrongSound";
-      this.wrongSound.Size = new System.Drawing.Size(549, 20);
-      this.wrongSound.TabIndex = 5;
-      this.wrongSound.Click += new System.EventHandler(this.SelectWrongSound);
-      // 
-      // generalInfoGroup
-      // 
-      this.generalInfoGroup.AutoSize = true;
-      this.generalInfoGroup.Controls.Add(this.generalSTable);
-      this.generalInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.generalInfoGroup.Location = new System.Drawing.Point(1, 282);
-      this.generalInfoGroup.Margin = new System.Windows.Forms.Padding(1);
-      this.generalInfoGroup.Name = "generalInfoGroup";
-      this.generalInfoGroup.Size = new System.Drawing.Size(750, 503);
-      this.generalInfoGroup.TabIndex = 1;
-      this.generalInfoGroup.TabStop = false;
-      this.generalInfoGroup.Text = "General Settings";
+      this.backgroundInfoGroup.AutoSize = true;
+      this.backgroundInfoGroup.Controls.Add(this.generalSTable);
+      this.backgroundInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.backgroundInfoGroup.Location = new System.Drawing.Point(1, 706);
+      this.backgroundInfoGroup.Margin = new System.Windows.Forms.Padding(1);
+      this.backgroundInfoGroup.Name = "backgroundInfoGroup";
+      this.backgroundInfoGroup.Size = new System.Drawing.Size(750, 398);
+      this.backgroundInfoGroup.TabIndex = 1;
+      this.backgroundInfoGroup.TabStop = false;
+      this.backgroundInfoGroup.Text = "General Settings";
       // 
       // generalSTable
       // 
@@ -506,43 +817,31 @@
       this.generalSTable.ColumnCount = 2;
       this.generalSTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
       this.generalSTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
-      this.generalSTable.Controls.Add(this.bkgColorLabel, 0, 6);
-      this.generalSTable.Controls.Add(this.bkgImageLabel, 0, 7);
-      this.generalSTable.Controls.Add(this.bkgImage, 1, 7);
-      this.generalSTable.Controls.Add(this.bkgColor, 1, 6);
-      this.generalSTable.Controls.Add(this.winning, 1, 0);
-      this.generalSTable.Controls.Add(this.losing, 1, 1);
-      this.generalSTable.Controls.Add(this.tying, 1, 2);
-      this.generalSTable.Controls.Add(this.won, 1, 3);
-      this.generalSTable.Controls.Add(this.lost, 1, 4);
-      this.generalSTable.Controls.Add(this.tied, 1, 5);
-      this.generalSTable.Controls.Add(this.winingLabel, 0, 0);
-      this.generalSTable.Controls.Add(this.losingLabel, 0, 1);
-      this.generalSTable.Controls.Add(this.tyingLabel, 0, 2);
-      this.generalSTable.Controls.Add(this.wonLabel, 0, 3);
-      this.generalSTable.Controls.Add(this.lostLabel, 0, 4);
-      this.generalSTable.Controls.Add(this.tiedLabel, 0, 5);
+      this.generalSTable.Controls.Add(this.bkgColorLabel, 0, 0);
+      this.generalSTable.Controls.Add(this.bkgImageLabel, 0, 1);
+      this.generalSTable.Controls.Add(this.bkgImage, 1, 1);
+      this.generalSTable.Controls.Add(this.bkgColor, 1, 0);
       this.generalSTable.Dock = System.Windows.Forms.DockStyle.Fill;
       this.generalSTable.Location = new System.Drawing.Point(3, 16);
       this.generalSTable.Margin = new System.Windows.Forms.Padding(0);
       this.generalSTable.Name = "generalSTable";
-      this.generalSTable.RowCount = 8;
+      this.generalSTable.RowCount = 2;
       this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.generalSTable.Size = new System.Drawing.Size(744, 484);
+      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.generalSTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+      this.generalSTable.Size = new System.Drawing.Size(744, 379);
       this.generalSTable.TabIndex = 0;
       // 
       // bkgColorLabel
       // 
       this.bkgColorLabel.AutoSize = true;
       this.bkgColorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.bkgColorLabel.Location = new System.Drawing.Point(3, 156);
+      this.bkgColorLabel.Location = new System.Drawing.Point(3, 0);
       this.bkgColorLabel.Name = "bkgColorLabel";
       this.bkgColorLabel.Size = new System.Drawing.Size(180, 26);
       this.bkgColorLabel.TabIndex = 0;
@@ -553,9 +852,9 @@
       // 
       this.bkgImageLabel.AutoSize = true;
       this.bkgImageLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.bkgImageLabel.Location = new System.Drawing.Point(3, 182);
+      this.bkgImageLabel.Location = new System.Drawing.Point(3, 26);
       this.bkgImageLabel.Name = "bkgImageLabel";
-      this.bkgImageLabel.Size = new System.Drawing.Size(180, 302);
+      this.bkgImageLabel.Size = new System.Drawing.Size(180, 753);
       this.bkgImageLabel.TabIndex = 1;
       this.bkgImageLabel.Text = "Background Image:";
       this.bkgImageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -564,9 +863,9 @@
       // 
       this.bkgImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.bkgImage.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.bkgImage.Location = new System.Drawing.Point(189, 185);
+      this.bkgImage.Location = new System.Drawing.Point(189, 29);
       this.bkgImage.Name = "bkgImage";
-      this.bkgImage.Size = new System.Drawing.Size(552, 296);
+      this.bkgImage.Size = new System.Drawing.Size(552, 747);
       this.bkgImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
       this.bkgImage.TabIndex = 2;
       this.bkgImage.TabStop = false;
@@ -575,298 +874,11 @@
       // bkgColor
       // 
       this.bkgColor.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.bkgColor.Location = new System.Drawing.Point(189, 159);
+      this.bkgColor.Location = new System.Drawing.Point(189, 3);
       this.bkgColor.Name = "bkgColor";
       this.bkgColor.Size = new System.Drawing.Size(552, 20);
       this.bkgColor.TabIndex = 3;
       this.bkgColor.Click += new System.EventHandler(this.SelectBkgColor);
-      // 
-      // winning
-      // 
-      this.winning.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.winning.Location = new System.Drawing.Point(189, 3);
-      this.winning.Name = "winning";
-      this.winning.Size = new System.Drawing.Size(552, 20);
-      this.winning.TabIndex = 4;
-      this.winning.TextChanged += new System.EventHandler(this.SetWinning);
-      // 
-      // losing
-      // 
-      this.losing.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.losing.Location = new System.Drawing.Point(189, 29);
-      this.losing.Name = "losing";
-      this.losing.Size = new System.Drawing.Size(552, 20);
-      this.losing.TabIndex = 5;
-      this.losing.TextChanged += new System.EventHandler(this.SetLosing);
-      // 
-      // tying
-      // 
-      this.tying.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tying.Location = new System.Drawing.Point(189, 55);
-      this.tying.Name = "tying";
-      this.tying.Size = new System.Drawing.Size(552, 20);
-      this.tying.TabIndex = 6;
-      this.tying.TextChanged += new System.EventHandler(this.SetTying);
-      // 
-      // won
-      // 
-      this.won.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.won.Location = new System.Drawing.Point(189, 81);
-      this.won.Name = "won";
-      this.won.Size = new System.Drawing.Size(552, 20);
-      this.won.TabIndex = 7;
-      this.won.TextChanged += new System.EventHandler(this.SetWon);
-      // 
-      // lost
-      // 
-      this.lost.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.lost.Location = new System.Drawing.Point(189, 107);
-      this.lost.Name = "lost";
-      this.lost.Size = new System.Drawing.Size(552, 20);
-      this.lost.TabIndex = 8;
-      this.lost.TextChanged += new System.EventHandler(this.SetLost);
-      // 
-      // tied
-      // 
-      this.tied.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tied.Location = new System.Drawing.Point(189, 133);
-      this.tied.Name = "tied";
-      this.tied.Size = new System.Drawing.Size(552, 20);
-      this.tied.TabIndex = 9;
-      this.tied.TextChanged += new System.EventHandler(this.SetTied);
-      // 
-      // winingLabel
-      // 
-      this.winingLabel.AutoSize = true;
-      this.winingLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.winingLabel.Location = new System.Drawing.Point(3, 0);
-      this.winingLabel.Name = "winingLabel";
-      this.winingLabel.Size = new System.Drawing.Size(180, 26);
-      this.winingLabel.TabIndex = 10;
-      this.winingLabel.Text = "Winning Message:";
-      this.winingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // losingLabel
-      // 
-      this.losingLabel.AutoSize = true;
-      this.losingLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.losingLabel.Location = new System.Drawing.Point(3, 26);
-      this.losingLabel.Name = "losingLabel";
-      this.losingLabel.Size = new System.Drawing.Size(180, 26);
-      this.losingLabel.TabIndex = 11;
-      this.losingLabel.Text = "Losing Message:";
-      this.losingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // tyingLabel
-      // 
-      this.tyingLabel.AutoSize = true;
-      this.tyingLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tyingLabel.Location = new System.Drawing.Point(3, 52);
-      this.tyingLabel.Name = "tyingLabel";
-      this.tyingLabel.Size = new System.Drawing.Size(180, 26);
-      this.tyingLabel.TabIndex = 12;
-      this.tyingLabel.Text = "Tying Message:";
-      this.tyingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // wonLabel
-      // 
-      this.wonLabel.AutoSize = true;
-      this.wonLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.wonLabel.Location = new System.Drawing.Point(3, 78);
-      this.wonLabel.Name = "wonLabel";
-      this.wonLabel.Size = new System.Drawing.Size(180, 26);
-      this.wonLabel.TabIndex = 13;
-      this.wonLabel.Text = "Won Message:";
-      this.wonLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // lostLabel
-      // 
-      this.lostLabel.AutoSize = true;
-      this.lostLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.lostLabel.Location = new System.Drawing.Point(3, 104);
-      this.lostLabel.Name = "lostLabel";
-      this.lostLabel.Size = new System.Drawing.Size(180, 26);
-      this.lostLabel.TabIndex = 14;
-      this.lostLabel.Text = "Lost Message:";
-      this.lostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // tiedLabel
-      // 
-      this.tiedLabel.AutoSize = true;
-      this.tiedLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tiedLabel.Location = new System.Drawing.Point(3, 130);
-      this.tiedLabel.Name = "tiedLabel";
-      this.tiedLabel.Size = new System.Drawing.Size(180, 26);
-      this.tiedLabel.TabIndex = 15;
-      this.tiedLabel.Text = "Tied Message:";
-      this.tiedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // archiveInfoGroup
-      // 
-      this.archiveInfoGroup.AutoSize = true;
-      this.archiveInfoGroup.Controls.Add(this.archiveTable);
-      this.archiveInfoGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveInfoGroup.Location = new System.Drawing.Point(1, 1);
-      this.archiveInfoGroup.Margin = new System.Windows.Forms.Padding(1);
-      this.archiveInfoGroup.Name = "archiveInfoGroup";
-      this.archiveInfoGroup.Size = new System.Drawing.Size(750, 279);
-      this.archiveInfoGroup.TabIndex = 0;
-      this.archiveInfoGroup.TabStop = false;
-      this.archiveInfoGroup.Text = "Archive Information";
-      // 
-      // archiveTable
-      // 
-      this.archiveTable.AutoSize = true;
-      this.archiveTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.archiveTable.ColumnCount = 2;
-      this.archiveTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-      this.archiveTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-      this.archiveTable.Controls.Add(this.archiveName, 1, 0);
-      this.archiveTable.Controls.Add(this.archiveNameLabel, 0, 0);
-      this.archiveTable.Controls.Add(this.archiveDescLabel, 0, 1);
-      this.archiveTable.Controls.Add(this.archiveDesc, 1, 1);
-      this.archiveTable.Controls.Add(this.archiveURLLabel, 0, 5);
-      this.archiveTable.Controls.Add(this.updateURL, 1, 5);
-      this.archiveTable.Controls.Add(this.versionLabel, 0, 2);
-      this.archiveTable.Controls.Add(this.version, 1, 2);
-      this.archiveTable.Controls.Add(this.author, 1, 3);
-      this.archiveTable.Controls.Add(this.license, 1, 4);
-      this.archiveTable.Controls.Add(this.authorLabel, 0, 3);
-      this.archiveTable.Controls.Add(this.licenseLabel, 0, 4);
-      this.archiveTable.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveTable.Location = new System.Drawing.Point(3, 16);
-      this.archiveTable.Margin = new System.Windows.Forms.Padding(0);
-      this.archiveTable.Name = "archiveTable";
-      this.archiveTable.RowCount = 6;
-      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-      this.archiveTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-      this.archiveTable.Size = new System.Drawing.Size(744, 260);
-      this.archiveTable.TabIndex = 0;
-      // 
-      // archiveName
-      // 
-      this.archiveName.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveName.Location = new System.Drawing.Point(114, 3);
-      this.archiveName.Name = "archiveName";
-      this.archiveName.Size = new System.Drawing.Size(627, 20);
-      this.archiveName.TabIndex = 0;
-      this.archiveName.TextChanged += new System.EventHandler(this.SetArchiveName);
-      // 
-      // archiveNameLabel
-      // 
-      this.archiveNameLabel.AutoSize = true;
-      this.archiveNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveNameLabel.Location = new System.Drawing.Point(3, 0);
-      this.archiveNameLabel.Name = "archiveNameLabel";
-      this.archiveNameLabel.Size = new System.Drawing.Size(105, 26);
-      this.archiveNameLabel.TabIndex = 3;
-      this.archiveNameLabel.Text = "Archive Name:";
-      this.archiveNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // archiveDescLabel
-      // 
-      this.archiveDescLabel.AutoSize = true;
-      this.archiveDescLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveDescLabel.Location = new System.Drawing.Point(3, 26);
-      this.archiveDescLabel.Name = "archiveDescLabel";
-      this.archiveDescLabel.Size = new System.Drawing.Size(105, 130);
-      this.archiveDescLabel.TabIndex = 4;
-      this.archiveDescLabel.Text = "Archive Description:";
-      // 
-      // archiveDesc
-      // 
-      this.archiveDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveDesc.Location = new System.Drawing.Point(114, 29);
-      this.archiveDesc.Multiline = true;
-      this.archiveDesc.Name = "archiveDesc";
-      this.archiveDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-      this.archiveDesc.Size = new System.Drawing.Size(627, 124);
-      this.archiveDesc.TabIndex = 1;
-      this.archiveDesc.TextChanged += new System.EventHandler(this.SetArchiveDesc);
-      // 
-      // archiveURLLabel
-      // 
-      this.archiveURLLabel.AutoSize = true;
-      this.archiveURLLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.archiveURLLabel.Location = new System.Drawing.Point(3, 234);
-      this.archiveURLLabel.Name = "archiveURLLabel";
-      this.archiveURLLabel.Size = new System.Drawing.Size(105, 26);
-      this.archiveURLLabel.TabIndex = 5;
-      this.archiveURLLabel.Text = "Update URL:";
-      this.archiveURLLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // updateURL
-      // 
-      this.updateURL.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.updateURL.Location = new System.Drawing.Point(114, 237);
-      this.updateURL.Name = "updateURL";
-      this.updateURL.Size = new System.Drawing.Size(627, 20);
-      this.updateURL.TabIndex = 2;
-      this.updateURL.TextChanged += new System.EventHandler(this.SetArchiveURL);
-      // 
-      // versionLabel
-      // 
-      this.versionLabel.AutoSize = true;
-      this.versionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.versionLabel.Location = new System.Drawing.Point(3, 156);
-      this.versionLabel.Name = "versionLabel";
-      this.versionLabel.Size = new System.Drawing.Size(105, 26);
-      this.versionLabel.TabIndex = 6;
-      this.versionLabel.Text = "Version:";
-      this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // version
-      // 
-      this.version.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.version.Location = new System.Drawing.Point(114, 159);
-      this.version.Name = "version";
-      this.version.Size = new System.Drawing.Size(627, 20);
-      this.version.TabIndex = 7;
-      this.version.TextChanged += new System.EventHandler(this.SetArchiveVersion);
-      // 
-      // author
-      // 
-      this.author.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.author.Location = new System.Drawing.Point(114, 185);
-      this.author.Name = "author";
-      this.author.Size = new System.Drawing.Size(627, 20);
-      this.author.TabIndex = 8;
-      this.author.TextChanged += new System.EventHandler(this.SetAuthor);
-      // 
-      // license
-      // 
-      this.license.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.license.Location = new System.Drawing.Point(114, 211);
-      this.license.Name = "license";
-      this.license.Size = new System.Drawing.Size(627, 20);
-      this.license.TabIndex = 9;
-      this.license.TextChanged += new System.EventHandler(this.SetLicense);
-      // 
-      // authorLabel
-      // 
-      this.authorLabel.AutoSize = true;
-      this.authorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.authorLabel.Location = new System.Drawing.Point(3, 182);
-      this.authorLabel.Name = "authorLabel";
-      this.authorLabel.Size = new System.Drawing.Size(105, 26);
-      this.authorLabel.TabIndex = 10;
-      this.authorLabel.Text = "Author:";
-      this.authorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      // 
-      // licenseLabel
-      // 
-      this.licenseLabel.AutoSize = true;
-      this.licenseLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.licenseLabel.Location = new System.Drawing.Point(3, 208);
-      this.licenseLabel.Name = "licenseLabel";
-      this.licenseLabel.Size = new System.Drawing.Size(105, 26);
-      this.licenseLabel.TabIndex = 11;
-      this.licenseLabel.Text = "License:";
-      this.licenseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
       // questionsTab
       // 
@@ -1307,6 +1319,17 @@
       this.generalTab.ResumeLayout(false);
       this.generalTable.ResumeLayout(false);
       this.generalTable.PerformLayout();
+      this.archiveInfoGroup.ResumeLayout(false);
+      this.archiveInfoGroup.PerformLayout();
+      this.archiveTable.ResumeLayout(false);
+      this.archiveTable.PerformLayout();
+      this.messageInfoGroup.ResumeLayout(false);
+      this.messageTable.ResumeLayout(false);
+      this.messageTable.PerformLayout();
+      this.soundInfoGroup.ResumeLayout(false);
+      this.soundInfoGroup.PerformLayout();
+      this.soundTable.ResumeLayout(false);
+      this.soundTable.PerformLayout();
       this.timeInfoGroup.ResumeLayout(false);
       this.timeInfoGroup.PerformLayout();
       this.timeTable.ResumeLayout(false);
@@ -1315,19 +1338,11 @@
       ((System.ComponentModel.ISupportInitialize)(this.afterAnswer)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.delayScore)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.delayGO)).EndInit();
-      this.soundInfoGroup.ResumeLayout(false);
-      this.soundInfoGroup.PerformLayout();
-      this.soundTable.ResumeLayout(false);
-      this.soundTable.PerformLayout();
-      this.generalInfoGroup.ResumeLayout(false);
-      this.generalInfoGroup.PerformLayout();
+      this.backgroundInfoGroup.ResumeLayout(false);
+      this.backgroundInfoGroup.PerformLayout();
       this.generalSTable.ResumeLayout(false);
       this.generalSTable.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.bkgImage)).EndInit();
-      this.archiveInfoGroup.ResumeLayout(false);
-      this.archiveInfoGroup.PerformLayout();
-      this.archiveTable.ResumeLayout(false);
-      this.archiveTable.PerformLayout();
       this.questionsTab.ResumeLayout(false);
       this.splitContainer.Panel1.ResumeLayout(false);
       this.splitContainer.Panel2.ResumeLayout(false);
@@ -1363,7 +1378,7 @@
     private System.Windows.Forms.TableLayoutPanel generalTable;
     private System.Windows.Forms.GroupBox timeInfoGroup;
     private System.Windows.Forms.GroupBox soundInfoGroup;
-    private System.Windows.Forms.GroupBox generalInfoGroup;
+    private System.Windows.Forms.GroupBox backgroundInfoGroup;
     private System.Windows.Forms.GroupBox archiveInfoGroup;
     private System.Windows.Forms.TableLayoutPanel archiveTable;
     private System.Windows.Forms.TextBox archiveName;
@@ -1425,18 +1440,6 @@
     private System.Windows.Forms.TableLayoutPanel teamTable;
     private System.Windows.Forms.Button addTeam;
     private System.Windows.Forms.TableLayoutPanel teamsTable;
-    private System.Windows.Forms.TextBox winning;
-    private System.Windows.Forms.TextBox losing;
-    private System.Windows.Forms.TextBox tying;
-    private System.Windows.Forms.TextBox won;
-    private System.Windows.Forms.TextBox lost;
-    private System.Windows.Forms.TextBox tied;
-    private System.Windows.Forms.Label winingLabel;
-    private System.Windows.Forms.Label losingLabel;
-    private System.Windows.Forms.Label tyingLabel;
-    private System.Windows.Forms.Label wonLabel;
-    private System.Windows.Forms.Label lostLabel;
-    private System.Windows.Forms.Label tiedLabel;
     private System.Windows.Forms.TextBox updateURL;
     private System.Windows.Forms.Label archiveURLLabel;
     private Controls.TreeLE topicsTree;
@@ -1450,5 +1453,17 @@
     private System.Windows.Forms.TextBox license;
     private System.Windows.Forms.Label authorLabel;
     private System.Windows.Forms.Label licenseLabel;
+    private System.Windows.Forms.GroupBox messageInfoGroup;
+    private System.Windows.Forms.TableLayoutPanel messageTable;
+    private System.Windows.Forms.Label curScoreLabel;
+    private System.Windows.Forms.TextBox curScore;
+    private System.Windows.Forms.Label goLabel;
+    private System.Windows.Forms.Label teamsLabel;
+    private System.Windows.Forms.Label scoresLabel;
+    private System.Windows.Forms.Label pointsTextLabel;
+    private System.Windows.Forms.TextBox gameOver;
+    private System.Windows.Forms.TextBox teams;
+    private System.Windows.Forms.TextBox scores;
+    private System.Windows.Forms.TextBox pointsText;
   }
 }

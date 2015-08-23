@@ -47,9 +47,10 @@
     internal void LoadData() {
       // Load General Page
       LoadArchiveInfo();
-      LoadGeneralSettings();
+      LoadMessageInfo();
       LoadSoundSettings();
       LoadTimeSettings();
+      LoadBackgroundSettings();
       // Load Question 
       UpdateTopicTree();
       // Load Teams
@@ -66,19 +67,12 @@
       updateURL.Text = archive.updateURL ?? "";
     }
 
-    internal void LoadGeneralSettings() {
-      winning.Text = archive.teamWinningMsg ?? "";
-      losing.Text = archive.teamLosingMsg ?? "";
-      tying.Text = archive.tyingMsg ?? "";
-      won.Text = archive.teamWonMsg ?? "";
-      lost.Text = archive.teamLostMsg ?? "";
-      tied.Text = archive.tiedMsg ?? "";
-      bkgColor.Text = archive.settings.backgroundColor.ToString();
-      if(!string.IsNullOrWhiteSpace(archive.settings.backgroundLoc)) {
-        bkgImage.Image = archive.settings.background ?? Extensions.LoadImage(Program.WorkingDirectory, archive.settings.backgroundLoc);
-      } else {
-        bkgImage.Image = null;
-      }
+    internal void LoadMessageInfo() {
+      curScore.Text = archive.settings.messages.scorePresenter ?? "";
+      gameOver.Text = archive.settings.messages.gameOver ?? "";
+      teams.Text = archive.settings.messages.teams ?? "";
+      scores.Text = archive.settings.messages.scores ?? "";
+      pointsText.Text = archive.settings.messages.fakePointsName ?? "";
     }
 
     internal void LoadSoundSettings() {
@@ -94,6 +88,15 @@
       afterAnswer.Value = archive.settings.time.afterAnswer;
       delayScore.Value = archive.settings.time.scoreDelay;
       delayGO.Value = archive.settings.time.gameOverDelay;
+    }
+
+    internal void LoadBackgroundSettings() {
+      bkgColor.Text = archive.settings.backgroundColor.ToString();
+      if(!string.IsNullOrWhiteSpace(archive.settings.backgroundLoc)) {
+        bkgImage.Image = archive.settings.background ?? Extensions.LoadImage(Program.WorkingDirectory, archive.settings.backgroundLoc);
+      } else {
+        bkgImage.Image = null;
+      }
     }
     #endregion
 
@@ -195,36 +198,6 @@
       archive.updateURL = obj.Text;
     }
 
-    private void SetWinning(object sender, EventArgs e) {
-      var obj = (TextBox)sender;
-      archive.teamWinningMsg = obj.Text;
-    }
-
-    private void SetLosing(object sender, EventArgs e) {
-      var obj = (TextBox)sender;
-      archive.teamLosingMsg = obj.Text;
-    }
-
-    private void SetTying(object sender, EventArgs e) {
-      var obj = (TextBox)sender;
-      archive.tyingMsg = obj.Text;
-    }
-
-    private void SetWon(object sender, EventArgs e) {
-      var obj = (TextBox)sender;
-      archive.teamWonMsg = obj.Text;
-    }
-
-    private void SetLost(object sender, EventArgs e) {
-      var obj = (TextBox)sender;
-      archive.teamLostMsg = obj.Text;
-    }
-
-    private void SetTied(object sender, EventArgs e) {
-      var obj = (TextBox)sender;
-      archive.tiedMsg = obj.Text;
-    }
-
     private void SetArchiveVersion(object sender, EventArgs e) {
       var obj = (TextBox)sender;
       archive.version = obj.Text;
@@ -238,6 +211,31 @@
     private void SetLicense(object sender, EventArgs e) {
       var obj = (TextBox)sender;
       archive.license = obj.Text;
+    }
+
+    private void SetCurrentScoreText(object sender, EventArgs e) {
+      var obj = (TextBox)sender;
+      archive.settings.messages.scorePresenter = obj.Text;
+    }
+
+    private void SetGameOverText(object sender, EventArgs e) {
+      var obj = (TextBox)sender;
+      archive.settings.messages.gameOver = obj.Text;
+    }
+
+    private void SetTeamsText(object sender, EventArgs e) {
+      var obj = (TextBox)sender;
+      archive.settings.messages.teams = obj.Text;
+    }
+
+    private void SetScoresText(object sender, EventArgs e) {
+      var obj = (TextBox)sender;
+      archive.settings.messages.scores = obj.Text;
+    }
+
+    private void SetPointsText(object sender, EventArgs e) {
+      var obj = (TextBox)sender;
+      archive.settings.messages.fakePointsName = obj.Text;
     }
 
     private void SetQuestion(object sender, EventArgs e) {

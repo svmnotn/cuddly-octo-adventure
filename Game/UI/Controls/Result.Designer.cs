@@ -81,7 +81,6 @@
       this.teamsLabel.Name = "teamsLabel";
       this.teamsLabel.Size = new System.Drawing.Size(241, 21);
       this.teamsLabel.TabIndex = 0;
-      this.teamsLabel.Text = "Teams";
       this.teamsLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
       // 
       // scoresLabel
@@ -92,7 +91,6 @@
       this.scoresLabel.Name = "scoresLabel";
       this.scoresLabel.Size = new System.Drawing.Size(241, 21);
       this.scoresLabel.TabIndex = 1;
-      this.scoresLabel.Text = "Score";
       this.scoresLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
       // 
       // Result

@@ -8,11 +8,12 @@
 
     internal Result() {
       InitializeComponent();
-      var info = "";
+      teamsLabel.Text = Program.main.archive.settings.messages.teams;
+      scoresLabel.Text = Program.main.archive.settings.messages.scores;
       // Check if game over
       if(Program.main.archive.HasQuestions()) {// Game not Over
         // Set the Text
-        label.Text = "Current scores are:";
+        label.Text = Program.main.archive.settings.messages.scorePresenter;
         WriteTable();
         // Set timer
         Program.main.timer.Interval = (int)(Program.main.archive.settings.time.scoreDelay * 1000);
@@ -21,7 +22,7 @@
         Program.main.timer.Start();
       } else {// No more questions == Game over
         // Set the Text
-        label.Text = "Tha tha tha That's All Folks!";
+        label.Text = Program.main.archive.settings.messages.gameOver;
         WriteTable();
         // Set timer
         Program.main.timer.Interval = (int)(Program.main.archive.settings.time.gameOverDelay * 1000);
@@ -29,7 +30,6 @@
         Program.main.timer.Enabled = true;
         Program.main.timer.Start();
       }
-      label.Text = info;
     }
 
     void WriteTable() {
@@ -46,7 +46,7 @@
         title.Dock = DockStyle.Fill;
         table.Controls.Add(title, teamIndex, currentRow);
         var score = new Label();
-        score.Text = t.score + " FIPs";
+        score.Text = t.score + " " + Program.main.archive.settings.messages.fakePointsName;
         score.TextAlign = ContentAlignment.MiddleCenter;
         score.Dock = DockStyle.Fill;
         table.Controls.Add(score, scoreIndex, currentRow);

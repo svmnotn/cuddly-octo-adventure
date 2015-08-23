@@ -9,12 +9,6 @@
     public string author;
     public string license;
     public string updateURL;
-    public string teamWinningMsg;
-    public string tyingMsg;
-    public string teamLosingMsg;
-    public string teamWonMsg;
-    public string teamLostMsg;
-    public string tiedMsg;
     [NonSerialized]
     public List<Topic> topics;
     [NonSerialized]
@@ -71,12 +65,6 @@
         tmp.version = "1.0.0";
         tmp.author = "someone";
         tmp.license = "Public Domain";
-        tmp.teamWinningMsg = "{team} is winning.";
-        tmp.teamLosingMsg = "{team} is losing.";
-        tmp.tyingMsg = "{teams} are tied!";
-        tmp.teamWonMsg = "{team} Won!";
-        tmp.teamLostMsg = "{team} Lost.";
-        tmp.tiedMsg = "{teams} tied";
         tmp.topics = new List<Topic>();
         #endregion
         var t = new Topic();
