@@ -16,11 +16,6 @@
         return AppDirectory + @"\Data";
       }
     }
-    internal static string TmpDirectory {
-      get {
-        return AppDirectory + @"\tmp";
-      }
-    }
     internal static string AnswerName { get { return main.CurrentTopic + '\\' + main.currentQuestion.id + "_answer" + (DateTime.Now - System.Diagnostics.Process.GetCurrentProcess().StartTime).Ticks; } }
     internal static MainScreen main;
 

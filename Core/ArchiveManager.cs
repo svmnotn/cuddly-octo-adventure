@@ -51,13 +51,9 @@
       return LoadArchiveFromDir(dest);
     }
 
-    public static void SaveArchiveToFile(string to, Archive arc, string tempPath) {
-      if(!Directory.Exists(tempPath)) {
-        Directory.CreateDirectory(tempPath);
-      }
-      SaveArchiveToDir(tempPath, arc);
-      ZipFile.CreateFromDirectory(tempPath, to, CompressionLevel.Optimal, false);
-      Directory.Delete(tempPath, true);
+    public static void SaveArchiveToFile(string dest, Archive arc, string src) {
+      SaveArchiveToDir(src, arc);
+      ZipFile.CreateFromDirectory(src, dest, CompressionLevel.Optimal, false);
     }
   }
 }
