@@ -38,7 +38,7 @@
     private void ExportArchive(object sender, EventArgs e) {
       var res = saveArchiveDialog.ShowDialog();
       if(res == DialogResult.OK || res == DialogResult.Yes) {
-        ArchiveManager.SaveArchiveToFile(saveArchiveDialog.FileName, archive, Program.TmpDirectory);
+        ArchiveManager.SaveArchiveToFile(saveArchiveDialog.FileName, archive, Program.WorkingDirectory);
       }
     }
     #endregion
