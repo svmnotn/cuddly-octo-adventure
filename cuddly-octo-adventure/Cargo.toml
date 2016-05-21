@@ -1,0 +1,13 @@
+[package]
+name = "cuddly-octo-adventure"
+version = "0.0.1"
+description = "The core libbrary of the Cuddly Octo Adventure Project."
+homepage = "https://github.com/svmnotn/cuddly-octo-adventure"
+repository = "svmnotn/cuddly-octo-adventure"
+readme = "README.md"
+license = "MIT"
+keywords = ["game"]
+authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
+
+[lib]
+name = "coa"

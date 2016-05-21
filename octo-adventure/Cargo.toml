@@ -1,0 +1,14 @@
+[package]
+name = "octo-adventure"
+version = "0.0.1"
+description = "A jeopardy like game made for teachers, providing simple and extensive customization to the generic jeopardy game."
+homepage = "https://github.com/svmnotn/cuddly-octo-adventure"
+repository = "svmnotn/cuddly-octo-adventure"
+readme = "README.md"
+license = "MIT"
+keywords = ["game"]
+authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
+
+[dependencies]
+cuddly-octo-adventure = { path = "../cuddly-octo-adventure" }
+clap = "2"
