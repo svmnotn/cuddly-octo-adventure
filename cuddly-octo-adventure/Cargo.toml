@@ -12,5 +12,6 @@ authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 [lib]
 name = "coa"
 
-[dependencies]
-conrod = "0"
+[dependencies.gtk]
+version = "0"
+features = ["v3_16"]
