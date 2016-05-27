@@ -12,6 +12,12 @@ authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 [lib]
 name = "coa"
 
+[dependencies]
+serde = "0"
+serde_json = "0"
+serde_macros = "0"
+zip = "0"
+
 [dependencies.gtk]
 version = "0"
 features = ["v3_16"]
