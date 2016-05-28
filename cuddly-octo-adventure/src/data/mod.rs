@@ -34,24 +34,23 @@ use zip::CompressionMethod;
 /// This is a convinience method.
 pub fn load_archive(from: PathBuf) -> Result<Archive> {
     let mut archive = Archive::default();
-    {
-        // Load the Archive info from the info json file
-        from.push("info");
-        let mut f = File::open(&from)?;
-        let mut data = String::new();
-        f.read_to_string(&mut data)?;
-        archive.info = from_json::from_str(&data)?;
-        from.pop();
-    }
-    {
-        // Load the Archive settings from the settings json file
-        from.push("settings");
-        let mut f = File::open(&from)?;
-        let mut data = String::new();
-        f.read_to_string(&mut data)?;
-        archive.settings = from_json::from_str(&data)?;
-        from.pop();
-    }
+
+    // Load the Archive info from the info json file
+    from.push("info");
+    let mut f = File::open(&from)?;
+    let mut data = String::new();
+    f.read_to_string(&mut data)?;
+    archive.info = from_json::from_str(&data)?;
+    from.pop();
+
+    // Load the Archive settings from the settings json file
+    from.push("settings");
+    let mut f = File::open(&from)?;
+    let mut data = String::new();
+    f.read_to_string(&mut data)?;
+    archive.settings = from_json::from_str(&data)?;
+    from.pop();
+
     if fs::metadata(&from)?.is_dir() {
         let topics = fs::read_dir(&from)
             .into_iter()
@@ -61,15 +60,15 @@ pub fn load_archive(from: PathBuf) -> Result<Archive> {
         for topic in topics {
             let mut t = Topic::default();
             t.name = topic.file_name().into_string()?;
-            {
-                // Load all the questions in the topic from the questions json file
-                from.push("questions");
-                let mut f = File::open(&from)?;
-                let mut data = String::new();
-                f.read_to_string(&mut data)?;
-                t.questions = from_json::from_str(&data)?;
-                from.pop();
-            }
+
+            // Load all the questions in the topic from the questions json file
+            from.push("questions");
+            let mut f = File::open(&from)?;
+            let mut data = String::new();
+            f.read_to_string(&mut data)?;
+            t.questions = from_json::from_str(&data)?;
+            from.pop();
+
         }
     }
     Ok(())
@@ -91,33 +90,32 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
 /// This is a convinience method.
 pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
     {
-        // Save the Archive info into its own json file
+    // Save the Archive info into its own json file
         let info = to_json::to_string(&archive.info)?;
-        to.push("info");
-        let mut f = File::create(&to)?;
-        f.write_all(&info)?;
-        to.pop();
-    }
-    {
-        // Save the Archive settings into its own json file
+    to.push("info");
+    let mut f = File::create(&to)?;
+    f.write_all(&to_json::to_string(&archive.info)?)?;
+    to.pop();
+
+    // Save the Archive settings into its own json file
         let settings = to_json::to_string(&archive.settings)?;
-        to.push("settings");
-        let mut f = File::create(&to)?;
-        f.write_all(&settings)?;
-        to.pop();
-    }
+    to.push("settings");
+    let mut f = File::create(&to)?;
+    f.write_all(&to_json::to_string(&archive.settings)?)?;
+    to.pop();
+
     for topic in archive.topics {
         // Create a directory per topic
         to.push(&topic.name);
         fs::create_dir(&to)?;
-        {
-            // Save all the questions in the topic to a json file
-            to.push("questions");
-            let questions = to_json::to_string(&topic.questions)?;
-            let mut f = File::create(&to)?;
-            f.write_all(&questions)?;
-            to.pop();
-        }
+
+        // Save all the questions in the topic to a json file
+        to.push("questions");
+        let questions = to_json::to_string(&topic.questions)?;
+        let mut f = File::create(&to)?;
+        f.write_all(&questions)?;
+        to.pop();
+
         to.pop();
     }
     Ok(())
