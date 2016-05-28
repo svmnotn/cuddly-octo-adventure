@@ -31,6 +31,47 @@ use json::de as from_json;
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
 pub fn load_archive(from: PathBuf) -> Result<Archive> {
+    let mut archive = Archive::default();
+    {
+        // Load the Archive info from the info json file
+        from.push("info");
+        let mut f = File::open(&from)?;
+        let mut data = String::new();
+        f.read_to_string(&mut data)?;
+        archive.info = from_json::from_str(&data)?;
+        from.pop();
+    }
+    {
+        // Load the Archive settings from the settings json file
+        from.push("settings");
+        let mut f = File::open(&from)?;
+        let mut data = String::new();
+        f.read_to_string(&mut data)?;
+        archive.settings = from_json::from_str(&data)?;
+        from.pop();
+    }
+    if fs::metadata(&from)?.is_dir() {
+        let topics = fs::read_dir(&from)
+            .into_iter()
+            .map(|e| e?)
+            .filter(|e| e.is_dir())
+            .collect();
+        for topic in topics {
+            let mut t = Topic::default();
+            t.name = topic.file_name().into_string()?;
+            {
+                // Load all the questions in the topic from the questions json file
+                from.push("questions");
+                let mut f = File::open(&from)?;
+                let mut data = String::new();
+                f.read_to_string(&mut data)?;
+                t.questions = from_json::from_str(&data)?;
+                from.pop();
+            }
+        }
+    }
+    Ok(())
+}
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
