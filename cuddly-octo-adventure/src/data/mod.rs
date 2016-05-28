@@ -75,11 +75,13 @@ pub fn load_archive(from: PathBuf) -> Result<Archive> {
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
-    // Unzip cuddle
+    let tmp = tempdir::TempDir::new("cuddle")?;
+    // TODO Unzip cuddle into ^
 
     // Load cuddle from unziped dir
-    // load_archive(cuddle dir)
-    unimplemented!()
+    let dir = PathBuf::new();
+    dir.push(tmp.path());
+    load_archive(dir)
 }
 
 /// Save an 'archive' to disk,
@@ -129,7 +131,6 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
         save_archive(archive, dir);
     }
 
-    // Zip contents of tmp folder and move to 'to' dir
-    // TODO ^
+    // TODO Zip contents of tmp folder and move to 'to' dir
     unimplemented!()
 }
