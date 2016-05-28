@@ -2,8 +2,9 @@
 // * Look into multithreading the load of images into ram.
 // * Write Topic in a sensible manner
 extern crate tempdir;
+extern crate zip;
 extern crate serde;
-extern crate serde_json;
+extern crate serde_json as json;
 
 mod answer;
 mod archive;
@@ -19,6 +20,10 @@ pub use self::team::Team;
 pub use self::topic::Topic;
 
 use std::path::PathBuf;
+use std::io::prelude::*;
+use std::fs::{self, DirEntry, File};
+use json::ser as to_json;
+use json::de as from_json;
 
 /// Load an 'archive' from disk,
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
