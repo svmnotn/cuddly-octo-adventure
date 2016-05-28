@@ -11,6 +11,7 @@ mod archive;
 mod question;
 mod team;
 mod topic;
+mod error;
 pub mod settings;
 
 pub use self::archive::{Archive, ArchiveInfo};
@@ -18,6 +19,7 @@ pub use self::answer::Answer;
 pub use self::question::Question;
 pub use self::team::Team;
 pub use self::topic::Topic;
+pub use self::error::{Error, Result};
 
 use std::path::PathBuf;
 use std::io::prelude::*;
@@ -28,10 +30,10 @@ use json::de as from_json;
 /// Load an 'archive' from disk,
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
-pub fn load_archive(from: PathBuf) -> Archive { unimplemented!() }
+pub fn load_archive(from: PathBuf) -> Result<Archive> {
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
-pub fn load_cuddle(from: PathBuf) -> Archive {
+pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
     // Unzip cuddle
 
     // Load cuddle from unziped dir
@@ -42,10 +44,10 @@ pub fn load_cuddle(from: PathBuf) -> Archive {
 /// Save an 'archive' to disk,
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
-pub fn save_archive(archive: Archive, to: PathBuf) { unimplemented!() }
+pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
-pub fn save_cuddle(archive: Archive, to: PathBuf) {
+pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
     // Save archive to tmp folder
     // save_archive(archive, tmp folder, prob in run dir);
 
