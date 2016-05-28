@@ -89,16 +89,13 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
 pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
-    {
     // Save the Archive info into its own json file
-        let info = to_json::to_string(&archive.info)?;
     to.push("info");
     let mut f = File::create(&to)?;
     f.write_all(&to_json::to_string(&archive.info)?)?;
     to.pop();
 
     // Save the Archive settings into its own json file
-        let settings = to_json::to_string(&archive.settings)?;
     to.push("settings");
     let mut f = File::create(&to)?;
     f.write_all(&to_json::to_string(&archive.settings)?)?;
@@ -123,14 +120,25 @@ pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
-    // Save archive to tmp folder
-    let tmp = tempdir::TempDir::new("cuddle")?;
-    {
-        let dir = PathBuf::new();
-        dir.push(tmp.path());
-        save_archive(archive, dir);
-    }
+    let cuddle = File::create(&to)?;
+    let mut zip = zip::ZipWriter::new(cuddle);
 
-    // TODO Zip contents of tmp folder and move to 'to' dir
-    unimplemented!()
+    // Save the Archive info into its own json file
+    zip.start_file("info", CompressionMethod::Deflated);
+    zip.write_all(to_json::to_string(&archive.info)?)?;
+
+    // Save the Archive settings into its own json file
+    zip.start_file("settings", CompressionMethod::Deflated);
+    zip.write_all(to_json::to_string(&archive.info)?)?;
+
+    for topic in archive.topics {
+        // Create a directory per topic
+        let mut folder = String::new(topic.name + "/");
+        zip.start_file(&folder, CompressionMethod::Stored);
+
+        // Save all the questions in the topic to a json file
+        zip.start_file(&(folder + "questions"), CompressionMethod::Deflated);
+        zip.write_all(to_json::to_string(&topic.questions)?)?;
+    }
+    Ok(())
 }
