@@ -13,3 +13,14 @@ pub struct Question {
   //img: Option<Image> from gtk
   answers: Vec<Answer>,
 }
+
+impl Default for Question {
+  fn default() -> Question {
+    Question {
+      value: 0,
+      text: "What is the answer to life the universe and everything?".to_owned(),
+      img_loc: None,
+      answers: vec![Answer::default()],
+    }
+  }
+}

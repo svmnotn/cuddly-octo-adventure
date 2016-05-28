@@ -1,6 +1,6 @@
 // TODO
 // * Look into multithreading the load of images into ram.
-// * impl Default to Archive and the rest of its contents.
+// * Write Topic in a sensible manner
 extern crate serde;
 extern crate serde_json;
 
