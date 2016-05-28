@@ -122,8 +122,14 @@ pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
     // Save archive to tmp folder
-    // save_archive(archive, tmp folder, prob in run dir);
+    let tmp = tempdir::TempDir::new("cuddle")?;
+    {
+        let dir = PathBuf::new();
+        dir.push(tmp.path());
+        save_archive(archive, dir);
+    }
 
     // Zip contents of tmp folder and move to 'to' dir
+    // TODO ^
     unimplemented!()
 }
