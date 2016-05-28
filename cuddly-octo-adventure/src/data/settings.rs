@@ -28,11 +28,14 @@ pub struct Message {
 
 #[derive(Serialize, Deserialize)]
 pub struct Sound {
-  bg_sound_loc: PathBuf,
+  #[serde(skip_serializing_if="Option::is_none")]
+  bg_sound_loc: Option<PathBuf>,
   bg_sound_vol: f32,
-  yay_sound_loc: PathBuf,
+  #[serde(skip_serializing_if="Option::is_none")]
+  yay_sound_loc: Option<PathBuf>,
   yay_sound_vol: f32,
-  nay_sound_loc: PathBuf,
+  #[serde(skip_serializing_if="Option::is_none")]
+  nay_sound_loc: Option<PathBuf>,
   nay_sound_vol: f32,
 }
 
