@@ -1,6 +1,7 @@
 // TODO
 // * Look into multithreading the load of images into ram.
 // * Write Topic in a sensible manner
+extern crate tempdir;
 extern crate serde;
 extern crate serde_json;
 
@@ -19,32 +20,30 @@ pub use self::topic::Topic;
 
 use std::path::PathBuf;
 
-/// Load an 'archive' from disk, an 'archive' is a folder following the structure expected in a 'cuddle'.
+/// Load an 'archive' from disk,
+/// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
-pub fn load_archive(from: PathBuf) -> Archive {
-  unimplemented!()
-}
+pub fn load_archive(from: PathBuf) -> Archive { unimplemented!() }
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 pub fn load_cuddle(from: PathBuf) -> Archive {
-  // Unzip cuddle
+    // Unzip cuddle
 
-  // Load cuddle from unziped dir
-  // load_archive(cuddle dir)
-  unimplemented!()
+    // Load cuddle from unziped dir
+    // load_archive(cuddle dir)
+    unimplemented!()
 }
 
-/// Save an 'archive' to disk, an 'archive' is a folder following the structure expected in a 'cuddle'.
+/// Save an 'archive' to disk,
+/// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
-pub fn save_archive(archive: Archive, to: PathBuf) {
-  unimplemented!()
-}
+pub fn save_archive(archive: Archive, to: PathBuf) { unimplemented!() }
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) {
-  // Save archive to tmp folder
-  // save_archive(archive, tmp folder, prob in run dir);
+    // Save archive to tmp folder
+    // save_archive(archive, tmp folder, prob in run dir);
 
-  // Zip contents of tmp folder and move to 'to' dir
-  unimplemented!()
+    // Zip contents of tmp folder and move to 'to' dir
+    unimplemented!()
 }

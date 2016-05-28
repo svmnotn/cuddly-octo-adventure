@@ -4,7 +4,5 @@ pub struct Topic {
 }
 
 impl Default for Topic {
-  fn default() -> Topic {
-    Topic {}
-  }
+    fn default() -> Topic { Topic {} }
 }

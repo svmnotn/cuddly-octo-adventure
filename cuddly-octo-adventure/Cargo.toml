@@ -17,6 +17,7 @@ serde = "0"
 serde_json = "0"
 serde_macros = "0"
 zip = "0"
+tempdir = "0"
 
 [dependencies.gtk]
 version = "0"
