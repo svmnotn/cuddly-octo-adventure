@@ -45,6 +45,38 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
 /// This is a convinience method.
 pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
+    {
+        // Save the Archive info into its own json file
+        let info = to_json::to_string(&archive.info)?;
+        to.push("info");
+        let mut f = File::create(&to)?;
+        f.write_all(&info)?;
+        to.pop();
+    }
+    {
+        // Save the Archive settings into its own json file
+        let settings = to_json::to_string(&archive.settings)?;
+        to.push("settings");
+        let mut f = File::create(&to)?;
+        f.write_all(&settings)?;
+        to.pop();
+    }
+    for topic in archive.topics {
+        // Create a directory per topic
+        to.push(&topic.name);
+        fs::create_dir(&to)?;
+        {
+            // Save all the questions in the topic to a json file
+            to.push("questions");
+            let questions = to_json::to_string(&topic.questions)?;
+            let mut f = File::create(&to)?;
+            f.write_all(&questions)?;
+            to.pop();
+        }
+        to.pop();
+    }
+    Ok(())
+}
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
