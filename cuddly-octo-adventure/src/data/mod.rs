@@ -21,11 +21,13 @@ pub use self::team::Team;
 pub use self::topic::Topic;
 pub use self::error::{Error, Result};
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
+use std::io;
 use std::io::prelude::*;
 use std::fs::{self, DirEntry, File};
 use json::ser as to_json;
 use json::de as from_json;
+use zip::CompressionMethod;
 
 /// Load an 'archive' from disk,
 /// an 'archive' is a folder following the structure expected in a 'cuddle'.
