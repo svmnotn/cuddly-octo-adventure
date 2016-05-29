@@ -1,10 +1,11 @@
+use std::result;
 use std::error;
 use std::fmt;
 use std::io;
 use super::json;
 use super::zip::result::ZipError;
 
-pub type Result<T> = Result<T, Error>;
+pub type Result<T> = result::Result<T, Error>;
 
 #[derive(Debug)]
 pub enum Error {

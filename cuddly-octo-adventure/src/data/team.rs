@@ -1,10 +1,10 @@
 #[derive(Serialize, Deserialize)]
 pub struct Team {
-    name: String,
+    pub name: String,
     // color: color
     // font: font
     #[serde(skip_serializing, skip_deserializing)]
-    score: u32,
+    pub score: u32,
 }
 
 impl Default for Team {

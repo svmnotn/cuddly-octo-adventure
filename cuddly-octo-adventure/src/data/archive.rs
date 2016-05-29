@@ -2,9 +2,9 @@ use super::Topic;
 use super::settings::Settings;
 
 pub struct Archive {
-    info: ArchiveInfo,
-    topics: Vec<Topic>,
-    settings: Settings,
+    pub info: ArchiveInfo,
+    pub topics: Vec<Topic>,
+    pub settings: Settings,
 }
 
 impl Default for Archive {
@@ -19,13 +19,13 @@ impl Default for Archive {
 
 #[derive(Serialize, Deserialize)]
 pub struct ArchiveInfo {
-    name: String,
-    description: String,
-    version: String,
-    author: String,
-    license: String,
+    pub name: String,
+    pub description: String,
+    pub version: String,
+    pub author: String,
+    pub license: String,
     #[serde(rename="updateURL")]
-    update_url: String, // TODO Check for URL stuff in std
+    pub update_url: String, // TODO Check for URL stuff in std
 }
 
 impl Default for ArchiveInfo {

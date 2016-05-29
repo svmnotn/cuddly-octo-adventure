@@ -1,8 +1,8 @@
 use super::Question;
 
 pub struct Topic {
-    name: String,
-    questions: Vec<Question>,
+    pub name: String,
+    pub questions: Vec<Question>,
 }
 
 impl Default for Topic {
