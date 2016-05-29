@@ -20,7 +20,7 @@ pub use self::error::{Error, Result};
 
 use std::path::PathBuf;
 use std::io::prelude::*;
-use std::fs::{self, File};
+use std::fs::File;
 use self::json::ser as to_json;
 use self::json::de as from_json;
 use self::zip::CompressionMethod;
@@ -29,7 +29,7 @@ use self::zip::CompressionMethod;
 // TODO Worry about other included files!
 pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
     let mut archive = Archive::default();
-    let cuddle = fs::File::open(&from)?;
+    let cuddle = File::open(&from)?;
     let mut zip = zip::ZipArchive::new(cuddle)?;
 
     {
