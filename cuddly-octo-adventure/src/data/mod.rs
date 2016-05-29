@@ -27,7 +27,7 @@ use self::json::de as from_json;
 use self::zip::CompressionMethod;
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
-// TODO Worry about other included files!
+// TODO Worry about Sounds!
 pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
     let mut archive = Archive::default();
     let cuddle = File::open(&from)?;
@@ -124,15 +124,13 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
     }
     let cuddle = File::create(to)?;
     let mut zip = zip::ZipWriter::new(cuddle);
-
     // Save the Archive info into its own json file
     zip.start_file("info", CompressionMethod::Deflated)?;
     zip.write_all(to_json::to_string(&archive.info)?.as_bytes())?;
-
     // Save the Archive settings into its own json file
     zip.start_file("settings", CompressionMethod::Deflated)?;
     zip.write_all(to_json::to_string(&archive.settings)?.as_bytes())?;
-
+    // Save the extra files to the zip
     write_loc("", archive.settings.bg_loc, &mut zip)?;
     write_loc("", archive.settings.sound.bg_sound_loc, &mut zip)?;
     write_loc("", archive.settings.sound.yay_sound_loc, &mut zip)?;
@@ -141,22 +139,22 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
     let mut topics = String::new();
 
     for topic in archive.topics {
+        // Add topic name to topics list
         topics.push_str(&topic.name);
         // Create a directory per topic
         zip.start_file(format!("{}/", &topic.name), CompressionMethod::Stored)?;
-
         // Save all the questions in the topic to a json file
         zip.start_file(format!("{}/{}", &topic.name, "questions"), CompressionMethod::Deflated)?;
         zip.write_all(to_json::to_string(&topic.questions)?.as_bytes())?;
 
         for q in topic.questions {
             write_loc(&format!("{}/", &topic.name), q.img_loc, &mut zip)?;
+
             for ans in q.answers {
                 write_loc(&format!("{}/", &topic.name), ans.img_loc, &mut zip)?;
             }
         }
     }
-
     zip.start_file("topics", CompressionMethod::Deflated)?;
     zip.write_all(topics.as_bytes())?;
     Ok(())
