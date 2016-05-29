@@ -22,3 +22,7 @@ tempdir = "0"
 [dependencies.gtk]
 version = "0"
 features = ["v3_16"]
+
+[dependencies.gdk]
+version = "0"
+features = ["v3_16"]

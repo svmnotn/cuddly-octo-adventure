@@ -1,12 +1,13 @@
-use std::path::PathBuf;
 use super::Team;
+use gtk::Image;
+use std::path::PathBuf;
 
 #[derive(Serialize, Deserialize)]
 pub struct Settings {
-    // timer_color,
-    // bg_color,
-    // #[serde(skip_serializing, skip_deserializing)]
-    // bg_img: Option<Image>,
+    pub timer_color: String,
+    pub bg_color: String,
+    #[serde(skip_serializing, skip_deserializing)]
+    pub bg_img: Option<Image>,
     #[serde(skip_serializing_if="Option::is_none")]
     pub bg_loc: Option<PathBuf>,
     pub message: Message,
@@ -18,6 +19,9 @@ pub struct Settings {
 impl Default for Settings {
     fn default() -> Settings {
         Settings {
+            timer_color: "".to_owned(),
+            bg_color: "".to_owned(),
+            bg_img: None,
             bg_loc: None,
             message: Message::default(),
             sound: Sound::default(),
