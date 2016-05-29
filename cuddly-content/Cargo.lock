@@ -98,6 +98,7 @@ dependencies = [
 name = "cuddly-octo-adventure"
 version = "0.0.1"
 dependencies = [
+ "gdk 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "gtk 0.0.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 0.7.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_json 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",

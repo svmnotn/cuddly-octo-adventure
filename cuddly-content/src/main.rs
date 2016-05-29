@@ -1,7 +1,37 @@
 extern crate coa;
-use coa::gtk;
-use coa::gtk::prelude::*;
-use coa::gtk::{Button, Window, WindowType};
+
+use coa::gtk::{Window, WindowType};
+pub use coa::cuddle::{
+  Archive,
+  ArchiveInfo,
+  Answer,
+  Question,
+  Team,
+  Topic,
+  Error as CuddleError,
+  Result as CuddleResult,
+  settings as cuddle_settings,
+};
+pub use coa::gtk::prelude::*;
+pub use coa::gtk::{
+  self,
+  Button, // Buttons! :D
+  Entry, // Text Input
+  Label, // Show all the text!
+  Notebook, // TABS!
+};
+
+mod info;
+use info::build as build_info;
+
+mod topics;
+use topics::build as build_topics;
+
+mod settings;
+use settings::build as build_settings;
+
+mod teams;
+use teams::build as build_teams;
 
 fn main() {
     println!("Hello World! Let's make some content!");
@@ -12,19 +42,20 @@ fn main() {
 
     let window = Window::new(WindowType::Toplevel);
     window.set_title("Cuddly Content Creator");
-    window.set_default_size(350, 70);
-    let button = Button::new_with_label("Click me!");
-    window.add(&button);
+    window.set_default_size(800, 600);
+    let tabs = Notebook::new();
+
+    build_info(&tabs);
+    build_topics(&tabs);
+    build_settings(&tabs);
+    build_teams(&tabs);
+
+    window.add(&tabs);
     window.show_all();
 
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
         Inhibit(false)
     });
-
-    button.connect_clicked(|_| {
-        println!("Clicked!");
-    });
-
     gtk::main();
 }
