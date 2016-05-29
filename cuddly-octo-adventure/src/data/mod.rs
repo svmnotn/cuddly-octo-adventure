@@ -1,6 +1,3 @@
-// TODO
-// * Look into multithreading the load of images into ram.
-// * Write Topic in a sensible manner
 extern crate tempdir;
 extern crate zip;
 extern crate serde;
@@ -21,124 +18,117 @@ pub use self::team::Team;
 pub use self::topic::Topic;
 pub use self::error::{Error, Result};
 
-use std::path::{Path, PathBuf};
-use std::io;
+use std::path::PathBuf;
 use std::io::prelude::*;
-use std::fs::{self, DirEntry, File};
-use json::ser as to_json;
-use json::de as from_json;
-use zip::CompressionMethod;
-
-/// Load an 'archive' from disk,
-/// an 'archive' is a folder following the structure expected in a 'cuddle'.
-/// This is a convinience method.
-pub fn load_archive(from: PathBuf) -> Result<Archive> {
-    let mut archive = Archive::default();
-
-    // Load the Archive info from the info json file
-    from.push("info");
-    let mut f = File::open(&from)?;
-    let mut data = String::new();
-    f.read_to_string(&mut data)?;
-    archive.info = from_json::from_str(&data)?;
-    from.pop();
-
-    // Load the Archive settings from the settings json file
-    from.push("settings");
-    let mut f = File::open(&from)?;
-    let mut data = String::new();
-    f.read_to_string(&mut data)?;
-    archive.settings = from_json::from_str(&data)?;
-    from.pop();
-
-    if fs::metadata(&from)?.is_dir() {
-        let topics = fs::read_dir(&from)
-            .into_iter()
-            .map(|e| e?)
-            .filter(|e| e.is_dir())
-            .collect();
-        for topic in topics {
-            let mut t = Topic::default();
-            t.name = topic.file_name().into_string()?;
-
-            // Load all the questions in the topic from the questions json file
-            from.push("questions");
-            let mut f = File::open(&from)?;
-            let mut data = String::new();
-            f.read_to_string(&mut data)?;
-            t.questions = from_json::from_str(&data)?;
-            from.pop();
-
-        }
-    }
-    Ok(())
-}
+use std::fs::{self, File};
+use self::json::ser as to_json;
+use self::json::de as from_json;
+use self::zip::CompressionMethod;
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
+// TODO Worry about other included files!
 pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
-    let tmp = tempdir::TempDir::new("cuddle")?;
-    // TODO Unzip cuddle into ^
+    let mut archive = Archive::default();
+    let cuddle = fs::File::open(&from)?;
+    let mut zip = zip::ZipArchive::new(cuddle)?;
 
-    // Load cuddle from unziped dir
-    let dir = PathBuf::new();
-    dir.push(tmp.path());
-    load_archive(dir)
-}
-
-/// Save an 'archive' to disk,
-/// an 'archive' is a folder following the structure expected in a 'cuddle'.
-/// This is a convinience method.
-pub fn save_archive(archive: Archive, to: PathBuf) -> Result<()> {
-    // Save the Archive info into its own json file
-    to.push("info");
-    let mut f = File::create(&to)?;
-    f.write_all(&to_json::to_string(&archive.info)?)?;
-    to.pop();
-
-    // Save the Archive settings into its own json file
-    to.push("settings");
-    let mut f = File::create(&to)?;
-    f.write_all(&to_json::to_string(&archive.settings)?)?;
-    to.pop();
-
-    for topic in archive.topics {
-        // Create a directory per topic
-        to.push(&topic.name);
-        fs::create_dir(&to)?;
-
-        // Save all the questions in the topic to a json file
-        to.push("questions");
-        let questions = to_json::to_string(&topic.questions)?;
-        let mut f = File::create(&to)?;
-        f.write_all(&questions)?;
-        to.pop();
-
-        to.pop();
+    {
+        let mut f = zip.by_name("info")?;
+        let mut data = String::new();
+        f.read_to_string(&mut data)?;
+        archive.info = from_json::from_str(&data)?;
     }
-    Ok(())
+    {
+        let mut f = zip.by_name("settings")?;
+        let mut data = String::new();
+        f.read_to_string(&mut data)?;
+        archive.settings = from_json::from_str(&data)?;
+        // TODO Load Sounds and Background
+    }
+    let mut topics = String::new();
+    {
+        let mut f = zip.by_name("topics")?;
+        f.read_to_string(&mut topics)?;
+    }
+    for topic in topics.lines() {
+      let mut t = Topic::default();
+      t.name = topic.to_owned();
+
+      {
+          let mut f = zip.by_name(&format!("{}/{}", topic, "questions"))?;
+          let mut data = String::new();
+          f.read_to_string(&mut data)?;
+          t.questions = from_json::from_str(&data)?;
+          // TODO Load images into the questions and answers
+      }
+
+      archive.topics.push(t);
+    }
+
+    Ok(archive)
 }
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
-    let cuddle = File::create(&to)?;
+    fn get_name(p: PathBuf) -> String {
+        if let Some(name) = p.file_name() {
+            if let Ok(n) = name.to_os_string().into_string() {
+                return n;
+            }
+        }
+        String::new()
+    }
+
+    fn write_loc<'a, W: Write + Seek>(name: &'a str,
+                                      opt_loc: Option<PathBuf>,
+                                      zip: &mut zip::ZipWriter<W>)
+                                      -> Result<()> {
+        if let Some(loc) = opt_loc {
+            zip.start_file(format!("{}{}", name, get_name(loc.clone())), CompressionMethod::Stored)?;
+            let mut f = File::open(loc)?;
+            let mut buf = Vec::new();
+            f.read_to_end(&mut buf)?;
+            zip.write_all(buf.as_slice())?;
+        }
+        Ok(())
+    }
+
+    let cuddle = File::create(to)?;
     let mut zip = zip::ZipWriter::new(cuddle);
 
     // Save the Archive info into its own json file
-    zip.start_file("info", CompressionMethod::Deflated);
-    zip.write_all(to_json::to_string(&archive.info)?)?;
+    zip.start_file("info", CompressionMethod::Deflated)?;
+    zip.write_all(to_json::to_string(&archive.info)?.as_bytes())?;
 
     // Save the Archive settings into its own json file
-    zip.start_file("settings", CompressionMethod::Deflated);
-    zip.write_all(to_json::to_string(&archive.info)?)?;
+    zip.start_file("settings", CompressionMethod::Deflated)?;
+    zip.write_all(to_json::to_string(&archive.settings)?.as_bytes())?;
+
+    write_loc("", archive.settings.bg_loc, &mut zip)?;
+    write_loc("", archive.settings.sound.bg_sound_loc, &mut zip)?;
+    write_loc("", archive.settings.sound.yay_sound_loc, &mut zip)?;
+    write_loc("", archive.settings.sound.nay_sound_loc, &mut zip)?;
+
+    let mut topics = String::new();
 
     for topic in archive.topics {
+        topics.push_str(&topic.name);
         // Create a directory per topic
-        let mut folder = String::new(topic.name + "/");
-        zip.start_file(&folder, CompressionMethod::Stored);
+        zip.start_file(format!("{}/", &topic.name), CompressionMethod::Stored)?;
 
         // Save all the questions in the topic to a json file
-        zip.start_file(&(folder + "questions"), CompressionMethod::Deflated);
-        zip.write_all(to_json::to_string(&topic.questions)?)?;
+        zip.start_file(format!("{}/{}", &topic.name, "questions"), CompressionMethod::Deflated)?;
+        zip.write_all(to_json::to_string(&topic.questions)?.as_bytes())?;
+
+        for q in topic.questions {
+            write_loc(&format!("{}/", &topic.name), q.img_loc, &mut zip)?;
+            for ans in q.answers {
+                write_loc(&format!("{}/", &topic.name), ans.img_loc, &mut zip)?;
+            }
+        }
     }
+
+    zip.start_file("topics", CompressionMethod::Deflated)?;
+    zip.write_all(topics.as_bytes())?;
     Ok(())
 }
