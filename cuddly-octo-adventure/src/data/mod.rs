@@ -82,13 +82,13 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
             let mut f = zip.by_name(&format!("{}/{}", topic, "questions"))?;
             let mut data = String::new();
             f.read_to_string(&mut data)?;
-            t.questions = from_json::from_str(&data)?;
+            t.questions = from_json::from_str::<Vec<Question>>(&data)?;
         }
-        for q in t.questions.as_mut() {
+        for q in &mut t.questions {
             {
                 q.img = read_img(&mut src, &format!("{}/", &t.name), q.img_loc.as_ref(), &mut zip)?;
             }
-            for ans in q.answers.as_mut() {
+            for ans in &mut q.answers {
                 ans.img = read_img(&mut src, &format!("{}/", &t.name), ans.img_loc.as_ref(), &mut zip)?;
             }
         }
