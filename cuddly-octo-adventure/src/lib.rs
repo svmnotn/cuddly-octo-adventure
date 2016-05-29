@@ -4,4 +4,4 @@
 extern crate gtk;
 extern crate gdk;
 
-pub mod data;
+pub mod cuddle;
