@@ -51,18 +51,18 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
         f.read_to_string(&mut topics)?;
     }
     for topic in topics.lines() {
-      let mut t = Topic::default();
-      t.name = topic.to_owned();
+        let mut t = Topic::default();
+        t.name = topic.to_owned();
 
-      {
-          let mut f = zip.by_name(&format!("{}/{}", topic, "questions"))?;
-          let mut data = String::new();
-          f.read_to_string(&mut data)?;
-          t.questions = from_json::from_str(&data)?;
-          // TODO Load images into the questions and answers
-      }
+        {
+            let mut f = zip.by_name(&format!("{}/{}", topic, "questions"))?;
+            let mut data = String::new();
+            f.read_to_string(&mut data)?;
+            t.questions = from_json::from_str(&data)?;
+            // TODO Load images into the questions and answers
+        }
 
-      archive.topics.push(t);
+        archive.topics.push(t);
     }
 
     Ok(archive)
