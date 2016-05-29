@@ -21,6 +21,7 @@ pub use self::error::{Error, Result};
 use std::path::PathBuf;
 use std::io::prelude::*;
 use std::fs::File;
+use gtk::Image;
 use self::json::ser as to_json;
 use self::json::de as from_json;
 use self::zip::CompressionMethod;
@@ -31,19 +32,43 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
     let mut archive = Archive::default();
     let cuddle = File::open(&from)?;
     let mut zip = zip::ZipArchive::new(cuddle)?;
-
     {
         let mut f = zip.by_name("info")?;
         let mut data = String::new();
         f.read_to_string(&mut data)?;
         archive.info = from_json::from_str(&data)?;
     }
+    let tmp = tempdir::TempDir::new("cuddle")?;
+    let mut src = PathBuf::from(tmp.path());
+    fn read_img<'a, W: Read + Seek>(src: &mut PathBuf,
+                                    name: &'a str,
+                                    opt_loc: Option<&PathBuf>,
+                                    zip: &mut zip::ZipArchive<W>)
+                                    -> Result<Option<Image>> {
+        if let Some(loc) = opt_loc {
+            let path = format!("{}{}", name, get_name(loc.clone()));
+            let mut tmp = src.clone();
+            tmp.push(&path);
+            let mut f = File::create(&tmp)?;
+            let mut buf = Vec::new();
+            zip.by_name(&path)?.read_to_end(&mut buf)?;
+            f.write_all(buf.as_slice())?;
+            f.flush()?;
+            Ok(Some(Image::new_from_file(&tmp)))
+        } else {
+            Ok(None)
+        }
+    }
+
     {
         let mut f = zip.by_name("settings")?;
         let mut data = String::new();
         f.read_to_string(&mut data)?;
         archive.settings = from_json::from_str(&data)?;
-        // TODO Load Sounds and Background
+    }
+    {
+        archive.settings.bg_img = read_img(&mut src, "", archive.settings.bg_loc.as_ref(), &mut zip)?;
+        // TODO Load Sounds
     }
     let mut topics = String::new();
     {
@@ -53,32 +78,37 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
     for topic in topics.lines() {
         let mut t = Topic::default();
         t.name = topic.to_owned();
-
         {
             let mut f = zip.by_name(&format!("{}/{}", topic, "questions"))?;
             let mut data = String::new();
             f.read_to_string(&mut data)?;
             t.questions = from_json::from_str(&data)?;
-            // TODO Load images into the questions and answers
         }
-
+        for q in t.questions.as_mut() {
+            {
+                q.img = read_img(&mut src, &format!("{}/", &t.name), q.img_loc.as_ref(), &mut zip)?;
+            }
+            for ans in q.answers.as_mut() {
+                ans.img = read_img(&mut src, &format!("{}/", &t.name), ans.img_loc.as_ref(), &mut zip)?;
+            }
+        }
         archive.topics.push(t);
     }
 
     Ok(archive)
 }
 
+fn get_name(p: PathBuf) -> String {
+    if let Some(name) = p.file_name() {
+        if let Ok(n) = name.to_os_string().into_string() {
+            return n;
+        }
+    }
+    String::new()
+}
+
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
-    fn get_name(p: PathBuf) -> String {
-        if let Some(name) = p.file_name() {
-            if let Ok(n) = name.to_os_string().into_string() {
-                return n;
-            }
-        }
-        String::new()
-    }
-
     fn write_loc<'a, W: Write + Seek>(name: &'a str,
                                       opt_loc: Option<PathBuf>,
                                       zip: &mut zip::ZipWriter<W>)
@@ -92,7 +122,6 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
         }
         Ok(())
     }
-
     let cuddle = File::create(to)?;
     let mut zip = zip::ZipWriter::new(cuddle);
 
