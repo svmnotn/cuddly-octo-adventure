@@ -12,3 +12,4 @@ authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 [dependencies]
 cuddly-octo-adventure = { path = "../cuddly-octo-adventure" }
 clap = "2"
+lazy_static = "0"
