@@ -117,10 +117,71 @@ fn main() {
     window.add(&holder);
     window.show_all();
 
+    window.connect_key_press_event(move |_, key| {
+        let keyval = key.as_ref().keyval;
+        let keystate = key.as_ref().state;
+
+        if keystate.intersects(modifier_type::ControlMask) && keyval == 115 {
+            println!("[Ctrl + s] Saving...");
+            open_save();
+        }
+        if keystate.intersects(modifier_type::ControlMask) && keyval == 111 {
+            println!("[Ctrl + o] Opening...");
+            open_load();
+        }
+
+        Inhibit(false)
+    });
+
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
         Inhibit(false)
     });
 
     gtk::main();
+}
+
+fn build_menu(window: &gtk::Box) {
+    let menu = gtk::Box::new(gtk::Orientation::Horizontal, 10);
+    menu.set_homogeneous(true);
+
+    let save = gtk::Button::new_with_label("Save File As");
+    let load = gtk::Button::new_with_label("Load File");
+
+    save.connect_clicked(|_| {
+        open_save();
+    });
+    load.connect_clicked(|_| {
+        open_load();
+    });
+
+    menu.add(&save);
+    menu.add(&load);
+
+    window.add(&menu);
+}
+
+fn build_tabs(window: &gtk::Box) {
+    let tabs = gtk::Notebook::new();
+
+    build_info(&tabs);
+    build_topics(&tabs);
+    build_settings(&tabs);
+    build_teams(&tabs);
+
+    window.pack_end(&tabs, true, true, 0);
+}
+
+fn open_save() {
+    let mut a = ARCHIVE.write().unwrap();
+    println!("{}", &a.info.name);
+    a.info.name = String::from("test!");
+    println!("{}", &a.info.name);
+}
+
+fn open_load() {
+    let mut a = ARCHIVE.write().unwrap();
+    println!("{}", &a.info.name);
+    a.info.name = String::from("test 2!");
+    println!("{}", &a.info.name);
 }

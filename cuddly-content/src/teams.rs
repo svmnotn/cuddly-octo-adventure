@@ -1,8 +1,8 @@
 use super::*;
 
-pub fn build(tabs: &Notebook) {
-    let label = Label::new(Some("Teams"));
-    let button = Button::new_with_label("Click me!");
+pub fn build(tabs: &gtk::Notebook) {
+    let label = gtk::Label::new(Some("Teams"));
+    let button = gtk::Button::new_with_label("Click me!");
 
     button.connect_clicked(|_| {
         println!("TEAMS!");
