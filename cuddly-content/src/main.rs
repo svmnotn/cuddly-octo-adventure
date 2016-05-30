@@ -9,7 +9,7 @@ pub use coa::gdk;
 pub use coa::gdk::enums::*;
 
 pub use coa::cuddle::{
-    Answer, 
+    Answer,
     Archive,
     ArchiveInfo,
     Error as CuddleError,

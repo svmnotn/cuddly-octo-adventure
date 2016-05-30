@@ -66,7 +66,7 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
         archive.settings = from_json::from_str(&data)?;
     }
     {
-        //archive.settings.bg_img = read_img(&mut src, "", archive.settings.bg_loc.as_ref(), &mut zip)?;
+        // archive.settings.bg_img = read_img(&mut src, "", archive.settings.bg_loc.as_ref(), &mut zip)?;
         // TODO Load Sounds
     }
     let mut topics = String::new();
