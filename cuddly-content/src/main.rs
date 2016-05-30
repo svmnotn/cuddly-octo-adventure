@@ -8,8 +8,17 @@ pub use coa::gtk::prelude::*;
 pub use coa::gdk;
 pub use coa::gdk::enums::*;
 
-pub use coa::cuddle::{Answer, Archive, ArchiveInfo, Error as CuddleError, Question, Result as CuddleResult, Team,
-                      Topic, settings as cuddle_settings};
+pub use coa::cuddle::{
+    Answer, 
+    Archive,
+    ArchiveInfo,
+    Error as CuddleError,
+    Question,
+    Result as CuddleResult,
+    Team,
+    Topic,
+    settings as cuddle_settings
+};
 
 pub use std::sync::*;
 
