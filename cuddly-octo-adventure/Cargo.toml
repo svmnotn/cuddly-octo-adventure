@@ -20,9 +20,9 @@ zip = "0"
 tempdir = "0"
 
 [dependencies.gtk]
-version = "0"
+git = "https://github.com/gtk-rs/gtk.git"
 features = ["v3_16"]
 
 [dependencies.gdk]
-version = "0"
+git = "https://github.com/gtk-rs/gdk.git"
 features = ["v3_16"]
