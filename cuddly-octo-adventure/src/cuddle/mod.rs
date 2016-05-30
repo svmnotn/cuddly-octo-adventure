@@ -21,7 +21,6 @@ pub use self::error::{Error, Result};
 use std::path::PathBuf;
 use std::io::prelude::*;
 use std::fs::File;
-use gtk::Image;
 use self::json::ser as to_json;
 use self::json::de as from_json;
 use self::zip::CompressionMethod;
@@ -38,7 +37,7 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
         f.read_to_string(&mut data)?;
         archive.info = from_json::from_str(&data)?;
     }
-    let tmp = tempdir::TempDir::new("cuddle")?;
+    /*let tmp = tempdir::TempDir::new("cuddle")?;
     let mut src = PathBuf::from(tmp.path());
     fn read_img<'a, W: Read + Seek>(src: &mut PathBuf,
                                     name: &'a str,
@@ -58,7 +57,7 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
         } else {
             Ok(None)
         }
-    }
+    }*/
 
     {
         let mut f = zip.by_name("settings")?;
@@ -67,7 +66,7 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
         archive.settings = from_json::from_str(&data)?;
     }
     {
-        archive.settings.bg_img = read_img(&mut src, "", archive.settings.bg_loc.as_ref(), &mut zip)?;
+        //archive.settings.bg_img = read_img(&mut src, "", archive.settings.bg_loc.as_ref(), &mut zip)?;
         // TODO Load Sounds
     }
     let mut topics = String::new();
@@ -84,14 +83,14 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
             f.read_to_string(&mut data)?;
             t.questions = from_json::from_str::<Vec<Question>>(&data)?;
         }
-        for q in &mut t.questions {
+        /*for q in &mut t.questions {
             {
                 q.img = read_img(&mut src, &format!("{}/", &t.name), q.img_loc.as_ref(), &mut zip)?;
             }
             for ans in &mut q.answers {
                 ans.img = read_img(&mut src, &format!("{}/", &t.name), ans.img_loc.as_ref(), &mut zip)?;
             }
-        }
+        }*/
         archive.topics.push(t);
     }
 

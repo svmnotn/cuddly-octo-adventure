@@ -5,11 +5,11 @@ extern crate gtk as gtk_rs;
 extern crate gdk as gdk_rs;
 
 pub mod gtk {
-  pub use gtk_rs::*;
+    pub use gtk_rs::*;
 }
 
 pub mod gdk {
-  pub use gdk_rs::*;
+    pub use gdk_rs::*;
 }
 
 pub mod cuddle;

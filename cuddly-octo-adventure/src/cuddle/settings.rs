@@ -1,13 +1,10 @@
 use super::Team;
-use gtk::Image;
 use std::path::PathBuf;
 
 #[derive(Serialize, Deserialize)]
 pub struct Settings {
     pub timer_color: String,
     pub bg_color: String,
-    #[serde(skip_serializing, skip_deserializing)]
-    pub bg_img: Option<Image>,
     #[serde(skip_serializing_if="Option::is_none")]
     pub bg_loc: Option<PathBuf>,
     pub message: Message,
@@ -21,7 +18,6 @@ impl Default for Settings {
         Settings {
             timer_color: "".to_owned(),
             bg_color: "".to_owned(),
-            bg_img: None,
             bg_loc: None,
             message: Message::default(),
             sound: Sound::default(),
@@ -60,19 +56,13 @@ impl Default for Message {
 pub struct Sound {
     #[serde(skip_serializing_if="Option::is_none")]
     pub bg_sound_loc: Option<PathBuf>,
-    pub bg_sound_vol: f32,
-    // #[serde(skip_serializing, skip_deserializing)]
-    // pub bg_sound: Option<Sound>,
+    pub bg_sound_vol: f64,
     #[serde(skip_serializing_if="Option::is_none")]
     pub yay_sound_loc: Option<PathBuf>,
-    pub yay_sound_vol: f32,
-    // #[serde(skip_serializing, skip_deserializing)]
-    // pub yay_sound: Option<Sound>,
+    pub yay_sound_vol: f64,
     #[serde(skip_serializing_if="Option::is_none")]
     pub nay_sound_loc: Option<PathBuf>,
-    // #[serde(skip_serializing, skip_deserializing)]
-    // pub nay_sound: Option<Sound>,
-    pub nay_sound_vol: f32,
+    pub nay_sound_vol: f64,
 }
 
 impl Default for Sound {
