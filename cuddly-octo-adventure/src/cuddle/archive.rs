@@ -11,7 +11,7 @@ impl Default for Archive {
     fn default() -> Archive {
         Archive {
             info: ArchiveInfo::default(),
-            topics: Vec::new(),
+            topics: vec![Topic::default()],
             settings: Settings::default(),
         }
     }

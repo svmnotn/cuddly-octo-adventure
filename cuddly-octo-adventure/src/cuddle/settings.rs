@@ -22,7 +22,7 @@ impl Default for Settings {
             message: Message::default(),
             sound: Sound::default(),
             time: Time::default(),
-            teams: Vec::new(),
+            teams: vec![Team::default()],
         }
     }
 }
