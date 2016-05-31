@@ -1,7 +1,7 @@
 use super::Answer;
 use std::path::PathBuf;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, PartialEq)]
 pub struct Question {
     pub id: String,
     pub value: u32,
