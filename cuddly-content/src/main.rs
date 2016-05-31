@@ -35,7 +35,7 @@ macro_rules! text_input {
     let entry = gtk::Entry::new();
     entry.set_text(&$read);
 
-    entry.connect_focus_out_event(|e,_| {
+    entry.connect_focus_out_event(move |e,_| {
       $write = e.get_text().unwrap();
       Inhibit(false)
     });
