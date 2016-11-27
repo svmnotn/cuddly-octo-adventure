@@ -27,18 +27,18 @@ use std::path::PathBuf;
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 // TODO REDO
 // TODO Worry about Sounds!
-pub fn load_cuddle(from: PathBuf) -> Result<Archive> {
+pub fn load_cuddle(from: PathBuf) -> Result<Archive, TmpDir> {
     let mut archive = Archive::default();
-    let cuddle = File::open(&from)?;
-    let mut zip = zip::ZipArchive::new(cuddle)?;
+    let f = File::open(&from)?;
+    let mut cuddle = zip::ZipArchive::new(f)?;
     {
-        let mut f = zip.by_name("info")?;
+        let mut f = cuddle.by_name("info")?;
         let mut data = String::new();
         f.read_to_string(&mut data)?;
         archive.info = from_json::from_str(&data)?;
     }
     {
-        let mut f = zip.by_name("settings")?;
+        let mut f = cuddle.by_name("settings")?;
         let mut data = String::new();
         f.read_to_string(&mut data)?;
         archive.settings = from_json::from_str(&data)?;
