@@ -1,9 +1,0 @@
-cd cuddly-content
-cargo update
-cd ..
-cd cuddly-octo-adventure
-cargo update
-cd ..
-cd octo-adventure
-cargo update
-cd ..

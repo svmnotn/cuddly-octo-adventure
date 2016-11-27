@@ -15,14 +15,6 @@ name = "coa"
 [dependencies]
 serde = "0"
 serde_json = "0"
-serde_macros = "0"
+serde_derive = "0"
 zip = "0"
 tempdir = "0"
-
-[dependencies.gtk]
-git = "https://github.com/gtk-rs/gtk.git"
-features = ["v3_16"]
-
-[dependencies.gdk]
-git = "https://github.com/gtk-rs/gdk.git"
-features = ["v3_16"]

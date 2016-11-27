@@ -1,5 +1,5 @@
-use super::Answer;
 use std::path::PathBuf;
+use super::Answer;
 
 #[derive(Serialize, Deserialize, PartialEq)]
 pub struct Question {

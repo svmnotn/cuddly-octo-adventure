@@ -1,8 +1,8 @@
-use std::result;
+use ::json;
 use std::error;
 use std::fmt;
 use std::io;
-use super::json;
+use std::result;
 use super::zip::result::ZipError;
 
 pub type Result<T> = result::Result<T, Error>;

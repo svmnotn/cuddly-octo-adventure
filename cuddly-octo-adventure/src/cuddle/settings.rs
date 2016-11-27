@@ -1,5 +1,5 @@
-use super::Team;
 use std::path::PathBuf;
+use super::Team;
 
 #[derive(Serialize, Deserialize)]
 pub struct Settings {
