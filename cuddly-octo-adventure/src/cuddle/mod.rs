@@ -14,80 +14,113 @@ pub use self::archive::{Archive, ArchiveInfo};
 pub use self::error::{Error, Result};
 pub use self::question::Question;
 pub use self::team::Team;
+use self::tempdir::TempDir;
 pub use self::topic::Topic;
+// TMP
+pub use self::zip::write::FileOptions;
+pub use self::zip::write::ZipWriter;
 
 use std::fs::File;
 use std::io::prelude::*;
-use std::path::PathBuf;
+use std::path::Path;
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 /// Any extra files will be extracted into the temporary folder returned,
 /// all paths are modified to lead to that folder.
-pub fn load_cuddle(from: PathBuf) -> Result<(Archive, TmpDir)> {
+pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archive, TempDir)> {
     use ::json::de as from_json;
 
     let mut archive = Archive::default();
-    let f = File::open(&from)?;
+
+    let f = File::open(from)?;
     let mut cuddle = zip::ZipArchive::new(f)?;
+
     {
+        // Load the Info section of the cuddle
         let mut f = cuddle.by_name("info")?;
         let mut data = String::new();
         f.read_to_string(&mut data)?;
         archive.info = from_json::from_str(&data)?;
     }
+
+    let dir_name = &format!("coa-{}-decompressed", &archive.info.name);
+    let dir = if let Some(p) = folder {
+            TempDir::new_in(p, dir_name)
+        } else {
+            TempDir::new(dir_name)
+        }
+        .expect("Creating decompress directory");
+
     {
+        // Load the Settings section of the cuddle
         let mut f = cuddle.by_name("settings")?;
         let mut data = String::new();
         f.read_to_string(&mut data)?;
         archive.settings = from_json::from_str(&data)?;
     }
-    {
-        // archive.settings.bg_img = read_img(&mut src, "", archive.settings.bg_loc.as_ref(), &mut zip)?;
-        // TODO Load Sounds
-    }
-    let mut topics = String::new();
-    {
-        let mut f = zip.by_name("topics")?;
-        f.read_to_string(&mut topics)?;
-    }
-    for topic in topics.lines() {
-        let mut t = Topic::default();
-        t.name = topic.to_owned();
-        {
-            let mut f = zip.by_name(&format!("{}/{}", topic, "questions"))?;
-            let mut data = String::new();
-            f.read_to_string(&mut data)?;
-            t.questions = from_json::from_str::<Vec<Question>>(&data)?;
+
+    archive.topics = vec![];
+
+    // Iterate over every other file
+    for i in 2..cuddle.len() {
+        let mut f = cuddle.by_index(i)?;
+        println!("{}:{} - {:?}", i, f.name(), f.compression());
+        let name = String::from(f.name());
+
+        if name.contains("bg_img") {
+            // This is the bg image, decompress it to the folder
+        } else if name.contains("bg_sound") {
+            // This is the bg sound, decompress it to the folder
+        } else if name.contains("yay_sound") {
+            // This is the yay sound, decompress it to the folder
+        } else if name.contains("nay_sound") {
+            // This is the nay sound, decompress it to the folder
+        } else {
+            use self::zip::CompressionMethod;
+            // This is a Topic or is within a topic
+            match f.compression() {
+                CompressionMethod::Deflated => {
+                    // The file is compressed (not a folder)
+                    if let Some(n) = name.split('/').nth(0) {
+                        // It has a valid name
+                        if name.contains("questions") {
+                            // Here we have the questions file, so lets load it
+                            let mut t = Topic::default();
+                            t.name = n.into();
+                            let mut data = String::with_capacity(f.size() as usize);
+                            f.read_to_string(&mut data)?;
+                            t.questions = from_json::from_str::<Vec<Question>>(&data)?;
+                        } else if let Some(id) = name.split('/').nth(1) {
+                            // We got a picture
+                            if id.contains("ans") {
+                                // It is an answer
+                            } else {
+                                // It is a question
+                            }
+                        }
+                    }
+                }
+                _ => {}// Not compressed.
+            }
         }
-        // for q in &mut t.questions {
-        // {
-        // q.img = read_img(&mut src, &format!("{}/", &t.name), q.img_loc.as_ref(), &mut zip)?;
-        // }
-        // for ans in &mut q.answers {
-        // ans.img = read_img(&mut src, &format!("{}/", &t.name), ans.img_loc.as_ref(), &mut zip)?;
-        // }
-        // }
-        archive.topics.push(t);
     }
 
-    Ok(archive)
+    Ok((archive, dir))
 }
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
-pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
+pub fn save_cuddle<P: AsRef<Path>>(archive: Archive, to: P) -> Result<()> {
     use ::json::ser as to_json;
     use self::zip::write::FileOptions;
 
     /// Writes a file into the Cuddle
-    fn write_file<'a, W: Write + Seek>(name: &'a str,
-                                       opt_loc: Option<PathBuf>,
-                                       zip: &mut zip::ZipWriter<W>)
-                                       -> Result<()> {
-        use std::path::Path;
-
+    fn write_file<'a, W: Write + Seek, P: AsRef<Path>>(name: &'a str,
+                                                       opt_loc: Option<P>,
+                                                       zip: &mut zip::ZipWriter<W>)
+                                                       -> Result<()> {
         /// Retrives the extension of a path
-        fn get_extension(p: &Path) -> String {
-            if let Some(ext) = p.extension() {
+        fn get_extension<P: AsRef<Path>>(p: P) -> String {
+            if let Some(ext) = p.as_ref().extension() {
                 if let Ok(s) = ext.to_os_string().into_string() {
                     return s;
                 }
