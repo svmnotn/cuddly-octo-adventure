@@ -9,25 +9,23 @@ mod topic;
 mod error;
 pub mod settings;
 
-use ::json::de as from_json;
-use ::json::ser as to_json;
 pub use self::answer::Answer;
 pub use self::archive::{Archive, ArchiveInfo};
 pub use self::error::{Error, Result};
 pub use self::question::Question;
 pub use self::team::Team;
 pub use self::topic::Topic;
-use self::zip::write::FileOptions;
+
 use std::fs::File;
 use std::io::prelude::*;
-use std::path::Path;
-
 use std::path::PathBuf;
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
-// TODO REDO
-// TODO Worry about Sounds!
-pub fn load_cuddle(from: PathBuf) -> Result<Archive, TmpDir> {
+/// Any extra files will be extracted into the temporary folder returned,
+/// all paths are modified to lead to that folder.
+pub fn load_cuddle(from: PathBuf) -> Result<(Archive, TmpDir)> {
+    use ::json::de as from_json;
+
     let mut archive = Archive::default();
     let f = File::open(&from)?;
     let mut cuddle = zip::ZipArchive::new(f)?;
@@ -77,11 +75,16 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive, TmpDir> {
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
+    use ::json::ser as to_json;
+    use self::zip::write::FileOptions;
+
     /// Writes a file into the Cuddle
     fn write_file<'a, W: Write + Seek>(name: &'a str,
                                        opt_loc: Option<PathBuf>,
                                        zip: &mut zip::ZipWriter<W>)
                                        -> Result<()> {
+        use std::path::Path;
+
         /// Retrives the extension of a path
         fn get_extension(p: &Path) -> String {
             if let Some(ext) = p.extension() {
