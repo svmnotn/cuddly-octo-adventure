@@ -26,6 +26,12 @@ use std::path::Path;
 /// all paths are modified to lead to that folder.
 pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archive, TempDir)> {
     use ::json::de as from_json;
+    use self::zip::read::ZipFile;
+
+    fn write_file<P: AsRef<Path>>(folder: P, file: ZipFile) -> Result<()> {
+        // DO THINGS!
+        Ok(())
+    }
 
     let mut archive = Archive::default();
 
@@ -66,12 +72,20 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
 
         if name.contains("bg_img") {
             // This is the bg image, decompress it to the folder
+            write_file(dir.path(), f)?;
+            // Update the path in the Archive
         } else if name.contains("bg_sound") {
             // This is the bg sound, decompress it to the folder
+            write_file(dir.path(), f)?;
+            // Update the path in the Archive
         } else if name.contains("yay_sound") {
             // This is the yay sound, decompress it to the folder
+            write_file(dir.path(), f)?;
+            // Update the path in the Archive
         } else if name.contains("nay_sound") {
             // This is the nay sound, decompress it to the folder
+            write_file(dir.path(), f)?;
+            // Update the path in the Archive
         } else {
             use self::zip::CompressionMethod;
             // This is a Topic or is within a topic
@@ -87,12 +101,17 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
                             let mut data = String::with_capacity(f.size() as usize);
                             f.read_to_string(&mut data)?;
                             t.questions = from_json::from_str::<Vec<Question>>(&data)?;
+                            archive.topics.push(t);
                         } else if let Some(id) = name.split('/').nth(1) {
                             // We got a picture
                             if id.contains("ans") {
                                 // It is an answer
+                                write_file(dir.path(), f)?;
+                                // Update the path in the Archive
                             } else {
                                 // It is a question
+                                write_file(dir.path(), f)?;
+                                // Update the path in the Archive
                             }
                         }
                     }
