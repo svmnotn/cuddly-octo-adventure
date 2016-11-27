@@ -75,21 +75,23 @@ pub fn load_cuddle(from: PathBuf) -> Result<Archive, TmpDir> {
     Ok(archive)
 }
 
-fn get_extension(p: &Path) -> String {
-    if let Some(ext) = p.extension() {
-        if let Ok(s) = ext.to_os_string().into_string() {
-            return s;
-        }
-    }
-    String::new()
-}
-
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
+    /// Writes a file into the Cuddle
     fn write_file<'a, W: Write + Seek>(name: &'a str,
                                        opt_loc: Option<PathBuf>,
                                        zip: &mut zip::ZipWriter<W>)
                                        -> Result<()> {
+        /// Retrives the extension of a path
+        fn get_extension(p: &Path) -> String {
+            if let Some(ext) = p.extension() {
+                if let Ok(s) = ext.to_os_string().into_string() {
+                    return s;
+                }
+            }
+            String::new()
+        }
+
         if let Some(loc) = opt_loc {
             zip.start_file(format!("{}.{}", name, get_extension(&loc)), FileOptions::default())?;
             let mut f = File::open(loc)?;
@@ -102,33 +104,44 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
 
     let f = File::create(to)?;
     let mut cuddle = zip::ZipWriter::new(f);
+
     // Save the Archive info into its own json file
     cuddle.start_file("info", FileOptions::default())?;
     cuddle.write_all(to_json::to_string(&archive.info)?.as_bytes())?;
+
     // Save the Archive settings into its own json file
     cuddle.start_file("settings", FileOptions::default())?;
     cuddle.write_all(to_json::to_string(&archive.settings)?.as_bytes())?;
-    // Save the extra files to the zip
+
+    // Save the extra files to the Cuddle
     write_file("bg", archive.settings.bg_loc, &mut cuddle)?;
     write_file("bg_sound", archive.settings.sound.bg_sound_loc, &mut cuddle)?;
     write_file("yay_sound", archive.settings.sound.yay_sound_loc, &mut cuddle)?;
     write_file("nay_sound", archive.settings.sound.nay_sound_loc, &mut cuddle)?;
 
+    // Go over all the topics in the Archive
     for topic in archive.topics {
         // Create a directory per topic
         cuddle.add_directory(&*topic.name, FileOptions::default())?;
-        // Save all the questions in the topic to a json file
-        cuddle.start_file(format!("{}/{}", &topic.name, "questions"), FileOptions::default())?;
-        cuddle.write_all(to_json::to_string(&topic.questions)?.as_bytes())?;
 
+        // Go over all the questions and change their path to refelct them being inside an archive
         for q in topic.questions {
             let s = format!("{}/{}", &topic.name, &q.id);
             write_file(&s, q.img_loc, &mut cuddle)?;
 
             for (i, ans) in q.answers.into_iter().enumerate() {
-                write_file(&format!("{}-ans-{}", &s, i), ans.img_loc, &mut cuddle)?;
+                let a = format!("{}-ans-{}", &s, i);
+                write_file(&a, ans.img_loc, &mut cuddle)?;
+                ans.img_loc = Some(a.into());
             }
+
+            // Change the img_loc of the question after it has been used by the answers
+            q.img_loc = Some(s.into());
         }
+
+        // Save all the questions in the topic to a json file
+        cuddle.start_file(format!("{}/{}", &topic.name, "questions"), FileOptions::default())?;
+        cuddle.write_all(to_json::to_string(&topic.questions)?.as_bytes())?;
     }
 
     Ok(())
