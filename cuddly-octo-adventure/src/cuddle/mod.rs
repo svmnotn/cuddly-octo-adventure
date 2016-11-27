@@ -16,9 +16,6 @@ pub use self::question::Question;
 pub use self::team::Team;
 use self::tempdir::TempDir;
 pub use self::topic::Topic;
-// TMP
-pub use self::zip::write::FileOptions;
-pub use self::zip::write::ZipWriter;
 
 use std::fs::File;
 use std::io::prelude::*;
