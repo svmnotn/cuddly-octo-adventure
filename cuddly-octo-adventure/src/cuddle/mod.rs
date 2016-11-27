@@ -125,8 +125,8 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
             let s = format!("{}/{}", &topic.name, &q.id);
             write_file(&s, q.img_loc, &mut cuddle)?;
 
-            for (i, ans) in q.answers.iter().enumerate() {
-                write_file(&format!("{}-ans-{}", &s, i), ans.img_loc.clone(), &mut cuddle)?;
+            for (i, ans) in q.answers.into_iter().enumerate() {
+                write_file(&format!("{}-ans-{}", &s, i), ans.img_loc, &mut cuddle)?;
             }
         }
     }
