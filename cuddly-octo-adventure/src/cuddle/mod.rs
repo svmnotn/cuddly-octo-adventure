@@ -117,7 +117,7 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
     cuddle.write_all(to_json::to_string(&archive.settings)?.as_bytes())?;
 
     // Save the extra files to the Cuddle
-    write_file("bg", archive.settings.bg_loc, &mut cuddle)?;
+    write_file("bg_img", archive.settings.bg_loc, &mut cuddle)?;
     write_file("bg_sound", archive.settings.sound.bg_sound_loc, &mut cuddle)?;
     write_file("yay_sound", archive.settings.sound.yay_sound_loc, &mut cuddle)?;
     write_file("nay_sound", archive.settings.sound.nay_sound_loc, &mut cuddle)?;
@@ -127,24 +127,21 @@ pub fn save_cuddle(archive: Archive, to: PathBuf) -> Result<()> {
         // Create a directory per topic
         cuddle.add_directory(&*topic.name, FileOptions::default())?;
 
-        // Go over all the questions and change their path to refelct them being inside an archive
-        for q in topic.questions {
-            let s = format!("{}/{}", &topic.name, &q.id);
-            write_file(&s, q.img_loc, &mut cuddle)?;
-
-            for (i, ans) in q.answers.into_iter().enumerate() {
-                let a = format!("{}-ans-{}", &s, i);
-                write_file(&a, ans.img_loc, &mut cuddle)?;
-                ans.img_loc = Some(a.into());
-            }
-
-            // Change the img_loc of the question after it has been used by the answers
-            q.img_loc = Some(s.into());
-        }
-
         // Save all the questions in the topic to a json file
-        cuddle.start_file(format!("{}/{}", &topic.name, "questions"), FileOptions::default())?;
+        cuddle.start_file(format!("{}/{}", topic.name, "questions"), FileOptions::default())?;
         cuddle.write_all(to_json::to_string(&topic.questions)?.as_bytes())?;
+
+        // Go over all the questions and change their path to refelct them being inside an archive
+        for q in &topic.questions {
+            let s = format!("{}/{}", &topic.name, &q.id);
+
+            write_file(&s, q.img_loc.as_ref(), &mut cuddle)?;
+
+            for (i, ans) in q.answers.iter().enumerate() {
+                let a = format!("{}-ans-{}", &s, i);
+                write_file(&a, ans.img_loc.as_ref(), &mut cuddle)?;
+            }
+        }
     }
 
     Ok(())
