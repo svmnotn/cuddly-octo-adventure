@@ -2,8 +2,8 @@ use ::cuddle::*;
 use ::error::Result;
 use json::de as from_json;
 use std::fs;
-use std::io::Read;
-use std::path::Path;
+use std::io::{Read, Write};
+use std::path::{Path, PathBuf};
 use tempdir::TempDir;
 use zip::{CompressionMethod, ZipArchive};
 use zip::read::ZipFile;
@@ -25,7 +25,14 @@ fn contains<P: AsRef<Path>>(path: P, name: &str) -> bool {
 }
 
 /// Decompress the ZipFile into the folder
-fn write_file<P: AsRef<Path>>(folder: P, file: ZipFile) -> Result<()> { Ok(()) }
+fn write_file<P: AsRef<Path>>(folder: P, mut file: ZipFile) -> Result<PathBuf> {
+    let path = PathBuf::from(folder.as_ref().join(file.name()));
+    let mut f = fs::File::create(&path)?;
+    let mut buf = Vec::with_capacity(file.size() as usize);
+    file.read_to_end(&mut buf)?;
+    f.write_all(buf.as_slice())?;
+    Ok(path)
+}
 
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 /// Any extra files will be extracted into the temporary folder returned,
