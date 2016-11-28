@@ -6,31 +6,6 @@ use std::io::{Seek, Write, Read};
 use std::path::Path;
 use zip::write::{FileOptions, ZipWriter};
 
-/// Retrives the extension of a path
-fn get_extension<P: AsRef<Path>>(p: P) -> String {
-    if let Some(ext) = p.as_ref().extension() {
-        if let Ok(s) = ext.to_os_string().into_string() {
-            return s;
-        }
-    }
-    String::new()
-}
-
-/// Writes a file into the Cuddle
-fn write_file<'a, W: Write + Seek, P: AsRef<Path>>(name: &'a str,
-                                                   opt_loc: Option<P>,
-                                                   zip: &mut ZipWriter<W>)
-                                                   -> Result<()> {
-    if let Some(loc) = opt_loc {
-        zip.start_file(format!("{}.{}", name, get_extension(&loc)), FileOptions::default())?;
-        let mut f = fs::File::open(loc)?;
-        let mut buf = Vec::with_capacity(f.metadata()?.len() as usize);
-        f.read_to_end(&mut buf)?;
-        zip.write_all(buf.as_slice())?;
-    }
-    Ok(())
-}
-
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
 pub fn save_cuddle<P: AsRef<Path>>(archive: Archive, to: P) -> Result<()> {
     let f = fs::File::create(to)?;
@@ -71,6 +46,30 @@ pub fn save_cuddle<P: AsRef<Path>>(archive: Archive, to: P) -> Result<()> {
             }
         }
     }
-
     Ok(())
+}
+
+/// Writes a file into the Cuddle
+fn write_file<'a, W: Write + Seek, P: AsRef<Path>>(name: &'a str,
+                                                   opt_loc: Option<P>,
+                                                   zip: &mut ZipWriter<W>)
+                                                   -> Result<()> {
+    if let Some(loc) = opt_loc {
+        zip.start_file(format!("{}.{}", name, get_extension(&loc)), FileOptions::default())?;
+        let mut f = fs::File::open(loc)?;
+        let mut buf = Vec::with_capacity(f.metadata()?.len() as usize);
+        f.read_to_end(&mut buf)?;
+        zip.write_all(buf.as_slice())?;
+    }
+    Ok(())
+}
+
+/// Retrives the extension of a path
+fn get_extension<P: AsRef<Path>>(p: P) -> String {
+    if let Some(ext) = p.as_ref().extension() {
+        if let Ok(s) = ext.to_os_string().into_string() {
+            return s;
+        }
+    }
+    String::new()
 }

@@ -8,38 +8,11 @@ use tempdir::TempDir;
 use zip::{CompressionMethod, ZipArchive};
 use zip::read::ZipFile;
 
-/// Checks if the path contains the given file/folder
-fn contains<P: AsRef<Path>>(path: P, name: &str) -> bool {
-    if let Ok(entries) = fs::read_dir(path) {
-        for rentry in entries {
-            if let Ok(entry) = rentry {
-                if let Ok(n) = entry.file_name().into_string() {
-                    if n == name {
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-    false
-}
-
-/// Decompress the ZipFile into the folder
-fn write_file<P: AsRef<Path>>(folder: P, mut file: ZipFile) -> Result<PathBuf> {
-    let path = PathBuf::from(folder.as_ref().join(file.name()));
-    let mut f = fs::File::create(&path)?;
-    let mut buf = Vec::with_capacity(file.size() as usize);
-    file.read_to_end(&mut buf)?;
-    f.write_all(buf.as_slice())?;
-    Ok(path)
-}
-
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 /// Any extra files will be extracted into the temporary folder returned,
 /// all paths are modified to lead to that folder.
 pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archive, TempDir)> {
     let mut archive = Archive::default();
-
     let f = fs::File::open(from)?;
     let mut cuddle = ZipArchive::new(f)?;
 
@@ -133,6 +106,31 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
             }
         }
     }
-
     Ok((archive, dir))
+}
+
+/// Decompress the ZipFile into the folder
+fn write_file<P: AsRef<Path>>(folder: P, mut file: ZipFile) -> Result<PathBuf> {
+    let path = PathBuf::from(folder.as_ref().join(file.name()));
+    let mut f = fs::File::create(&path)?;
+    let mut buf = Vec::with_capacity(file.size() as usize);
+    file.read_to_end(&mut buf)?;
+    f.write_all(buf.as_slice())?;
+    Ok(path)
+}
+
+/// Checks if the path contains the given file/folder
+fn contains<P: AsRef<Path>>(path: P, name: &str) -> bool {
+    if let Ok(entries) = fs::read_dir(path) {
+        for rentry in entries {
+            if let Ok(entry) = rentry {
+                if let Ok(n) = entry.file_name().into_string() {
+                    if n == name {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    false
 }
