@@ -85,19 +85,34 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
                             archive.topics.push(t);
                         } else if let Some(id) = name.split('/').nth(1) {
                             // We got a picture! So, lets make sure this topic has a folder
-
                             if contains(dir.path(), n) == false {
                                 fs::create_dir(dir.path().join(n))?;
                             }
 
-                            if id.contains("ans") {
-                                // It is an answer
-                                write_file(dir.path(), f)?;
-                                // Update the path in the Archive
-                            } else {
-                                // It is a question
-                                write_file(dir.path(), f)?;
-                                // Update the path in the Archive
+                            if let Some(t) = archive.topics.iter_mut().find(|t| t.name == n) {
+                                if let Some(q) = t.questions.iter_mut().find(|q| q.id == id) {
+                                    if id.contains("ans") {
+                                        // It is an answer, so lets get it's number
+                                        if let Some(num) = id.split('-').nth(2) {
+                                            // Lets also make sure it is a valid number
+                                            // (It should be if save_cuddle was used)
+                                            if let Ok(i) = num.parse() {
+                                                // Now lets find the answer that maches it
+                                                if let Some(a) = q.answers.iter_mut().nth(i) {
+                                                    // Now this is the correct answer, so lets decompress the picture
+                                                    let path = write_file(dir.path().join(n), f)?;
+                                                    // Update the path in the Archive
+                                                    a.img_loc = Some(path);
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        // It is a question, so let decompress the picture
+                                        let path = write_file(dir.path().join(n), f)?;
+                                        // Update the path in the Archive
+                                        q.img_loc = Some(path);
+                                    }
+                                }
                             }
                         }
                     }
