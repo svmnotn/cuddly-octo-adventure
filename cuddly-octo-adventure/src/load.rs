@@ -43,7 +43,7 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
     archive.topics = vec![];
 
     // Iterate over every other file
-    for i in 2..cuddle.len() {
+    for i in 0..cuddle.len() {
         let mut f = cuddle.by_index(i)?;
         println!("{}:{} - {:?}", i, f.name(), f.compression());
         let name = String::from(f.name());
