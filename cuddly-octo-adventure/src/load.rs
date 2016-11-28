@@ -77,20 +77,24 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
 
         if name.contains("bg_img") {
             // This is the bg image, decompress it to the folder
-            write_file(dir.path(), f)?;
+            let path = write_file(dir.path(), f)?;
             // Update the path in the Archive
+            archive.settings.bg_loc = Some(path);
         } else if name.contains("bg_sound") {
             // This is the bg sound, decompress it to the folder
-            write_file(dir.path(), f)?;
+            let path = write_file(dir.path(), f)?;
             // Update the path in the Archive
+            archive.settings.sound.bg_sound_loc = Some(path);
         } else if name.contains("yay_sound") {
             // This is the yay sound, decompress it to the folder
-            write_file(dir.path(), f)?;
+            let path = write_file(dir.path(), f)?;
             // Update the path in the Archive
+            archive.settings.sound.yay_sound_loc = Some(path);
         } else if name.contains("nay_sound") {
             // This is the nay sound, decompress it to the folder
-            write_file(dir.path(), f)?;
+            let path = write_file(dir.path(), f)?;
             // Update the path in the Archive
+            archive.settings.sound.nay_sound_loc = Some(path);
         } else {
             // This is a Topic or is within a topic
             match f.compression() {
