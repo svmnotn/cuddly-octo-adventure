@@ -1,5 +1,6 @@
 // TODO Add Documentation.
-#![feature(proc_macro)]
+#![cfg_attr(feature = "serde_derive", feature(proc_macro))]
+#[cfg(feature = "serde_derive")]
 #[macro_use]
 extern crate serde_derive;
 extern crate serde;

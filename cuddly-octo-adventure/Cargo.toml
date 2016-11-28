@@ -1,20 +1,28 @@
 [package]
 name = "cuddly-octo-adventure"
 version = "0.0.1"
-description = "The core libbrary of the Cuddly Octo Adventure Project."
+description = "The core library of the Cuddly Octo Adventure Project."
 homepage = "https://github.com/svmnotn/cuddly-octo-adventure"
 repository = "svmnotn/cuddly-octo-adventure"
 readme = "README.md"
 license = "MIT"
-keywords = ["game"]
+keywords = ["game", "jeopardy"]
 authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
+build = "build.rs"
 
 [lib]
 name = "coa"
 
+[features]
+default = ["serde_codegen"]
+nightly = ["serde_derive"]
+
+[build-dependencies]
+serde_codegen = { version = "0.8", optional = true }
+
 [dependencies]
 serde = "0"
 serde_json = "0"
-serde_derive = "0"
+serde_derive = { version = "0.8", optional = true }
 zip = "0"
 tempdir = "0"

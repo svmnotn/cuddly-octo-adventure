@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-#[derive(Serialize, Deserialize, PartialEq)]
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct Answer {
     pub correct: bool,
     #[serde(rename="answer")]

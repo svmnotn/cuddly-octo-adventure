@@ -1,6 +1,7 @@
 use super::Topic;
 use super::settings::Settings;
 
+#[derive(Debug)]
 pub struct Archive {
     pub info: ArchiveInfo,
     pub topics: Vec<Topic>,
@@ -17,7 +18,7 @@ impl Default for Archive {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct ArchiveInfo {
     pub name: String,
     pub description: String,

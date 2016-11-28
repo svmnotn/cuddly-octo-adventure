@@ -1,5 +1,6 @@
 use super::Question;
 
+#[derive(Debug)]
 pub struct Topic {
     pub name: String,
     pub questions: Vec<Question>,

@@ -1,4 +1,4 @@
-#[derive(Serialize, Deserialize, PartialEq)]
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct Team {
     pub name: String,
     pub color: String,

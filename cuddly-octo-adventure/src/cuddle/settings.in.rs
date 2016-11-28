@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 use super::Team;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Settings {
     pub timer_color: String,
     pub bg_color: String,
@@ -28,7 +28,7 @@ impl Default for Settings {
 }
 
 // TODO add more custom text!
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Message {
     pub score_presentation: String,
     pub game_over: String,
@@ -52,7 +52,7 @@ impl Default for Message {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Sound {
     #[serde(skip_serializing_if="Option::is_none")]
     pub bg_sound_loc: Option<PathBuf>,
@@ -79,7 +79,7 @@ impl Default for Sound {
 }
 
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Time {
     pub pre_ans_delay: f64,
     pub post_ans_delay: f64,
