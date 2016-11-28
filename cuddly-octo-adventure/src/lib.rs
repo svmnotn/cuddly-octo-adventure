@@ -14,3 +14,4 @@ mod save;
 
 pub use load::load_cuddle;
 pub use save::save_cuddle;
+pub use tempdir::TempDir;
