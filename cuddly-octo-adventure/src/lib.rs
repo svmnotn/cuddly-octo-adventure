@@ -1,3 +1,4 @@
+// TODO Add Documentation.
 #![feature(proc_macro)]
 #[macro_use]
 extern crate serde_derive;
@@ -6,7 +7,6 @@ extern crate serde_json as json;
 extern crate tempdir;
 extern crate zip;
 
-// TODO The whole thing
 pub mod cuddle;
 pub mod error;
 mod load;
