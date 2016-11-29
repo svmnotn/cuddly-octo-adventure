@@ -95,13 +95,15 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
                                     // (It should be if save_cuddle was used)
                                     if let Ok(i) = num.parse() {
                                         // Now lets find the answer that maches it
-                                        if let Some(a) = q.answers.get_mut(i) {
+                                        if let Some(a) = q.answers.iter_mut().nth(i) {
+                                            // if let Some(a) = q.answers.get_mut(i) {
+                                            // ^ leads to the issue in line 104
                                             // Now this is the correct answer, so lets decompress the picture
                                             let path = write_file(dir.path().join(n), f)?;
-                                            let () = a;
                                             // Update the path in the Archive
                                             a.img_loc = Some(path);
-                                            //^^^^^^^^^ "the type of this value must be known in this context"
+                                            // ^^^^^^^ this causes issues with
+                                            //  rustc 1.15.0-nightly (03bdaade2 2016-11-27)
                                         }
                                     }
                                 }
