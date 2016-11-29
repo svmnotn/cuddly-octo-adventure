@@ -15,7 +15,7 @@ name = "coa"
 
 [features]
 default = ["serde_codegen"]
-nightly = ["serde_derive"]
+funtimes = ["serde_derive"]
 
 [build-dependencies]
 serde_codegen = { version = "0.8", optional = true }

@@ -1,7 +1,7 @@
 [package]
 name = "cuddly-content"
 version = "0.0.1"
-description = "A content creator for the Cuddly Octo Adventure project"
+description = "A content creator for the Cuddly Octo Adventure Project."
 homepage = "https://github.com/svmnotn/cuddly-octo-adventure"
 repository = "svmnotn/cuddly-octo-adventure"
 readme = "README.md"
@@ -12,4 +12,8 @@ authors = ["Victor M. Suarez <svmnotn@gmail.com>"]
 [dependencies]
 cuddly-octo-adventure = { path = "../cuddly-octo-adventure" }
 clap = "2"
-lazy_static = "0"
+
+[dependencies.conrod]
+version = "0"
+default-features = false
+features = ["glutin", "glium"]
