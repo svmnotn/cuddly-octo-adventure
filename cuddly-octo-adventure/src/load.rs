@@ -100,6 +100,7 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
                                             let path = write_file(dir.path().join(n), f)?;
                                             // Update the path in the Archive
                                             a.img_loc = Some(path);
+                                          //^^^^^^^^^ "the type of this value must be known in this contextthe type of this value must be known in this context"
                                         }
                                     }
                                 }
