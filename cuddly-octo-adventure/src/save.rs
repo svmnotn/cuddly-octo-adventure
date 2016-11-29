@@ -50,10 +50,7 @@ pub fn save_cuddle<P: AsRef<Path>>(archive: Archive, to: P) -> Result<()> {
 }
 
 /// Writes a file into the Cuddle
-fn write_file<'a, W: Write + Seek, P: AsRef<Path>>(name: &'a str,
-                                                   opt_loc: Option<P>,
-                                                   zip: &mut ZipWriter<W>)
-                                                   -> Result<()> {
+fn write_file<W: Write + Seek, P: AsRef<Path>>(name: &str, opt_loc: Option<P>, zip: &mut ZipWriter<W>) -> Result<()> {
     if let Some(loc) = opt_loc {
         zip.start_file(format!("{}.{}", name, get_extension(&loc)), FileOptions::default())?;
         let mut f = fs::File::open(loc)?;

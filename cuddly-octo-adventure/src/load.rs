@@ -70,61 +70,59 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
             archive.settings.sound.nay_sound_loc = Some(path);
         } else {
             // This is a Topic or is within a topic
-            match f.compression() {
-                CompressionMethod::Deflated => {
-                    // The file is compressed (not a folder)
-                    if let Some(n) = name.split('/').nth(0) {
-                        // It has a valid name
-                        if name.contains("questions") {
-                            // Here we have the questions file, so lets load it
-                            let mut t = Topic::default();
-                            t.name = n.into();
-                            let mut data = String::with_capacity(f.size() as usize);
-                            f.read_to_string(&mut data)?;
-                            t.questions = from_json::from_str::<Vec<Question>>(&data)?;
-                            archive.topics.push(t);
-                        } else if let Some(id) = name.split('/').nth(1) {
-                            // We got a picture! So, lets make sure this topic has a folder
-                            if contains(dir.path(), n) == false {
-                                fs::create_dir(dir.path().join(n))?;
-                            }
+            if let CompressionMethod::Deflated = f.compression() {
+                // The file is compressed (not a folder)
+                if let Some(n) = name.split('/').nth(0) {
+                    // It has a valid name
+                    if name.contains("questions") {
+                        // Here we have the questions file, so lets load it
+                        let mut t = Topic::default();
+                        t.name = n.into();
+                        let mut data = String::with_capacity(f.size() as usize);
+                        f.read_to_string(&mut data)?;
+                        t.questions = from_json::from_str::<Vec<Question>>(&data)?;
+                        archive.topics.push(t);
+                    } else if let Some(id) = name.split('/').nth(1) {
+                        // We got a picture! So, lets make sure this topic has a folder
+                        if contains(dir.path(), n) == false {
+                            fs::create_dir(dir.path().join(n))?;
+                        }
 
-                            if let Some(t) = archive.topics.iter_mut().find(|t| t.name == n) {
-                                if let Some(q) = t.questions.iter_mut().find(|q| q.id == id) {
-                                    if id.contains("ans") {
-                                        // It is an answer, so lets get it's number
-                                        if let Some(num) = id.split('-').nth(2) {
-                                            // Lets also make sure it is a valid number
-                                            // (It should be if save_cuddle was used)
-                                            if let Ok(i) = num.parse() {
-                                                // Now lets find the answer that maches it
-                                                if let Some(a) = q.answers.iter_mut().nth(i) {
-                                                    // Now this is the correct answer, so lets decompress the picture
-                                                    let path = write_file(dir.path().join(n), f)?;
-                                                    // Update the path in the Archive
-                                                    a.img_loc = Some(path);
-                                                }
+                        if let Some(t) = archive.topics.iter_mut().find(|t| t.name == n) {
+                            if let Some(q) = t.questions.iter_mut().find(|q| q.id == id) {
+                                if id.contains("ans") {
+                                    // It is an answer, so lets get it's number
+                                    if let Some(num) = id.split('-').nth(2) {
+                                        // Lets also make sure it is a valid number
+                                        // (It should be if save_cuddle was used)
+                                        if let Ok(i) = num.parse() {
+                                            // Now lets find the answer that maches it
+                                            if let Some(a) = q.answers.get_mut(i) {
+                                                // Now this is the correct answer, so lets decompress the picture
+                                                let path = write_file(dir.path().join(n), f)?;
+                                                // Update the path in the Archive
+                                                a.img_loc = Some(path);
                                             }
                                         }
-                                    } else {
-                                        // It is a question, so let decompress the picture
-                                        let path = write_file(dir.path().join(n), f)?;
-                                        // Update the path in the Archive
-                                        q.img_loc = Some(path);
                                     }
+                                } else {
+                                    // It is a question, so let decompress the picture
+                                    let path = write_file(dir.path().join(n), f)?;
+                                    // Update the path in the Archive
+                                    q.img_loc = Some(path);
                                 }
                             }
                         }
                     }
                 }
-                _ => {}// Not compressed.
+
             }
         }
     }
     Ok((archive, dir))
 }
 
-/// Decompress the ZipFile into the folder
+/// Decompress the ziped file into the folder
 fn write_file<P: AsRef<Path>>(folder: P, mut file: ZipFile) -> Result<PathBuf> {
     let path = PathBuf::from(folder.as_ref().join(file.name()));
     let mut f = fs::File::create(&path)?;
