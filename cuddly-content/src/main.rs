@@ -13,6 +13,8 @@ use conrod::widget;
 const WIDTH: u32 = 800;
 const HEIGHT: u32 = 600;
 
+mod app;
+
 fn main() {
     let matches = clap::App::new("Cuddly Content Creator")
         .bin_name("cuddly-content")
@@ -56,4 +58,6 @@ fn run(archive: Archive, dir: TempDir) {
         .with_title("Cuddly Content Creator")
         .build_glium()
         .unwrap();
+
+
 }
