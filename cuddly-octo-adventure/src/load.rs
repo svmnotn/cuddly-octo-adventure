@@ -40,7 +40,7 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
         archive.settings = from_json::from_str(&data)?;
     }
 
-    archive.topics = vec![];
+    archive.topics = Vec::<Topic>::new();
 
     // Iterate over every other file
     for i in 0..cuddle.len() {
@@ -98,9 +98,10 @@ pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archiv
                                         if let Some(a) = q.answers.get_mut(i) {
                                             // Now this is the correct answer, so lets decompress the picture
                                             let path = write_file(dir.path().join(n), f)?;
+                                            let () = a;
                                             // Update the path in the Archive
                                             a.img_loc = Some(path);
-                                          //^^^^^^^^^ "the type of this value must be known in this contextthe type of this value must be known in this context"
+                                            //^^^^^^^^^ "the type of this value must be known in this context"
                                         }
                                     }
                                 }
