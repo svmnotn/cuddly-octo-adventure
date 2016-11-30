@@ -11,7 +11,7 @@ use zip::read::ZipFile;
 /// Load a 'cuddle' from disk, a 'cuddle' is a ziped folder.
 /// Any extra files will be extracted into the temporary folder returned,
 /// all paths are modified to lead to that folder.
-pub fn load_cuddle<P: AsRef<Path>>(from: P, folder: Option<P>) -> Result<(Archive, TempDir)> {
+pub fn load_cuddle<P: AsRef<Path>, I: AsRef<Path>>(from: P, folder: Option<I>) -> Result<(Archive, TempDir)> {
     let mut archive = Archive::default();
     let f = fs::File::open(from)?;
     let mut cuddle = ZipArchive::new(f)?;
