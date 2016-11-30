@@ -1,0 +1,1 @@
+fmtn && cargon build --no-default-features --features funtimes

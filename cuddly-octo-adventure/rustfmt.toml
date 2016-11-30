@@ -1,0 +1,9 @@
+max_width = 120
+ideal_width = 100
+fn_call_width = 100
+format_strings = false
+fn_single_line = true
+newline_style = "unix"
+write_mode = "overwrite"
+reorder_imports = true
+use_try_shorthand = true
