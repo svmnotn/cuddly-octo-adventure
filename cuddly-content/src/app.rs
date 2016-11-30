@@ -1,4 +1,4 @@
-use conrod::{color, widget, Colorable, Labelable, Positionable, Sizeable, Widget, Color};
+use conrod::{color, widget, Colorable, Borderable, Labelable, Positionable, Sizeable, Widget, Color};
 use std::path::PathBuf;
 use super::*;
 
@@ -54,6 +54,7 @@ impl ArchiveEditor {
             .set(self.ids.load_btn, ui) {
             // TODO: Ask where to get the archive from!
             let from = "./test.cuddle";
+            // Load the given cuddle and modify our data
             let (a, d) = ::coa::load_cuddle(from, Some(&self.dir)).expect("Unable to load cuddle");
             self.archive = a;
             self.data = d;
@@ -66,9 +67,43 @@ impl ArchiveEditor {
             .set(self.ids.save_btn, ui) {
             // TODO: Ask for place to store this archive
             let to = "./test.cuddle";
+            // Save our data to disk
             ::coa::save_cuddle(&self.archive, to);
         }
     }
 
-    fn make_tabs(&mut self, ui: &mut ::conrod::UiCell) {}
+    fn make_tabs(&mut self, ui: &mut ::conrod::UiCell) {
+        widget::Tabs::new(&[(self.ids.info_tab, "Information"),
+                            (self.ids.topics_tab, "Topics"),
+                            (self.ids.teams_tab, "Teams"),
+                            (self.ids.settings_tab, "Settings")])
+            .layout_horizontally()
+            .bar_thickness(36.0)
+            .starting_canvas(self.ids.info_tab)
+            .mid_bottom_of(self.ids.main_canvas)
+            .w_of(self.ids.main_canvas)
+            .border(2.0)
+            .border_color(color::BLACK)
+            .set(self.ids.tabs, ui);
+
+        // Setup the Information Tab
+        self.make_info_tab(ui);
+
+        // Setup the Topics Tab
+        self.make_topics_tab(ui);
+
+        // Setup the Teams Tab
+        self.make_teams_tab(ui);
+
+        // Setup the Settings Tab
+        self.make_settings_tab(ui);
+    }
+
+    fn make_info_tab(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    fn make_topics_tab(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    fn make_teams_tab(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    fn make_settings_tab(&mut self, ui: &mut ::conrod::UiCell) {}
 }

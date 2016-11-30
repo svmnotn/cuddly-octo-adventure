@@ -13,8 +13,8 @@ widget_ids! {
         tabs,
         info_tab,
         topics_tab,
-        settings_tab,
         teams_tab,
+        settings_tab,
 
         ////////////////////////////////
         //
