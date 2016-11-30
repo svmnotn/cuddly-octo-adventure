@@ -7,7 +7,7 @@ use std::path::Path;
 use zip::write::{FileOptions, ZipWriter};
 
 /// Save a 'cuddle' to disk, a 'cuddle' is a ziped folder.
-pub fn save_cuddle<P: AsRef<Path>>(archive: Archive, to: P) -> Result<()> {
+pub fn save_cuddle<P: AsRef<Path>>(archive: &Archive, to: P) -> Result<()> {
     let f = fs::File::create(to)?;
     let mut cuddle = ZipWriter::new(f);
 
@@ -20,13 +20,13 @@ pub fn save_cuddle<P: AsRef<Path>>(archive: Archive, to: P) -> Result<()> {
     cuddle.write_all(to_json::to_string(&archive.settings)?.as_bytes())?;
 
     // Save the extra files to the Cuddle
-    write_file("bg_img", archive.settings.bg_loc, &mut cuddle)?;
-    write_file("bg_sound", archive.settings.sound.bg_sound_loc, &mut cuddle)?;
-    write_file("yay_sound", archive.settings.sound.yay_sound_loc, &mut cuddle)?;
-    write_file("nay_sound", archive.settings.sound.nay_sound_loc, &mut cuddle)?;
+    write_file("bg_img", archive.settings.bg_loc.as_ref(), &mut cuddle)?;
+    write_file("bg_sound", archive.settings.sound.bg_sound_loc.as_ref(), &mut cuddle)?;
+    write_file("yay_sound", archive.settings.sound.yay_sound_loc.as_ref(), &mut cuddle)?;
+    write_file("nay_sound", archive.settings.sound.nay_sound_loc.as_ref(), &mut cuddle)?;
 
     // Go over all the topics in the Archive
-    for topic in archive.topics {
+    for topic in &archive.topics {
         // Create a directory per topic
         cuddle.add_directory(&*topic.name, FileOptions::default())?;
 
