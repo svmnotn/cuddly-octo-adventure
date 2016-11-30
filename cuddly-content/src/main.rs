@@ -1,3 +1,5 @@
+// TODO: Remove these allows
+#![allow(unused_imports, unused_must_use, unused_variables)]
 #[macro_use]
 extern crate conrod;
 extern crate coa;
@@ -7,10 +9,7 @@ pub use coa::TempDir;
 pub use coa::cuddle::{Answer, Archive, ArchiveInfo, Question, Team, Topic, settings as cuddle_settings};
 pub use coa::error::{Result as CuddleResult, Error as CuddleError};
 pub use conrod::backend::glium::glium;
-pub use conrod::backend::glium::glium::{DisplayBuild, Surface};
-
-const WIDTH: u32 = 800;
-const HEIGHT: u32 = 600;
+use conrod::backend::glium::glium::{DisplayBuild, Surface};
 
 mod app;
 mod support;
@@ -22,36 +21,60 @@ fn main() {
         .author("Victor M. Suarez <svmnotn@gmail.com>")
         .about("A content creator for the Cuddly Octo Adventure Project.")
         .args_from_usage("[file]             'A cuddle archive to load at the beginning of the program'
-                          -d --data=[folder] 'A folder in which to keep all the temporary data'")
+                          -d --data=[folder] 'A folder in which to keep all the temporary data, Defaults to .cuddles'")
         .get_matches();
 
+    let data = if let Some(val) = matches.value_of("data") {
+        val
+    } else {
+        std::fs::create_dir(".cuddles");
+        ".cuddles"
+    };
+
     let (archive, dir) = if let Some(loc) = matches.value_of("file") {
-        coa::load_cuddle(loc, None).expect("Unable to load given cuddle")
+        coa::load_cuddle(loc, Some(data)).expect("Unable to load the given cuddle")
     } else {
         use std::time::{UNIX_EPOCH, SystemTime};
 
         (Archive::default(),
-         if let Some(f) = matches.value_of("data") {
-                 TempDir::new_in(f,
-                                 &format!("coa-new-archive-{:?}",
-                                          SystemTime::now()
-                                              .duration_since(UNIX_EPOCH)
-                                              .expect("Now is before UNIX_EPOCH? Clock is wrong!")
-                                              .as_secs()))
-             } else {
-                 TempDir::new(&format!("coa-new-archive-{:?}",
-                                       SystemTime::now()
-                                           .duration_since(UNIX_EPOCH)
-                                           .expect("Now is before UNIX_EPOCH? Clock is wrong!")
-                                           .as_secs()))
-             }
+         TempDir::new_in(data,
+                         &format!("new-cuddle-{:?}",
+                                  SystemTime::now()
+                                      .duration_since(UNIX_EPOCH)
+                                      .expect("Now is before UNIX_EPOCH? Clock is wrong!")
+                                      .as_secs()))
              .expect("Unable to create temporary folder"))
     };
 
-    run(archive, dir);
+    run(archive, dir, data.into());
 }
 
-fn run(archive: Archive, dir: TempDir) {
+/// A set of reasonable stylistic defaults that works for the `gui` below.
+fn theme() -> conrod::Theme {
+    conrod::Theme {
+        name: "Demo Theme".to_string(),
+        padding: conrod::Padding::none(),
+        x_position: conrod::Position::Align(conrod::Align::Start, None),
+        y_position: conrod::Position::Direction(conrod::Direction::Backwards, 20.0, None),
+        background_color: conrod::color::DARK_CHARCOAL,
+        shape_color: conrod::color::LIGHT_CHARCOAL,
+        border_color: conrod::color::DARK_BLUE,
+        border_width: 0.0,
+        label_color: conrod::color::BLACK,
+        font_id: None,
+        font_size_large: 26,
+        font_size_medium: 18,
+        font_size_small: 12,
+        widget_styling: std::collections::HashMap::new(),
+        mouse_drag_threshold: 0.0,
+        double_click_threshold: std::time::Duration::from_millis(500),
+    }
+}
+
+fn run(archive: Archive, dir: TempDir, data: String) {
+    const WIDTH: u32 = 800;
+    const HEIGHT: u32 = 600;
+
     // Build the window.
     let display = glium::glutin::WindowBuilder::new()
         .with_vsync()
@@ -61,11 +84,17 @@ fn run(archive: Archive, dir: TempDir) {
         .expect("Unable to build the window");
 
     // Construct our `Ui`.
-    let mut ui = conrod::UiBuilder::new([WIDTH as f64, HEIGHT as f64]).build();
+    let mut ui = conrod::UiBuilder::new([WIDTH as f64, HEIGHT as f64]).theme(theme()).build();
+    // Hack for the font loading, since it is required.
+    // TODO: properly load font
+    ui.fonts.insert_from_file("Vera.ttf").expect("Unable to find font");
 
     // Make the editor state
-    let mut editor =
-        app::ArchiveEditor::new(archive, dir, support::Ids::new(ui.widget_id_generator()), conrod::image::Map::new());
+    let mut editor = app::ArchiveEditor::new(archive,
+                                             data,
+                                             dir,
+                                             support::Ids::new(ui.widget_id_generator()),
+                                             conrod::image::Map::new());
 
     // A type used for converting `conrod::render::Primitives` into `Command`s that can be used
     // for drawing to the glium `Surface`.
@@ -103,19 +132,20 @@ fn run(archive: Archive, dir: TempDir) {
             }
         }
 
-        // We must manually track the window width and height as it is currently not possible to
-        // receive `Resize` events from glium on Mac OS any other way.
-        //
-        // TODO: Once the following PR lands, we should stop tracking size like this and use the
-        // `window_resize_callback`. https://github.com/tomaka/winit/pull/88
-        if let Some(win_rect) = ui.rect_of(ui.window) {
-            let (win_w, win_h) = (win_rect.w() as u32, win_rect.h() as u32);
-            let (w, h) = display.get_window().unwrap().get_inner_size_points().unwrap();
-            if w != win_w || h != win_h {
-                let event = conrod::event::Input::Resize(w, h);
-                ui.handle_event(event);
+
+            // We must manually track the window width and height as it is currently not possible to
+            // receive `Resize` events from glium on Mac OS any other way.
+            //
+            // TODO: Once the following PR lands, we should stop tracking size like this and use the
+            // `window_resize_callback`. https://github.com/tomaka/winit/pull/88
+            if let Some(win_rect) = ui.rect_of(ui.window) {
+                let (win_w, win_h) = (win_rect.w() as u32, win_rect.h() as u32);
+                let (w, h) = display.get_window().unwrap().get_inner_size_points().unwrap();
+                if w != win_w || h != win_h {
+                    let event = conrod::event::Input::Resize(w, h);
+                    ui.handle_event(event);
+                }
             }
-        }
 
         // If some input event has been received, update the GUI.
         if ui.global_input.events().next().is_some() {
