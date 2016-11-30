@@ -1,29 +1,32 @@
 // Generate a unique `WidgetId` for each widget.
 widget_ids! {
     pub struct Ids {
-        // The overarching scrollable canvas.
+        // The overarching canvas.
         main_canvas,
 
-        // Menu Buttons
+        // Tab ids
+        tabs_canvas,
+        tabs,
+
+        ////////////////////////////////
+        //
+        //  Menu
+        //
+        ////////////////////////////////
         menu_canvas,
         save_canvas,
         save_btn,
         load_canvas,
         load_btn,
 
-        // Tabs
-        tabs_canvas,
-        tabs,
-        info_tab,
-        topics_tab,
-        teams_tab,
-        settings_tab,
-
         ////////////////////////////////
         //
         //  Information
         //
         ////////////////////////////////
+
+        // Info Tab
+        info_tab,
 
         // Main Info canvas
         info_canvas,
@@ -69,5 +72,41 @@ widget_ids! {
         info_update_label_canvas,
         info_update_input,
         info_update_input_canvas,
+
+        ////////////////////////////////
+        //
+        //  Topics
+        //
+        ////////////////////////////////
+
+        // Topics Tab
+        topics_tab,
+
+        // Main Topics canvas
+        topics_canvas,
+
+        ////////////////////////////////
+        //
+        //  Teams
+        //
+        ////////////////////////////////
+
+        // Teams Tab
+        teams_tab,
+
+        // Main Teams canvas
+        teams_canvas,
+
+        ////////////////////////////////
+        //
+        //  Settings
+        //
+        ////////////////////////////////
+
+        // Settings Tab
+        settings_tab,
+
+        // Main Settings canvas
+        settings_canvas,
     }
 }
