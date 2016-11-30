@@ -88,7 +88,8 @@ impl ArchiveEditor {
             // TODO: Ask for place to store this archive
             let to = "./test.cuddle";
             // Save our data to disk
-            ::coa::save_cuddle(&self.archive, to);
+            println!("{:?}", &self.archive);
+            //::coa::save_cuddle(&self.archive, to);
         }
     }
 
@@ -123,134 +124,105 @@ impl ArchiveEditor {
 
     /// Setup the Information Tab
     fn make_info_tab(&mut self, ui: &mut ::conrod::UiCell) {
+        macro_rules! info_canvas {
+          ($c:ident, $l:ident, $i:ident) => {(self.ids.$c,
+                        widget::Canvas::new()
+                            .parent(self.ids.info_tab)
+                            .color(color::TRANSPARENT)
+                            .length_weight(1.0 / 6.0)
+                            .flow_right(&[(self.ids.$l,
+                                           widget::Canvas::new()
+                                               .parent(self.ids.$c)
+                                               .color(color::TRANSPARENT)
+                                               .length_weight(0.2)),
+                                          (self.ids.$i,
+                                           widget::Canvas::new()
+                                               .parent(self.ids.$c)
+                                               .color(color::TRANSPARENT)
+                                               .length_weight(0.8))]))};
+        }
+
         widget::Canvas::new()
             .parent(self.ids.info_tab)
             .color(color::TRANSPARENT)
             .middle_of(self.ids.info_tab)
             .padded_wh_of(self.ids.info_tab, 10.0)
-            .flow_down(&[(self.ids.info_name_canvas,
-                          widget::Canvas::new()
-                              .parent(self.ids.info_tab)
-                              .color(color::TRANSPARENT)
-                              .length_weight(1.0 / 6.0)
-                              .flow_right(&[(self.ids.info_name_label_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_name_canvas)
-                                                 .color(color::RED)
-                                                 .length_weight(0.2)),
-                                            (self.ids.info_name_input_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_name_canvas)
-                                                 .color(color::BLUE)
-                                                 .length_weight(0.8))])),
-                         (self.ids.info_desc_canvas,
-                          widget::Canvas::new()
-                              .parent(self.ids.info_tab)
-                              .color(color::TRANSPARENT)
-                              .length_weight(1.0 / 6.0)
-                              .flow_right(&[(self.ids.info_desc_label_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_desc_canvas)
-                                                 .color(color::BLUE)
-                                                 .length_weight(0.2)),
-                                            (self.ids.info_desc_input_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_desc_canvas)
-                                                 .color(color::RED)
-                                                 .length_weight(0.8))])),
-                         (self.ids.info_ver_canvas,
-                          widget::Canvas::new()
-                              .parent(self.ids.info_tab)
-                              .color(color::TRANSPARENT)
-                              .length_weight(1.0 / 6.0)
-                              .flow_right(&[(self.ids.info_ver_label_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_ver_canvas)
-                                                 .color(color::RED)
-                                                 .length_weight(0.2)),
-                                            (self.ids.info_ver_input_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_ver_canvas)
-                                                 .color(color::BLUE)
-                                                 .length_weight(0.8))])),
-                         (self.ids.info_author_canvas,
-                          widget::Canvas::new()
-                              .parent(self.ids.info_tab)
-                              .color(color::TRANSPARENT)
-                              .length_weight(1.0 / 6.0)
-                              .flow_right(&[(self.ids.info_author_label_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_author_canvas)
-                                                 .color(color::BLUE)
-                                                 .length_weight(0.2)),
-                                            (self.ids.info_author_input_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_author_canvas)
-                                                 .color(color::RED)
-                                                 .length_weight(0.8))])),
-                         (self.ids.info_license_canvas,
-                          widget::Canvas::new()
-                              .parent(self.ids.info_tab)
-                              .color(color::TRANSPARENT)
-                              .length_weight(1.0 / 6.0)
-                              .flow_right(&[(self.ids.info_license_label_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_license_canvas)
-                                                 .color(color::RED)
-                                                 .length_weight(0.2)),
-                                            (self.ids.info_license_input_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_license_canvas)
-                                                 .color(color::BLUE)
-                                                 .length_weight(0.8))])),
-                         (self.ids.info_update_canvas,
-                          widget::Canvas::new()
-                              .parent(self.ids.info_tab)
-                              .color(color::TRANSPARENT)
-                              .length_weight(1.0 / 6.0)
-                              .flow_right(&[(self.ids.info_update_label_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_update_canvas)
-                                                 .color(color::BLUE)
-                                                 .length_weight(0.2)),
-                                            (self.ids.info_update_input_canvas,
-                                             widget::Canvas::new()
-                                                 .parent(self.ids.info_update_canvas)
-                                                 .color(color::RED)
-                                                 .length_weight(0.8))]))])
+            .flow_down(&[info_canvas!(info_name_canvas, info_name_label_canvas, info_name_input_canvas),
+                         info_canvas!(info_desc_canvas, info_desc_label_canvas, info_desc_input_canvas),
+                         info_canvas!(info_ver_canvas, info_ver_label_canvas, info_ver_input_canvas),
+                         info_canvas!(info_author_canvas, info_author_label_canvas, info_author_input_canvas),
+                         info_canvas!(info_license_canvas, info_license_label_canvas, info_license_input_canvas),
+                         info_canvas!(info_update_canvas, info_update_label_canvas, info_update_input_canvas)])
             .set(self.ids.info_canvas, ui);
 
+        macro_rules! info_part {
+              ($title:expr, $a:ident, $lc:ident, $l:ident, $ic:ident, $i:ident) => {
+                widget::Text::new($title)
+                    .parent(self.ids.$lc)
+                    .middle_of(self.ids.$lc)
+                    .padded_wh_of(self.ids.$lc, 5.0)
+                    .align_text_left()
+                    .set(self.ids.$l, ui);
+
+                for string in widget::TextEdit::new(&self.archive.info.$a)
+                    .parent(self.ids.$ic)
+                    .middle_of(self.ids.$ic)
+                    .padded_wh_of(self.ids.$ic, 5.0)
+                    .align_text_left()
+                    .set(self.ids.$i, ui) {
+                    self.archive.info.$a = string;
+                }
+              };
+            }
+
         // Setup the Name
-        self.make_info_name(ui);
+        info_part!("Cuddle Name:",
+                   name,
+                   info_name_label_canvas,
+                   info_name_label,
+                   info_name_input_canvas,
+                   info_name_input);
+
         // Setup the Description
-        self.make_info_desc(ui);
+        info_part!("Cuddle Description:",
+                   description,
+                   info_desc_label_canvas,
+                   info_desc_label,
+                   info_desc_input_canvas,
+                   info_desc_input);
+
         // Setup the Version
-        self.make_info_ver(ui);
+        info_part!("Cuddle Version:",
+                   version,
+                   info_ver_label_canvas,
+                   info_ver_label,
+                   info_ver_input_canvas,
+                   info_ver_input);
+
         // Setup the Author
-        self.make_info_author(ui);
+        info_part!("Cuddle Author:",
+                   author,
+                   info_author_label_canvas,
+                   info_author_label,
+                   info_author_input_canvas,
+                   info_author_input);
+
         // Setup the License
-        self.make_info_license(ui);
+        info_part!("Cuddle License:",
+                   license,
+                   info_license_label_canvas,
+                   info_license_label,
+                   info_license_input_canvas,
+                   info_license_input);
+
         // Setup the Update URl
-        self.make_info_update(ui);
+        info_part!("Cuddle Update URL:",
+                   update_url,
+                   info_update_label_canvas,
+                   info_update_label,
+                   info_update_input_canvas,
+                   info_update_input);
     }
-
-    /// Setup the Name part of the Information Tab
-    fn make_info_name(&mut self, ui: &mut ::conrod::UiCell) {}
-
-    /// Setup the Name part of the Information Tab
-    fn make_info_desc(&mut self, ui: &mut ::conrod::UiCell) {}
-
-    /// Setup the Version part of the Information Tab
-    fn make_info_ver(&mut self, ui: &mut ::conrod::UiCell) {}
-
-    /// Setup the Author part of the Information Tab
-    fn make_info_author(&mut self, ui: &mut ::conrod::UiCell) {}
-
-    /// Setup the License part of the Information Tab
-    fn make_info_license(&mut self, ui: &mut ::conrod::UiCell) {}
-
-    /// Setup the Update URL part of the Information Tab
-    fn make_info_update(&mut self, ui: &mut ::conrod::UiCell) {}
 
     /// Setup the Topics Tab
     fn make_topics_tab(&mut self, ui: &mut ::conrod::UiCell) {}
