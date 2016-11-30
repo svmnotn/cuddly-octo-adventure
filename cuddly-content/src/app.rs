@@ -1,5 +1,5 @@
 use conrod::{color, widget, Colorable, Borderable, Labelable, Positionable, Sizeable, Widget, Color};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use super::*;
 
 pub struct ArchiveEditor {
@@ -11,6 +11,11 @@ pub struct ArchiveEditor {
     // The Image Map that will contain all the dynamically loaded pictures
     pub img_map: ::conrod::image::Map<glium::texture::Texture2d>,
 }
+
+#[allow(dead_code)]
+const IMAGE_EXTENSIONS: [&'static str; 3] = ["jpeg", "jpg", "png"];
+#[allow(dead_code)]
+const SOUND_EXTENSIONS: [&'static str; 2] = ["wav", "mp3"];
 
 impl ArchiveEditor {
     pub fn new<P: Into<PathBuf>>(a: Archive,
@@ -232,4 +237,35 @@ impl ArchiveEditor {
 
     /// Setup the Settings Tab
     fn make_settings_tab(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Creates a File Picker
+    fn make_file_picker<P: AsRef<Path>>(&mut self, label: &str, start: P, ext: &[&str], ui: &mut ::conrod::UiCell) {
+        widget::Canvas::new()
+            .no_parent()
+            .floating(true)
+            .color(color::DARK_CHARCOAL)
+            .label(label)
+            .label_font_size(20)
+            .border(1.0)
+            .border_color(color::BLACK)
+            .w(800.0)
+            .h(600.0)
+            .middle_of(self.ids.main_canvas)
+            .set(self.ids.file_canvas, ui);
+
+        for e in widget::FileNavigator::with_extension(start.as_ref(), ext)
+            .parent(self.ids.file_canvas)
+            .color(color::TRANSPARENT)
+            .unselected_color(color::TRANSPARENT)
+            .middle_of(self.ids.file_canvas)
+            .padded_wh_of(self.ids.file_canvas, 20.0)
+            .set(self.ids.file_navigator, ui) {
+            match e {
+                widget::file_navigator::Event::DoubleClick(_, vec) => {
+                    println!("{:?}", vec);
+                }
+                _ => {}
+            }
+        }
+    }
 }

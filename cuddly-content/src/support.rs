@@ -108,5 +108,13 @@ widget_ids! {
 
         // Main Settings canvas
         settings_canvas,
+
+        ////////////////////////////////
+        //
+        //  File Picker
+        //
+        ////////////////////////////////
+        file_canvas,
+        file_navigator,
     }
 }
