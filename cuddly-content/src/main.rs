@@ -8,7 +8,6 @@ pub use coa::cuddle::{Answer, Archive, ArchiveInfo, Question, Team, Topic, setti
 pub use coa::error::{Result as CuddleResult, Error as CuddleError};
 pub use conrod::backend::glium::glium;
 pub use conrod::backend::glium::glium::{DisplayBuild, Surface};
-pub use conrod::widget;
 
 const WIDTH: u32 = 800;
 const HEIGHT: u32 = 600;
@@ -65,7 +64,8 @@ fn run(archive: Archive, dir: TempDir) {
     let mut ui = conrod::UiBuilder::new([WIDTH as f64, HEIGHT as f64]).build();
 
     // Make the editor state
-    let mut editor = app::ArchiveEditor::new(archive, dir, support::Ids::new(ui.widget_id_generator()), conrod::image::Map::new());
+    let mut editor =
+        app::ArchiveEditor::new(archive, dir, support::Ids::new(ui.widget_id_generator()), conrod::image::Map::new());
 
     // A type used for converting `conrod::render::Primitives` into `Command`s that can be used
     // for drawing to the glium `Surface`.
