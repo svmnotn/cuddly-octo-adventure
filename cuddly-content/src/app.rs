@@ -30,7 +30,31 @@ impl ArchiveEditor {
 
     pub fn gui(&mut self, ui: &mut ::conrod::UiCell) {
         // Set up the main canvas
-        widget::Canvas::new().pad(15.0).set(self.ids.main_canvas, ui);
+        widget::Canvas::new()
+            .pad(10.0)
+            .no_parent()
+            .color(color::TRANSPARENT)
+            .flow_down(&[(self.ids.menu_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.main_canvas)
+                              .color(color::TRANSPARENT)
+                              .length_weight(0.1)
+                              .flow_right(&[(self.ids.load_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.menu_canvas)
+                                                 .color(color::TRANSPARENT)
+                                                 .length_weight(0.5)),
+                                            (self.ids.save_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.menu_canvas)
+                                                 .color(color::TRANSPARENT)
+                                                 .length_weight(0.5))])),
+                         (self.ids.tabs_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.main_canvas)
+                              .color(color::TRANSPARENT)
+                              .length_weight(0.9))])
+            .set(self.ids.main_canvas, ui);
 
         // Setup the Save and Load buttons
         self.make_sl_buttons(ui);
@@ -39,18 +63,13 @@ impl ArchiveEditor {
         self.make_tabs(ui);
     }
 
+    /// Set up the Save and Load Buttons
     fn make_sl_buttons(&mut self, ui: &mut ::conrod::UiCell) {
-        widget::Canvas::new()
-            .mid_top_of(self.ids.main_canvas)
-            .kid_area_w_of(self.ids.main_canvas)
-            .h(60.0)
-            .color(color::TRANSPARENT)
-            .set(self.ids.menu_canvas, ui);
-
         for _press in widget::Button::new()
             .label("Load Cuddle")
-            .mid_right_of(self.ids.menu_canvas)
-            .w((ui.kid_area_of(self.ids.menu_canvas).unwrap().w() * 0.5) - 10.0)
+            .parent(self.ids.load_canvas)
+            .middle_of(self.ids.load_canvas)
+            .padded_wh_of(self.ids.load_canvas, 10.0)
             .set(self.ids.load_btn, ui) {
             // TODO: Ask where to get the archive from!
             let from = "./test.cuddle";
@@ -62,8 +81,9 @@ impl ArchiveEditor {
 
         for _press in widget::Button::new()
             .label("Save Cuddle")
-            .mid_left_of(self.ids.menu_canvas)
-            .w((ui.kid_area_of(self.ids.menu_canvas).unwrap().w() * 0.5) - 10.0)
+            .parent(self.ids.save_canvas)
+            .middle_of(self.ids.save_canvas)
+            .padded_wh_of(self.ids.save_canvas, 10.0)
             .set(self.ids.save_btn, ui) {
             // TODO: Ask for place to store this archive
             let to = "./test.cuddle";
@@ -72,16 +92,18 @@ impl ArchiveEditor {
         }
     }
 
+    /// Setup the Tabs Container
     fn make_tabs(&mut self, ui: &mut ::conrod::UiCell) {
         widget::Tabs::new(&[(self.ids.info_tab, "Information"),
                             (self.ids.topics_tab, "Topics"),
                             (self.ids.teams_tab, "Teams"),
                             (self.ids.settings_tab, "Settings")])
             .layout_horizontally()
+            .parent(self.ids.tabs_canvas)
             .bar_thickness(36.0)
             .starting_canvas(self.ids.info_tab)
-            .mid_bottom_of(self.ids.main_canvas)
-            .w_of(self.ids.main_canvas)
+            .middle_of(self.ids.tabs_canvas)
+            .padded_wh_of(self.ids.tabs_canvas, 10.0)
             .border(2.0)
             .border_color(color::BLACK)
             .set(self.ids.tabs, ui);
@@ -99,11 +121,143 @@ impl ArchiveEditor {
         self.make_settings_tab(ui);
     }
 
-    fn make_info_tab(&mut self, ui: &mut ::conrod::UiCell) {}
+    /// Setup the Information Tab
+    fn make_info_tab(&mut self, ui: &mut ::conrod::UiCell) {
+        widget::Canvas::new()
+            .parent(self.ids.info_tab)
+            .color(color::TRANSPARENT)
+            .middle_of(self.ids.info_tab)
+            .padded_wh_of(self.ids.info_tab, 10.0)
+            .flow_down(&[(self.ids.info_name_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.info_tab)
+                              .color(color::TRANSPARENT)
+                              .length_weight(1.0 / 6.0)
+                              .flow_right(&[(self.ids.info_name_label_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_name_canvas)
+                                                 .color(color::RED)
+                                                 .length_weight(0.2)),
+                                            (self.ids.info_name_input_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_name_canvas)
+                                                 .color(color::BLUE)
+                                                 .length_weight(0.8))])),
+                         (self.ids.info_desc_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.info_tab)
+                              .color(color::TRANSPARENT)
+                              .length_weight(1.0 / 6.0)
+                              .flow_right(&[(self.ids.info_desc_label_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_desc_canvas)
+                                                 .color(color::BLUE)
+                                                 .length_weight(0.2)),
+                                            (self.ids.info_desc_input_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_desc_canvas)
+                                                 .color(color::RED)
+                                                 .length_weight(0.8))])),
+                         (self.ids.info_ver_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.info_tab)
+                              .color(color::TRANSPARENT)
+                              .length_weight(1.0 / 6.0)
+                              .flow_right(&[(self.ids.info_ver_label_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_ver_canvas)
+                                                 .color(color::RED)
+                                                 .length_weight(0.2)),
+                                            (self.ids.info_ver_input_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_ver_canvas)
+                                                 .color(color::BLUE)
+                                                 .length_weight(0.8))])),
+                         (self.ids.info_author_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.info_tab)
+                              .color(color::TRANSPARENT)
+                              .length_weight(1.0 / 6.0)
+                              .flow_right(&[(self.ids.info_author_label_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_author_canvas)
+                                                 .color(color::BLUE)
+                                                 .length_weight(0.2)),
+                                            (self.ids.info_author_input_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_author_canvas)
+                                                 .color(color::RED)
+                                                 .length_weight(0.8))])),
+                         (self.ids.info_license_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.info_tab)
+                              .color(color::TRANSPARENT)
+                              .length_weight(1.0 / 6.0)
+                              .flow_right(&[(self.ids.info_license_label_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_license_canvas)
+                                                 .color(color::RED)
+                                                 .length_weight(0.2)),
+                                            (self.ids.info_license_input_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_license_canvas)
+                                                 .color(color::BLUE)
+                                                 .length_weight(0.8))])),
+                         (self.ids.info_update_canvas,
+                          widget::Canvas::new()
+                              .parent(self.ids.info_tab)
+                              .color(color::TRANSPARENT)
+                              .length_weight(1.0 / 6.0)
+                              .flow_right(&[(self.ids.info_update_label_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_update_canvas)
+                                                 .color(color::BLUE)
+                                                 .length_weight(0.2)),
+                                            (self.ids.info_update_input_canvas,
+                                             widget::Canvas::new()
+                                                 .parent(self.ids.info_update_canvas)
+                                                 .color(color::RED)
+                                                 .length_weight(0.8))]))])
+            .set(self.ids.info_canvas, ui);
 
+        // Setup the Name
+        self.make_info_name(ui);
+        // Setup the Description
+        self.make_info_desc(ui);
+        // Setup the Version
+        self.make_info_ver(ui);
+        // Setup the Author
+        self.make_info_author(ui);
+        // Setup the License
+        self.make_info_license(ui);
+        // Setup the Update URl
+        self.make_info_update(ui);
+    }
+
+    /// Setup the Name part of the Information Tab
+    fn make_info_name(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Setup the Name part of the Information Tab
+    fn make_info_desc(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Setup the Version part of the Information Tab
+    fn make_info_ver(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Setup the Author part of the Information Tab
+    fn make_info_author(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Setup the License part of the Information Tab
+    fn make_info_license(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Setup the Update URL part of the Information Tab
+    fn make_info_update(&mut self, ui: &mut ::conrod::UiCell) {}
+
+    /// Setup the Topics Tab
     fn make_topics_tab(&mut self, ui: &mut ::conrod::UiCell) {}
 
+    /// Setup the Teams Tab
     fn make_teams_tab(&mut self, ui: &mut ::conrod::UiCell) {}
 
+    /// Setup the Settings Tab
     fn make_settings_tab(&mut self, ui: &mut ::conrod::UiCell) {}
 }
