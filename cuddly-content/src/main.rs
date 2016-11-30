@@ -133,19 +133,19 @@ fn run(archive: Archive, dir: TempDir, data: String) {
         }
 
 
-            // We must manually track the window width and height as it is currently not possible to
-            // receive `Resize` events from glium on Mac OS any other way.
-            //
-            // TODO: Once the following PR lands, we should stop tracking size like this and use the
-            // `window_resize_callback`. https://github.com/tomaka/winit/pull/88
-            if let Some(win_rect) = ui.rect_of(ui.window) {
-                let (win_w, win_h) = (win_rect.w() as u32, win_rect.h() as u32);
-                let (w, h) = display.get_window().unwrap().get_inner_size_points().unwrap();
-                if w != win_w || h != win_h {
-                    let event = conrod::event::Input::Resize(w, h);
-                    ui.handle_event(event);
-                }
+        // We must manually track the window width and height as it is currently not possible to
+        // receive `Resize` events from glium on Mac OS any other way.
+        //
+        // TODO: Once the following PR lands, we should stop tracking size like this and use the
+        // `window_resize_callback`. https://github.com/tomaka/winit/pull/88
+        if let Some(win_rect) = ui.rect_of(ui.window) {
+            let (win_w, win_h) = (win_rect.w() as u32, win_rect.h() as u32);
+            let (w, h) = display.get_window().unwrap().get_inner_size_points().unwrap();
+            if w != win_w || h != win_h {
+                let event = conrod::event::Input::Resize(w, h);
+                ui.handle_event(event);
             }
+        }
 
         // If some input event has been received, update the GUI.
         if ui.global_input.events().next().is_some() {
